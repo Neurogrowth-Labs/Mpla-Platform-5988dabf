@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Member } from "../types";
-import { Download, Share2, Shield, CreditCard, CheckCircle, Truck, Package, Clock, Wifi } from "lucide-react";
+import { Download, Share2, Shield, CreditCard, CheckCircle, Truck, Package, Clock, Wifi, Wallet } from "lucide-react";
+import { images } from "../assets/images";
 
 interface DigitalCardProps {
   member: Member;
@@ -11,6 +12,26 @@ export default function DigitalCard({ member }: DigitalCardProps) {
   const [flipped, setFlipped] = useState(false);
 
   const shareLink = `https://portal.party.org/verify/${member.membershipNo}`;
+  const watermark = new Date().toLocaleString("pt-ZA", { dateStyle: "short", timeStyle: "medium" });
+  const trackingCode = `MPLA-CPT-${member.membershipNo.replace(/[^A-Z0-9]/gi, "").slice(-8)}-${member.id.replace(/[^A-Z0-9]/gi, "").toUpperCase()}`;
+
+  const downloadPrintablePdf = () => {
+    const printable = window.open("", "_blank", "width=900,height=650");
+    if (!printable) return;
+    printable.document.write(`<!doctype html><html><head><title>Cartão ${member.membershipNo}</title><style>body{font-family:Arial,sans-serif;padding:28px;color:#111827}.card{width:760px;border:3px double #c8102e;border-radius:20px;padding:24px;position:relative;background:#fff}.head{display:flex;gap:16px;align-items:center;border-bottom:1px solid #eee;padding-bottom:12px}.logo{width:72px;height:72px}.name{font-size:24px;font-weight:900;text-transform:uppercase}.grid{display:grid;grid-template-columns:160px 1fr;gap:22px;margin-top:22px}.photo{width:150px;height:180px;object-fit:cover;border:2px solid #ffcc00;border-radius:10px}.label{font-size:10px;color:#64748b;text-transform:uppercase;font-weight:700}.value{font-size:15px;font-weight:800;margin-bottom:12px}.wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;color:rgba(200,16,46,.12);transform:rotate(-28deg);font-weight:900;pointer-events:none}.foot{border-top:1px solid #eee;margin-top:18px;padding-top:12px;font-size:11px;color:#64748b;display:flex;justify-content:space-between}</style></head><body><div class="card"><div class="wm">VALIDADO ${watermark}</div><div class="head"><img class="logo" src="${images.mplaLogo}"/><div><div style="font-size:12px;font-weight:900;color:#c8102e">MPLA CAPE • Sede Cape Town</div><div style="font-size:22px;font-weight:900">Cartão Oficial do Militante</div></div></div><div class="grid"><img class="photo" src="${member.photo}"/><div><div class="label">Nome Completo</div><div class="value">${member.fullName}</div><div class="label">Nº de Militante</div><div class="value">${member.membershipNo}</div><div class="label">BI / Passaporte</div><div class="value">${member.nationalId}</div><div class="label">Comité</div><div class="value">${member.committee || "Comité MPLA Cape Town"}</div><div class="label">Emissão</div><div class="value">${member.registrationDate}</div></div></div><div class="foot"><span>${trackingCode}</span><span>Desenvolvido por NeuroGrowth Labs • www.ai.neurogrowthlabs.co.za</span></div></div><script>window.print()</script></body></html>`);
+    printable.document.close();
+  };
+
+  const addToWallet = () => {
+    const pass = { formatVersion: 1, passTypeIdentifier: "pass.co.za.mpla.member", serialNumber: member.membershipNo, organizationName: "MPLA CAPE", description: "Cartão de Militante", generic: { primaryFields: [{ key: "name", label: "Militante", value: member.fullName }], secondaryFields: [{ key: "no", label: "Nº", value: member.membershipNo }] } };
+    const blob = new Blob([JSON.stringify(pass, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${member.membershipNo}-wallet-pass.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
 
   const copyShareLink = () => {
     navigator.clipboard.writeText(shareLink);
@@ -124,7 +145,7 @@ export default function DigitalCard({ member }: DigitalCardProps) {
                 <div className="flex items-center gap-2">
                   <div className="bg-white p-1 rounded border border-[#D4AF37] shadow-xs">
                     <img 
-                      src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
+                      src={images.mplaLogo} 
                       alt="MPLA Logo" 
                       className="w-7 h-7 object-contain"
                       referrerPolicy="no-referrer"
@@ -135,7 +156,7 @@ export default function DigitalCard({ member }: DigitalCardProps) {
                       Movimento Popular de Libertação de Angola
                     </h2>
                     <p className="text-[6px] sm:text-[7px] text-[#B5121B] font-mono tracking-widest uppercase mt-0.5 font-extrabold">
-                      Comité de Militantes • Sede África do Sul
+                      Comité MPLA CAPE • Sede Cape Town
                     </p>
                     <h3 className="text-[11px] font-mono font-black text-[#B5121B] tracking-widest mt-1">
                       CARTÃO DO MILITANTE
@@ -155,10 +176,10 @@ export default function DigitalCard({ member }: DigitalCardProps) {
               </div>
 
               {/* Main Card Grid */}
-              <div className="relative z-10 grid grid-cols-12 gap-3 items-center flex-1 py-1.5">
+              <div className="relative z-10 grid grid-cols-12 gap-2 items-center flex-1 py-1.5 min-h-0">
                 
                 {/* Photo with fine holographic seal and micro-border */}
-                <div className="col-span-3.5 flex flex-col items-center justify-center relative">
+                <div className="col-span-4 flex flex-col items-center justify-center relative">
                   <div className="relative p-0.5 bg-gradient-to-br from-[#B5121B] via-[#D4AF37] to-[#1A1A1A] rounded-lg shadow-md">
                     <img 
                       src={member.photo} 
@@ -179,7 +200,7 @@ export default function DigitalCard({ member }: DigitalCardProps) {
                 </div>
 
                 {/* Secure Details Layout */}
-                <div className="col-span-8.5 grid grid-cols-2 gap-x-3 gap-y-1 text-left">
+                <div className="col-span-8 grid grid-cols-2 gap-x-3 gap-y-1 text-left">
                   <div className="col-span-2">
                     <p className="text-[6px] uppercase tracking-wider text-slate-400 font-mono font-bold leading-none">Nome Completo</p>
                     <p className="text-[10px] sm:text-xs font-black text-slate-900 font-sans tracking-wide uppercase truncate mt-0.5">
@@ -357,24 +378,19 @@ export default function DigitalCard({ member }: DigitalCardProps) {
 
         <p className="text-[11px] text-slate-400 mt-3 text-center font-semibold italic flex items-center gap-1.5 justify-center">
           <Share2 className="w-3.5 h-3.5" />
-          Clique no cartão para girar e ver o QR-Code e assinaturas.
+          Clique no cartão para girar. Marca de água dinâmica: {watermark}
         </p>
 
         {/* Quick Actions for Digital Card */}
         <div className="flex gap-3 mt-4 w-full max-w-[440px]">
           <button 
-            onClick={() => {
-              const link = document.createElement('a');
-              link.href = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${shareLink}`;
-              link.download = `${member.membershipNo}-digital-card.png`;
-              link.target = '_blank';
-              link.click();
-            }}
+            onClick={downloadPrintablePdf}
             className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition shadow-xs cursor-pointer"
           >
             <Download className="w-4 h-4 text-slate-500" />
             Download PDF
           </button>
+          <button onClick={addToWallet} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-amber-50 border border-amber-100 rounded-xl text-xs font-bold text-amber-800 hover:bg-amber-100 transition shadow-xs cursor-pointer"><Wallet className="w-4 h-4" />Adicionar ao Wallet</button>
           <button 
             onClick={copyShareLink}
             className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-emerald-50 border border-emerald-100 rounded-xl text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition shadow-xs cursor-pointer"
@@ -395,7 +411,7 @@ export default function DigitalCard({ member }: DigitalCardProps) {
             </div>
             <span className="inline-flex items-center gap-1 px-3 py-1 bg-red-50 border border-red-100 rounded-full text-[10px] font-mono font-bold text-[#B5121B] uppercase shrink-0">
               <CreditCard className="w-3.5 h-3.5" />
-              EST: 4 DIAS ÚTEIS
+              EST: 2 SEMANAS
             </span>
           </div>
 

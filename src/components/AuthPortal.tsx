@@ -60,7 +60,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
   const [rememberMe, setRememberMe] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const [language, setLanguage] = useState("EN");
+  const [language, setLanguage] = useState("PT");
 
   // OTP Fields
   const [otpCode, setOtpCode] = useState<string[]>(Array(6).fill(""));
@@ -81,6 +81,8 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
     province: "Gauteng",
     municipality: "City of Johannesburg",
     committee: "Ward 117 Local Committee",
+    affiliation: "Apenas Militante",
+    documentType: "BI",
     photo: ""
   });
 
@@ -163,7 +165,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!identifier) {
-      setErrorMsg("Please enter your Membership Number, Email, or Phone Number.");
+      setErrorMsg("Introduza o seu Número de Militante, Email ou Telefone.");
       return;
     }
     setErrorMsg("");
@@ -207,7 +209,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
   // Handle Sign In with OTP requested
   const handleRequestOTP = async () => {
     if (!identifier) {
-      setErrorMsg("Please enter your Phone Number or Email to receive an OTP.");
+      setErrorMsg("Introduza o seu telefone ou email para receber o OTP.");
       return;
     }
     setErrorMsg("");
@@ -316,7 +318,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
       saveSignUpDraft(signUpData, 2);
     } else if (signUpStep === 2) {
       if (!signUpData.email || !signUpData.password || !signUpData.confirmPassword) {
-        setErrorMsg("Please complete all password and email fields.");
+        setErrorMsg("Preencha todos os campos de email e palavra-passe.");
         return;
       }
       if (signUpData.password !== signUpData.confirmPassword) {
@@ -603,7 +605,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                     }`}
                   >
                     <ShieldCheck className="w-3.5 h-3.5" />
-                    Super Admin Portal
+                    Portal do Super Administrador
                   </button>
                 </div>
 
@@ -618,7 +620,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                   {/* Smart Identifier Input */}
                   <div className="space-y-2">
                     <label htmlFor="signin_identifier" className="block text-xs font-semibold text-[#111827]">
-                      {role === "admin" ? "Super Admin Username or Email" : "Membership Number / Email / Phone Number"}
+                      {role === "admin" ? "Email ou utilizador do Super Administrador" : "Número de Militante / Email / Telefone"}
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#6B7280]">
@@ -630,7 +632,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                         required
                         value={identifier}
                         onChange={(e) => setIdentifier(e.target.value)}
-                        placeholder={role === "admin" ? "Enter admin username" : "Enter membership number, email or phone"}
+                        placeholder={role === "admin" ? "Digite o utilizador administrador" : "Digite número de militante, email ou telefone"}
                         className="block w-full pl-11 pr-4 py-3.5 h-[52px] bg-white border border-[#E5E7EB] rounded-xl text-sm text-[#111827] placeholder-[#6B7280] focus:ring-1 focus:ring-[#C8102E] focus:border-[#C8102E] focus:outline-hidden"
                       />
                     </div>
@@ -1387,14 +1389,14 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                 </div>
 
                 <div className="space-y-2">
-                  <h1 className="text-2xl font-bold text-[#111827]">Registration Successful!</h1>
+                  <h1 className="text-2xl font-bold text-[#111827]">Registo concluído com sucesso!</h1>
                   <p className="text-xs text-[#6B7280] leading-relaxed max-w-sm mx-auto">
-                    Your central national registration record has been committed to the secure party database. Your digital card queue is active.
+                    O seu registo foi gravado com segurança na base de dados partidária. A fila do cartão digital está activa.
                   </p>
                 </div>
 
                 <div className="bg-[#F8FAFC] p-4 rounded-xl border border-[#E5E7EB] text-left space-y-2.5 max-w-sm mx-auto">
-                  <p className="text-[10px] font-mono font-bold text-[#6B7280] uppercase tracking-wider">Default Login Credentials</p>
+                  <p className="text-[10px] font-mono font-bold text-[#6B7280] uppercase tracking-wider">Credenciais de acesso</p>
                   <div>
                     <span className="text-[10px] text-[#6B7280] block">IDENTIFIER</span>
                     <span className="font-bold text-xs text-[#111827]">{signUpData.email}</span>
@@ -1415,7 +1417,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                   }}
                   className="w-full h-14 bg-[#C8102E] hover:bg-[#A50D24] text-white font-semibold text-sm rounded-xl flex items-center justify-center transition active:scale-[0.99] cursor-pointer"
                 >
-                  Continue to Sign In
+                  Continuar para iniciar sessão
                 </button>
               </div>
             )}
@@ -1425,12 +1427,12 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
           {/* Right Panel Footer - Responsive & accessible links */}
           <div className="w-full max-w-[460px] border-t border-[#E5E7EB] pt-6 mt-8 flex flex-wrap justify-between items-center text-[11px] text-[#6B7280] font-medium gap-2">
             <div className="flex gap-4">
-              <a href="#privacy" className="hover:text-[#111827] hover:underline">Privacy Policy</a>
-              <a href="#terms" className="hover:text-[#111827] hover:underline">Terms of Service</a>
-              <a href="#help" className="hover:text-[#111827] hover:underline">Help & Support</a>
+              <a href="#privacy" className="hover:text-[#111827] hover:underline">Política de Privacidade</a>
+              <a href="#terms" className="hover:text-[#111827] hover:underline">Termos de Serviço</a>
+              <a href="#help" className="hover:text-[#111827] hover:underline">Ajuda e Apoio</a>
             </div>
             <div className="font-mono text-[10px] text-right">
-              Gateway v2.2 AA
+              Gateway v2.2 AA<br/><a href="http://www.ai.neurogrowthlabs.co.za" target="_blank" rel="noreferrer" className="text-[#C8102E] font-bold hover:underline">Developed by NeuroGrowth Labs www.ai.neurogrowthlabs.co.za</a>
             </div>
           </div>
 

@@ -4,7 +4,7 @@ import { formatCurrencyPT, traduzirEstadoMembro } from "../utils/portugal";
 import { 
   Users, CheckCircle, ShieldAlert, Clock, Search, MapPin, 
   Trash2, ShieldOff, CheckSquare, XCircle, ChevronRight, 
-  AlertTriangle, Filter, FolderPlus, Compass 
+  AlertTriangle, Filter, FolderPlus, Compass, Download, FileText 
 } from "lucide-react";
 
 interface AdminDashboardProps {
@@ -50,6 +50,30 @@ export default function AdminDashboard({
 
   const pendingRegistrations = members.filter(m => m.status === "Pending Verification");
 
+  const downloadBlob = (content: string, fileName: string, type: string) => {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const exportMembersCsv = () => {
+    const header = "membershipNo,fullName,email,mobile,province,committee,status,outstandingBalance";
+    const rows = filteredMembers.map(m => [m.membershipNo, m.fullName, m.email, m.mobile, m.province, m.committee, m.status, m.outstandingBalance].map(v => `"${String(v).replace(/"/g, '""')}"`).join(","));
+    downloadBlob([header, ...rows].join("\n"), "mpla-cape-members.csv", "text/csv;charset=utf-8");
+  };
+
+  const exportAuditPdf = () => {
+    const html = `<!doctype html><html><head><title>Relatório de Auditoria</title><style>body{font-family:Arial,sans-serif;padding:24px}h1{color:#c8102e}table{width:100%;border-collapse:collapse;font-size:11px}td,th{border:1px solid #ddd;padding:6px;text-align:left}</style></head><body><h1>MPLA CAPE — Relatório de Auditoria</h1><p>Gerado em ${new Date().toLocaleString("pt-ZA")}</p><table><thead><tr><th>Data</th><th>Utilizador</th><th>Ação</th><th>Detalhes</th></tr></thead><tbody>${auditLogs.map(log => `<tr><td>${log.timestamp}</td><td>${log.user}</td><td>${log.action}</td><td>${log.details}</td></tr>`).join("")}</tbody></table><script>window.print()</script></body></html>`;
+    const win = window.open("", "_blank", "width=1000,height=700");
+    if (!win) return;
+    win.document.write(html);
+    win.document.close();
+  };
+
   // Geographic hierarchy mock data
   const geoHierarchy: { [prov: string]: { [muni: string]: string[] } } = {
     "Gauteng": {
@@ -69,6 +93,11 @@ export default function AdminDashboard({
 
   return (
     <div className="space-y-8" id="admin-dashboard-panel">
+      <div className="flex flex-wrap justify-end gap-2">
+        <button onClick={exportMembersCsv} className="px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 flex items-center gap-2"><Download className="w-4 h-4" />Exportar membros CSV</button>
+        <button onClick={exportAuditPdf} className="px-3 py-2 bg-[#D3122A] text-white rounded-xl text-xs font-bold hover:bg-red-700 flex items-center gap-2"><FileText className="w-4 h-4" />Exportar auditoria PDF</button>
+      </div>
+
       {/* Super Admin KPI Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {[
