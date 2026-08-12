@@ -1,17 +1,17 @@
 import { images } from "../assets/images";
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { 
-  Phone, Mail, Clock, Globe, ArrowRight, User, Shield, Users, 
-  Calendar, MapPin, Award, BookOpen, Volume2, ShieldCheck, 
-  Download, Search, Eye, Share2, HelpCircle, ChevronRight, 
+import {
+  Phone, Mail, Clock, Globe, ArrowRight, User, Shield, Users,
+  Calendar, MapPin, Award, BookOpen, Volume2, ShieldCheck,
+  Download, Search, Eye, Share2, HelpCircle, ChevronRight,
   ChevronDown, ExternalLink, MessageSquare, Heart, Sparkles,
   Check, FileText, CheckCircle2, Moon, Sun, Type, Play, X,
   ArrowLeft, ChevronLeft, Send, Sparkle, Trophy
 } from "lucide-react";
-import { 
-  AreaChart, Area, BarChart, Bar, XAxis, YAxis, 
-  CartesianGrid, Tooltip, ResponsiveContainer 
+import {
+  AreaChart, Area, BarChart, Bar, XAxis, YAxis,
+  CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts";
 
 interface PublicWebsiteProps {
@@ -151,59 +151,112 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
   const leaders = [
     {
-      name: "Camarada Dr. Manuel Diogo",
-      role_pt: "Secretário Executivo da Coordenação Nacional",
-      role_en: "National Coordination Executive Secretary",
+      name: "Camarada Pinto N P Cauende",
+      role_pt: "Primeiro Secretário do Comité de MPLA Cape Town",
+      role_en: "First Secretary of the MPLA Cape Town Committee",
       committee: "national",
-      bio_pt: "Diplomata e cientista político com mais de 18 anos de coordenação de assuntos comunitários e bilaterais entre Angola e África do Sul. Dedicado a reestruturar os mecanismos de apoio consular.",
-      bio_en: "Diplomat and political scientist with over 18 years of experience coordinating community and bilateral affairs between Angola and Diáspora. Dedicated to improving consular helpdesks.",
-      speech_pt: "A nossa missão na diáspora sul-africana transcende a política; somos uma família unida pela identidade, trabalhando incansavelmente para o progresso de cada angolano.",
-      speech_en: "Our mission in the Diásporan diaspora transcends politics; we are a family united by identity, working tirelessly for the progress of every Angolan citizen.",
+      bio_pt: "Líder supremo e Primeiro Secretário da comissão executiva do comité do MPLA para a comunidade da Cidade do Cabo, guiando a integração, filiação digital e apoio consular.",
+      bio_en: "Supreme leader and First Secretary of the MPLA committee executive commission for the Cape Town community, guiding integration, digital membership and consular support.",
+      speech_pt: "A nossa prioridade é servir a comunidade angolana da Cidade do Cabo com disciplina, proximidade e unidade patriótica.",
+      speech_en: "Our priority is to serve Cape Town's Angolan community with discipline, proximity and patriotic unity.",
       photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop"
     },
     {
-      name: "Camarada Teresa Francisco",
-      role_pt: "Coordenadora Regional da OMA - África do Sul",
-      role_en: "OMA Regional Coordinator - Diáspora",
-      committee: "oma",
-      bio_pt: "Líder de direitos cívicos femininos, gestora comunitária em Joanesburgo, foca no apoio ao empreendedorismo feminino, capacitação de mulheres e amparo social a agregados familiares vulneráveis.",
-      bio_en: "Women's civic rights advocate, community manager in Johannesburg, focusing on women's entrepreneurship, child education, and welfare support for single-parent families.",
-      speech_pt: "Mulheres fortes constroem nações fortes. Na OMA, abrimos portas de formação e autonomia financeira para que a mulher angolana seja protagonista de sua história.",
-      speech_en: "Strong women build strong nations. At OMA, we open avenues for professional training and financial autonomy so that Angolan women can lead their destinies.",
-      photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=400&fit=crop"
-    },
-    {
-      name: "Camarada António Bernardo",
-      role_pt: "Secretário Geral da JMPLA - Província do Gauteng",
-      role_en: "JMPLA General Secretary - Gauteng Province",
-      committee: "jmpla",
-      bio_pt: "Engenheiro de sistemas e mentor académico, lidera projetos de bolsas de estudo e integração de jovens angolanos nas universidades sul-africanas de prestígio.",
-      bio_en: "Systems engineer and academic mentor, leading student bursaries and the smooth integration of young Angolans into premium Diásporan universities.",
-      speech_pt: "A juventude é o motor da inovação. Capacitar nossos estudantes na África do Sul com tecnologia e ciência é semear o progresso de Angola no amanhã.",
-      speech_en: "Youth is the engine of innovation. Empowering our students in Diáspora with technology and science is sowing the seeds of Angola's progress tomorrow.",
+      name: "Camarada Manuel Mateus",
+      role_pt: "Segundo Secretário do Comité de MPLA Cape Town",
+      role_en: "Second Secretary of the MPLA Cape Town Committee",
+      committee: "national",
+      bio_pt: "Apoio direto ao Primeiro Secretário na coordenação política, supervisão das atividades regionais e alinhamento do secretariado executivo do comité.",
+      bio_en: "Direct support to the First Secretary in political coordination, supervision of regional activities and alignment of the committee executive secretariat.",
+      speech_pt: "Trabalhamos lado a lado para garantir coordenação eficaz e resposta organizada às necessidades da nossa comunidade.",
+      speech_en: "We work side by side to ensure effective coordination and an organized response to our community's needs.",
       photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=400&fit=crop"
     },
     {
-      name: "Camarada Sofia Cassule",
-      role_pt: "Secretária de Mobilização e Integração Social",
-      role_en: "Secretary of Mobilization and Social Integration",
+      name: "Camarada Raquel Correia",
+      role_pt: "Tesoureira do Comité de MPLA Cape Town",
+      role_en: "Treasurer of the MPLA Cape Town Committee",
       committee: "national",
-      bio_pt: "Especialista em assistência humanitária, lidera o registo social unificado, auxiliando os imigrantes a regularizarem a sua documentação e inserção laboral digna.",
-      bio_en: "Humanitarian assistance specialist, leading the unified social registry, assisting immigrants in regularizing documentation and obtaining dignified employment.",
-      speech_pt: "A solidariedade é a nossa maior divisa. Nenhum compatriota nosso deve sentir-se desamparado nas terras da África do Sul.",
-      speech_en: "Solidarity is our greatest currency. No compatriot of ours should ever feel helpless or forgotten while living in Diáspora.",
+      bio_pt: "Responsável pela gestão de quotas, contabilidade e financiamento das iniciativas de solidariedade social e auxílio a famílias em condições de vulnerabilidade.",
+      bio_en: "Responsible for dues management, accounting and financing social solidarity initiatives supporting vulnerable families.",
+      speech_pt: "A transparência financeira fortalece a confiança e transforma contribuições em apoio real às famílias.",
+      speech_en: "Financial transparency strengthens trust and transforms contributions into real family support.",
+      photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=400&fit=crop"
+    },
+    {
+      name: "Camarada Vânia da Cruz",
+      role_pt: "Secretária para a Comissão de Organização e Mobilização",
+      role_en: "Secretary for the Organization and Mobilization Commission",
+      committee: "national",
+      bio_pt: "Gestão da mobilização de militantes, dinamização do cadastro unificado e coordenação dos núcleos de ação do partido na África do Sul.",
+      bio_en: "Management of member mobilization, activation of the unified registry and coordination of party action cells in South Africa.",
+      speech_pt: "Mobilizar é aproximar cada militante do trabalho coletivo e da responsabilidade comunitária.",
+      speech_en: "Mobilizing means bringing every member closer to collective work and community responsibility.",
       photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop"
+    },
+    {
+      name: "Camarada Capenda Venâncio",
+      role_pt: "Secretário da Comissão para Questões Políticas e das Comunidades",
+      role_en: "Secretary of the Commission for Political and Community Affairs",
+      committee: "national",
+      bio_pt: "Acompanhamento de assuntos comunitários, mediação política e apoio às necessidades sociais e de integração dos cidadãos angolanos.",
+      bio_en: "Monitoring community affairs, political mediation and supporting the social and integration needs of Angolan citizens.",
+      speech_pt: "A política comunitária deve ouvir, mediar e resolver com serenidade e compromisso patriótico.",
+      speech_en: "Community politics must listen, mediate and resolve with calm and patriotic commitment.",
+      photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=400&fit=crop"
+    },
+    {
+      name: "Camarada Raimundo Pereira",
+      role_pt: "Secretário da Comissão para a Auditoria e Disciplina",
+      role_en: "Secretary of the Audit and Discipline Commission",
+      committee: "national",
+      bio_pt: "Garantia do cumprimento dos estatutos do partido, integridade procedimental, ética e disciplina institucional em todos os níveis do comité.",
+      bio_en: "Ensures compliance with party statutes, procedural integrity, ethics and institutional discipline across all committee levels.",
+      speech_pt: "Disciplina e integridade são pilares da confiança no serviço partidário.",
+      speech_en: "Discipline and integrity are pillars of trust in party service.",
+      photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=400&fit=crop"
+    },
+    {
+      name: "Camarada Aurélio Sekesseke",
+      role_pt: "Secretário da Formação Militante e Educação Patriótica",
+      role_en: "Secretary of Member Training and Patriotic Education",
+      committee: "national",
+      bio_pt: "Desenvolvimento de programas de formação política, capacitação ideológica e promoção de valores patrióticos para os militantes da diáspora.",
+      bio_en: "Develops political training programs, ideological capacity building and patriotic values for diaspora members.",
+      speech_pt: "Formação permanente prepara militantes conscientes, unidos e comprometidos com Angola.",
+      speech_en: "Continuous training prepares conscious, united members committed to Angola.",
+      photo: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=300&h=400&fit=crop"
+    },
+    {
+      name: "Camarada Tunisia Sebastião",
+      role_pt: "Secretária de Informação, Propaganda e Marketing",
+      role_en: "Secretary of Information, Propaganda and Marketing",
+      committee: "national",
+      bio_pt: "Responsável pela comunicação institucional, difusão de campanhas, newsletters informativas e fortalecimento dos laços patrióticos da comunidade diáspora.",
+      bio_en: "Responsible for institutional communication, campaign distribution, newsletters and strengthening patriotic ties in the diaspora community.",
+      speech_pt: "Comunicar com clareza é unir a comunidade em torno de informação útil e valores comuns.",
+      speech_en: "Communicating clearly unites the community around useful information and shared values.",
+      photo: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=300&h=400&fit=crop"
+    },
+    {
+      name: "Camarada Lusimanadio Soki Simão",
+      role_pt: "Estratégia de Comunicação, Mídia Digital e Suporte",
+      role_en: "Communication Strategy, Digital Media and Support",
+      committee: "national",
+      bio_pt: "Arquiteto de sistemas digitais do portal, responsável por toda infraestrutura de dados de militantes, emissão de credenciais eletrónicas e segurança.",
+      bio_en: "Digital systems architect for the portal, responsible for member data infrastructure, electronic credentials and security.",
+      speech_pt: "A tecnologia deve proteger dados, facilitar serviços e aproximar o comité de cada militante.",
+      speech_en: "Technology must protect data, simplify services and bring the committee closer to every member.",
+      photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop"
     }
   ];
 
   // Interactive Diáspora Map state
-  const [hoveredProvince, setHoveredProvince] = useState<string | null>("GP");
+  const [hoveredProvince, setHoveredProvince] = useState<string | null>("WC");
   const provinceDetails: Record<string, { name: string; members: string; caps: number; projects: string }> = {
-    GP: { name: "Gauteng (Johannesburg/Pretoria)", members: "6,420+", caps: 14, projects: "Aulas de Português, Gabinete Jurídico, Distribuição Alimentar" },
-    WC: { name: "Western Cape (Cape Town)", members: "3,150+", caps: 8, projects: "Mentoria Académica JMPLA, Integração Consular" },
-    KZN: { name: "KwaZulu-Natal (Durban)", members: "1,580+", caps: 4, projects: "Encontros de Negócios Bilaterais SADC" },
-    EC: { name: "Eastern Cape (Gqeberha)", members: "650+", caps: 2, projects: "Apoio a Famílias Estudantis" },
-    FS: { name: "Free State (Bloemfontein)", members: "650+", caps: 2, projects: "Apoio de Integração a Estudantes Universitários" }
+    NC: { name: "Northern Cape", members: "420+", caps: 2, projects: "Mobilização comunitária e apoio itinerante" },
+    EC: { name: "Eastern Cape", members: "650+", caps: 2, projects: "Apoio a famílias estudantis e integração regional" },
+    WC: { name: "Western Cape", members: "3,150+", caps: 8, projects: "Coordenação Cape Town, mentoria académica e integração consular" }
   };
 
   // Recharts Dashboard Data
@@ -225,7 +278,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
   // Netflix-style Events Countdown State
   const [eventCountdowns, setEventCountdowns] = useState<Record<number, string>>({});
-  
+
   useEffect(() => {
     const dates = [
       new Date("2026-08-12T09:00:00").getTime(),
@@ -236,7 +289,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const updated: Record<number, string> = {};
-      
+
       dates.forEach((target, index) => {
         const diff = target - now;
         if (diff < 0) {
@@ -371,14 +424,14 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
   const searchResults = useMemo(() => {
     if (!searchQuery) return [];
-    return searchableItems.filter(item => 
+    return searchableItems.filter(item =>
       item.text_pt.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.text_en.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [searchQuery]);
 
   return (
-    <div 
+    <div
       className={`min-h-screen antialiased transition-all duration-300 ${
         highContrast ? "bg-black text-white" : "bg-[#FAF9F5] text-slate-900"
       } ${
@@ -395,7 +448,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               LATEST
             </span>
             <div className="relative w-full overflow-hidden h-4">
-              <motion.div 
+              <motion.div
                 animate={{ x: ["100%", "-100%"] }}
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
                 className="absolute whitespace-nowrap text-[11px] font-medium text-amber-400"
@@ -410,22 +463,22 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             {/* Font Scaling */}
             <div className="flex items-center gap-1.5 border-r border-neutral-800 pr-3">
               <Type className="w-3.5 h-3.5 text-slate-400" />
-              <button 
-                onClick={() => setFontSize("normal")} 
+              <button
+                onClick={() => setFontSize("normal")}
                 className={`w-5 h-5 rounded flex items-center justify-center font-bold text-[10px] ${fontSize === "normal" ? "bg-amber-400 text-black" : "text-slate-400 hover:text-white"}`}
                 title="Normal Font"
               >
                 A
               </button>
-              <button 
-                onClick={() => setFontSize("large")} 
+              <button
+                onClick={() => setFontSize("large")}
                 className={`w-5 h-5 rounded flex items-center justify-center font-bold text-[10px] ${fontSize === "large" ? "bg-amber-400 text-black" : "text-slate-400 hover:text-white"}`}
                 title="Large Font"
               >
                 A+
               </button>
-              <button 
-                onClick={() => setFontSize("xlarge")} 
+              <button
+                onClick={() => setFontSize("xlarge")}
                 className={`w-5 h-5 rounded flex items-center justify-center font-bold text-[10px] ${fontSize === "xlarge" ? "bg-amber-400 text-black" : "text-slate-400 hover:text-white"}`}
                 title="Extra Large Font"
               >
@@ -434,7 +487,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             </div>
 
             {/* High Contrast */}
-            <button 
+            <button
               onClick={() => setHighContrast(!highContrast)}
               className="flex items-center gap-1 text-[11px] font-semibold text-slate-300 hover:text-white"
               aria-label="Toggle contrast theme"
@@ -455,7 +508,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       </div>
 
       {/* LUXURIOUS FLOATING STICKY HEADER */}
-      <header 
+      <header
         className="sticky top-0 z-40 transition-all duration-300 w-full bg-[#B5121B] text-white shadow-xl py-4"
         id="navbar-site"
       >
@@ -463,16 +516,16 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           {/* Logo Brand */}
           <a href="#portal-root" className="flex items-center gap-3.5 group">
             <div className="w-11 h-11 bg-white rounded-xl flex items-center justify-center border-2 border-[#D4AF37] p-1 shadow-md transform group-hover:scale-105 transition duration-300">
-              <img 
-                src={images.mplaLogo} 
-                alt="MPLA Logo" 
+              <img
+                src={images.mplaLogo}
+                alt="MPLA Logo"
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
               />
             </div>
             <div>
               <h2 className="font-extrabold text-sm sm:text-base tracking-tight leading-none text-white">
-                MPLA • ÁFRICA DO SUL
+                MPLA Cape Town
               </h2>
               <p className="text-[9px] text-[#D4AF37] font-mono font-black tracking-widest mt-1 uppercase">
                 {language === "PT" ? "UNIDADE, LUTA, PROGRESSO" : "UNITY, STRUGGLE, PROGRESS"}
@@ -483,43 +536,43 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           {/* Navigation Links */}
           <nav className="hidden lg:flex items-center gap-7 text-xs font-bold uppercase tracking-widest text-slate-100">
             {/* SOBRE DROPDOWN */}
-            <div 
+            <div
               className="relative"
               onMouseEnter={() => setShowSobreDropdown(true)}
               onMouseLeave={() => setShowSobreDropdown(false)}
             >
-              <button 
+              <button
                 className="hover:text-amber-300 transition flex items-center gap-1 py-2 font-bold uppercase tracking-widest text-xs cursor-pointer bg-transparent border-0 text-slate-100"
               >
                 {language === "PT" ? "Sobre" : "About"}
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${showSobreDropdown ? "rotate-180" : ""}`} />
               </button>
-              
+
               <AnimatePresence>
                 {showSobreDropdown && (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
                     className="absolute left-0 mt-1 w-48 bg-slate-900 border border-neutral-800 rounded-xl shadow-2xl p-2 flex flex-col z-50 text-left"
                   >
-                    <a 
-                      href="#about" 
+                    <a
+                      href="#about"
                       onClick={() => setShowSobreDropdown(false)}
                       className="px-3 py-2 text-xs font-bold text-slate-100 hover:text-amber-400 hover:bg-slate-800 rounded-lg transition"
                     >
                       MPLA
                     </a>
-                    <a 
-                      href="#jmpla" 
+                    <a
+                      href="#jmpla"
                       onClick={() => setShowSobreDropdown(false)}
                       className="px-3 py-2 text-xs font-bold text-slate-100 hover:text-amber-400 hover:bg-slate-800 rounded-lg transition"
                     >
                       JMPLA
                     </a>
-                    <a 
-                      href="#oma" 
+                    <a
+                      href="#oma"
                       onClick={() => setShowSobreDropdown(false)}
                       className="px-3 py-2 text-xs font-bold text-slate-100 hover:text-amber-400 hover:bg-slate-800 rounded-lg transition"
                     >
@@ -541,13 +594,13 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
           {/* Action buttons */}
           <div className="flex items-center gap-3">
-            <button 
+            <button
               onClick={() => onNavigateToAuth("signin")}
               className="px-4 py-2 text-xs font-bold bg-amber-400 text-slate-950 rounded-xl hover:bg-amber-300 transition cursor-pointer shadow-md"
             >
               {language === "PT" ? "Entrar" : "Login"}
             </button>
-            <button 
+            <button
               onClick={() => setShowDonationModal(true)}
               className="px-4 py-2 text-xs font-bold bg-[#D4AF37] text-slate-950 hover:bg-yellow-500 rounded-xl transition shadow-lg cursor-pointer flex items-center gap-1.5"
             >
@@ -571,9 +624,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               transition={{ duration: 1.5 }}
               className="absolute inset-0 w-full h-full"
             >
-              <img 
-                src={heroSlides[currentSlide].image} 
-                alt="MPLA CAPE background" 
+              <img
+                src={heroSlides[currentSlide].image}
+                alt="MPLA CAPE background"
                 className="w-full h-full object-cover opacity-35"
                 referrerPolicy="no-referrer"
               />
@@ -586,14 +639,14 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
         <div className="max-w-7xl mx-auto px-6 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-16">
           <div className="lg:col-span-8 text-left space-y-6">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37]"
             >
               <Sparkle className="w-3.5 h-3.5 animate-spin" />
-              {language === "PT" ? "Delegação Oficial África do Sul" : "Official Diáspora Delegation"}
+
             </motion.div>
 
             {/* Giant Bold Typography Animated Reveal */}
@@ -603,7 +656,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               </span>
             </h1>
 
-            <motion.p 
+            <motion.p
               key={currentSlide + "-p"}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -613,14 +666,14 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             </motion.p>
 
             <div className="flex flex-wrap gap-4 pt-3">
-              <button 
+              <button
                 onClick={() => onNavigateToAuth("signup")}
                 className="px-6 py-3.5 bg-[#B5121B] hover:bg-red-700 text-white font-bold text-xs rounded-xl tracking-widest uppercase transition-all shadow-xl shadow-red-900/40 hover:shadow-red-900/60 flex items-center gap-2 cursor-pointer"
               >
                 {language === "PT" ? "Torne-se Militante" : "Become a Member"}
                 <ArrowRight className="w-4 h-4" />
               </button>
-              <a 
+              <a
                 href="#about"
                 className="px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs rounded-xl tracking-widest uppercase transition"
               >
@@ -675,7 +728,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
             <Search className="w-5 h-5 text-slate-400" />
           </div>
-          <input 
+          <input
             type="text"
             value={searchQuery}
             onChange={(e) => {
@@ -691,7 +744,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           {/* Autocomplete Dropdown */}
           <AnimatePresence>
             {showSearchAutocomplete && searchQuery && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
@@ -700,8 +753,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 <p className="text-[9px] font-mono uppercase text-[#D4AF37] px-3 py-1 font-black">Suggested Results:</p>
                 {searchResults.length > 0 ? (
                   searchResults.map((result, idx) => (
-                    <a 
-                      key={idx} 
+                    <a
+                      key={idx}
                       href={result.link}
                       onClick={() => {
                         setSearchQuery("");
@@ -728,20 +781,20 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           highContrast ? "bg-[#111111] border-neutral-800 text-white" : "bg-white border-slate-200"
         } shadow-xl relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-12 items-center`}>
           <div className="absolute top-0 left-0 w-2 h-full bg-[#B5121B]" />
-          
+
           {/* Portrait and play trigger */}
           <div className="lg:col-span-5 relative group">
             <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/30 shadow-2xl">
-              <img 
-                src="/src/assets/images/mpla_presidents_collage_1784384603231.jpg" 
-                alt={language === "PT" ? "Presidentes Históricos do MPLA" : "Historic MPLA Presidents"} 
+              <img
+                src="/src/assets/images/mpla_presidents_collage_1784384603231.jpg"
+                alt={language === "PT" ? "Presidentes Históricos do MPLA" : "Historic MPLA Presidents"}
                 className="w-full h-[380px] object-cover filter brightness-95 group-hover:scale-105 transition duration-500"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-              
+
               {/* Play video overlay trigger */}
-              <button 
+              <button
                 onClick={() => setShowVideoModal(true)}
                 className="absolute inset-0 m-auto w-16 h-16 bg-[#B5121B]/90 hover:bg-red-700 text-white rounded-full flex items-center justify-center shadow-2xl cursor-pointer transition transform hover:scale-110 active:scale-95"
                 title="Assistir Mensagem de Boas-Vindas"
@@ -753,15 +806,12 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
           {/* Letter and signature */}
           <div className="lg:col-span-7 space-y-6">
-            <span className="text-[10px] font-mono font-black uppercase text-[#B5121B] bg-red-50 px-3 py-1 rounded-full border border-red-100">
-              {language === "PT" ? "MENSAGEM DO PRESIDENTE DO COMITÉ" : "MESSAGE FROM THE COMMITTEE PRESIDENT"}
-            </span>
             <h2 className="text-3xl font-black text-slate-900 leading-tight">
               {language === "PT" ? "Liderança Que Inspira. Serviço Que Transforma." : "Leadership That Inspires. Service That Matters."}
             </h2>
             <p className="text-slate-600 leading-relaxed font-light text-sm italic border-l-4 border-[#D4AF37] pl-4">
-              "{language === "PT" 
-                ? "Benvindo ao portal cívico unificado dos militantes e amigos do MPLA na África do Sul. A nossa missão é aproximar cada angolano, fornecer representação autêntica, e contribuir diretamente para o desenvolvimento do nosso país." 
+              "{language === "PT"
+                ? "Benvindo ao portal cívico unificado dos militantes e amigos do MPLA na África do Sul. A nossa missão é aproximar cada angolano, fornecer representação autêntica, e contribuir diretamente para o desenvolvimento do nosso país."
                 : "Welcome to the unified civic portal of MPLA members and friends in Diáspora. Our goal is to bring every Angolan closer, provide authentic representation, and contribute directly to the development of our country."}"
             </p>
             <p className="text-slate-500 leading-relaxed text-xs">
@@ -769,7 +819,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 ? "Estamos focados em modernizar a nossa coordenação através de recursos digitais, apoio consular estruturado e programas sociais inovadores voltados para a formação de jovens, solidariedade de género e atracção de investimentos comerciais."
                 : "We are focused on modernizing our coordination via advanced digital tools, structured consular backup and community programs aimed at training the youth, reinforcing gender equality and driving bilateral investments."}
             </p>
-            
+
             <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
               <div>
                 <p className="font-bold text-slate-900 text-sm">Camarada Dr. Manuel Diogo</p>
@@ -792,9 +842,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           {/* Left Column: Large Cinematic Image */}
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=700&q=80" 
-                alt="MPLA general assembly conference" 
+              <img
+                src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=700&q=80"
+                alt="MPLA general assembly conference"
                 className="w-full h-[440px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
@@ -810,14 +860,11 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
           {/* Right Column: Mission, Vision, Values Tab Display */}
           <div className="lg:col-span-7 space-y-6">
-            <span className="text-[10px] font-mono font-black uppercase text-[#B5121B] bg-red-50 border border-red-100 px-3 py-1 rounded-full">
-              {language === "PT" ? "A NOSSA IDENTIDADE INSTITUCIONAL" : "OUR INSTITUTIONAL IDENTITY"}
-            </span>
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
               {language === "PT" ? "Unindo a Diáspora Angolana com Visão de Futuro" : "Unifying the Angolan Diaspora with a Vision for the Future"}
             </h2>
             <p className="text-slate-600 leading-relaxed text-sm">
-              {language === "PT" 
+              {language === "PT"
                 ? "Como representação cívica e política unificada, apoiamos os imigrantes angolanos na sua regularização e inserção digna na sociedade sul-africana, ao mesmo tempo que cultivamos os valores patrióticos."
                 : "As a unified civic and political representation body, we support Angolan immigrants in their formal integration into Diásporan society, while preserving patriotic cultural values."}
             </p>
@@ -829,8 +876,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   key={tab}
                   onClick={() => setAboutTab(tab as any)}
                   className={`py-2 px-4 text-xs font-black uppercase tracking-wider border-b-2 transition cursor-pointer ${
-                    aboutTab === tab 
-                      ? "border-[#B5121B] text-[#B5121B]" 
+                    aboutTab === tab
+                      ? "border-[#B5121B] text-[#B5121B]"
                       : "border-transparent text-slate-400 hover:text-slate-600"
                   }`}
                 >
@@ -844,7 +891,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               {aboutTab === "mission" && (
                 <p className="text-xs text-slate-600 leading-relaxed">
                   <strong>{language === "PT" ? "Missão:" : "Mission:"}</strong>{" "}
-                  {language === "PT" 
+                  {language === "PT"
                     ? "Unir a diáspora angolana na África do Sul sob os princípios de solidariedade, legalidade e participação cívica ativa, atuando como o canal oficial que faz ouvir a voz de nossos militantes na pátria."
                     : "To unite the Angolan diaspora in Diáspora under the principles of solidarity, legality and active citizenship, serving as the official channel to let the voice of our members be heard."}
                 </p>
@@ -874,12 +921,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <section className="py-20 text-left border-t border-slate-150 bg-[#FAF9F5] dark:bg-[#111] dark:border-neutral-800" id="jmpla">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Column: Description & Initiatives */}
             <div className="lg:col-span-7 space-y-6">
-              <span className="text-[10px] font-mono font-black uppercase text-[#B5121B] bg-red-50 border border-red-100 px-3 py-1 rounded-full dark:bg-red-950/20 dark:text-red-400 dark:border-red-900/30">
-                {language === "PT" ? "JUVENTUDE DO PARTIDO" : "PARTY YOUTH WING"}
-              </span>
               <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-none">
                 JMPLA
               </h2>
@@ -887,7 +931,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 {language === "PT" ? "Juventude do Movimento Popular de Libertação de Angola" : "Youth of the Popular Movement for the Liberation of Angola"}
               </p>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-xs sm:text-sm font-light">
-                {language === "PT" 
+                {language === "PT"
                   ? "A JMPLA na África do Sul é o motor dinâmico que mobiliza, capacita e integra a juventude angolana na diáspora. Focamo-nos no desenvolvimento de líderes do amanhã, através de programas académicos, mentorias de carreira, eventos culturais e integração tecnológica."
                   : "JMPLA in Diáspora is the dynamic engine mobilizing, empowering, and integrating Angolan youth in the diaspora. We focus on developing the leaders of tomorrow through academic programs, career mentorship, cultural events, and technological integration."}
               </p>
@@ -902,7 +946,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     {language === "PT" ? "Suporte Académico" : "Academic Support"}
                   </h4>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
-                    {language === "PT" 
+                    {language === "PT"
                       ? "Aconselhamento universitário, auxílio com matrículas, bolsas de estudo locais e grupos de estudo."
                       : "University advisory, application assistance, local bursary coordination, and study groups."}
                   </p>
@@ -916,7 +960,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     {language === "PT" ? "Liderança e Cidadania" : "Leadership & Citizenship"}
                   </h4>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
-                    {language === "PT" 
+                    {language === "PT"
                       ? "Fóruns de debate, capacitação de quadros jovens e fortalecimento da consciência cívica e patriótica."
                       : "Debate forums, training of young leaders, and strengthening civic and patriotic awareness."}
                   </p>
@@ -930,7 +974,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     {language === "PT" ? "Empreendedorismo" : "Entrepreneurship"}
                   </h4>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
-                    {language === "PT" 
+                    {language === "PT"
                       ? "Networking de jovens profissionais, workshops práticos de negócios e incentivo a startups cívicas."
                       : "Young professionals networking, business workshops, and boosting civic-oriented startups."}
                   </p>
@@ -944,7 +988,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     {language === "PT" ? "Cultura e Desporto" : "Culture & Sports"}
                   </h4>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
-                    {language === "PT" 
+                    {language === "PT"
                       ? "Torneios de futebol comunitário, festivais culturais de música e dança integrando a pátria."
                       : "Community soccer tournaments, cultural music & dance festivals connecting to our homeland."}
                   </p>
@@ -952,7 +996,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               </div>
 
               <div className="pt-2">
-                <button 
+                <button
                   onClick={() => onNavigateToAuth("signup")}
                   className="px-6 py-3 bg-[#B5121B] hover:bg-red-700 text-white font-bold text-xs tracking-wider uppercase rounded-xl transition shadow-lg shadow-red-900/10 hover:shadow-red-900/20 cursor-pointer"
                 >
@@ -965,9 +1009,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             <div className="lg:col-span-5 space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-neutral-800 shadow-lg h-80 group relative">
-                  <img 
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUaULF4VKz7AMPfCly9-Y4QQMctIz6BYkUBN80F38Q-w&s=10" 
-                    alt="JMPLA Youth Event" 
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUaULF4VKz7AMPfCly9-Y4QQMctIz6BYkUBN80F38Q-w&s=10"
+                    alt="JMPLA Youth Event"
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     referrerPolicy="no-referrer"
                   />
@@ -979,9 +1023,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 </div>
 
                 <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-neutral-800 shadow-lg h-80 group relative">
-                  <img 
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5dmmZOI1ueDakZtkqMPnmf0eiT0u1cSnhl0Y2VfhY9hQMfZ9Gld5iCJZv&s=10" 
-                    alt="JMPLA Assembly" 
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5dmmZOI1ueDakZtkqMPnmf0eiT0u1cSnhl0Y2VfhY9hQMfZ9Gld5iCJZv&s=10"
+                    alt="JMPLA Assembly"
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     referrerPolicy="no-referrer"
                   />
@@ -996,9 +1040,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               {/* Decorative Banner Block with provided Logo */}
               <div className="bg-slate-100 dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 rounded-2xl p-4 flex items-center gap-4">
                 <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1 shrink-0">
-                  <img 
-                    src="https://logowik.com/content/uploads/images/mpla-angola8253.logowik.com.webp" 
-                    alt="MPLA Brand" 
+                  <img
+                    src="https://logowik.com/content/uploads/images/mpla-angola8253.logowik.com.webp"
+                    alt="MPLA Brand"
                     className="w-full h-full object-contain"
                     referrerPolicy="no-referrer"
                   />
@@ -1022,13 +1066,13 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <section className="py-20 text-left border-t border-slate-150 bg-white dark:bg-neutral-950 dark:border-neutral-800" id="oma">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Column: Image Showcase using User Provided OMA Image */}
             <div className="lg:col-span-5 space-y-6 order-last lg:order-first">
               <div className="rounded-3xl overflow-hidden border-4 border-slate-50 dark:border-neutral-900 shadow-2xl h-[400px] group relative">
-                <img 
-                  src="https://shutterstock.com/editorial/image-editorial/O1Tbk617M9TbI32cODU5Ng==/delegates-popular-movement-liberation-angola-mpla-show-440nw-9876929i.jpg" 
-                  alt="OMA Delegates and Supporters" 
+                <img
+                  src="https://shutterstock.com/editorial/image-editorial/O1Tbk617M9TbI32cODU5Ng==/delegates-popular-movement-liberation-angola-mpla-show-440nw-9876929i.jpg"
+                  alt="OMA Delegates and Supporters"
                   className="w-full h-full object-cover group-hover:scale-105 transition duration-500 filter brightness-95"
                   referrerPolicy="no-referrer"
                 />
@@ -1063,9 +1107,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
             {/* Right Column: Mission and Programs */}
             <div className="lg:col-span-7 space-y-6">
-              <span className="text-[10px] font-mono font-black uppercase text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
-                {language === "PT" ? "EMANCIPAÇÃO DA MULHER" : "WOMEN EMANCIPATION"}
-              </span>
               <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-none">
                 OMA
               </h2>
@@ -1073,7 +1114,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 {language === "PT" ? "Organização da Mulher Angolana" : "Organization of Angolan Women"}
               </p>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-xs sm:text-sm font-light">
-                {language === "PT" 
+                {language === "PT"
                   ? "A OMA é o pilar de solidariedade, igualdade e apoio social das famílias angolanas na África do Sul. A nossa missão reside em defender os direitos das mulheres, apoiar a inclusão financeira e garantir amparo direto a mães, crianças e compatriotas em situação de vulnerabilidade migratória."
                   : "OMA is the pillars of solidarity, equality, and social support for Angolan families in Diáspora. Our mission lies in defending women's rights, supporting financial inclusion, and providing direct welfare to mothers, children, and compatriots in vulnerable migration states."}
               </p>
@@ -1089,7 +1130,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                       {language === "PT" ? "Apoio e Assistência Social" : "Welfare & Social Assistance"}
                     </h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                      {language === "PT" 
+                      {language === "PT"
                         ? "Distribuição de donativos alimentares, vestuário, agasalhos de inverno e auxílio médico voluntário para famílias imigrantes vulneráveis."
                         : "Distribution of food hampers, clothing, winter blankets, and volunteer medical backup for vulnerable immigrant families."}
                     </p>
@@ -1105,7 +1146,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                       {language === "PT" ? "Empreendedorismo e Formação" : "Women Entrepreneurship & Training"}
                     </h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                      {language === "PT" 
+                      {language === "PT"
                         ? "Aulas de costura, literacia financeira, workshops de culinária e incentivo à formalização de pequenos comércios comunitários."
                         : "Sewing classes, financial literacy, catering workshops, and support for formalizing small community-based retail trades."}
                     </p>
@@ -1121,7 +1162,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                       {language === "PT" ? "Aconselhamento e Integração Legal" : "Advisory & Legal Integration"}
                     </h4>
                     <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                      {language === "PT" 
+                      {language === "PT"
                         ? "Orientações práticas para mães solo sobre documentação de menores, processos consulares e inserção escolar regular de crianças."
                         : "Practical tips for single mothers on minors documentation, consular services, and formal school enrollment for children."}
                     </p>
@@ -1130,7 +1171,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               </div>
 
               <div className="pt-2 flex flex-wrap gap-4">
-                <button 
+                <button
                   onClick={() => onNavigateToAuth("signup")}
                   className="px-6 py-3 bg-[#D4AF37] hover:bg-yellow-500 text-slate-950 font-bold text-xs tracking-wider uppercase rounded-xl transition shadow-lg cursor-pointer"
                 >
@@ -1147,9 +1188,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <section className="bg-slate-950 py-20 text-white text-left" id="timeline">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-[10px] font-mono font-black uppercase text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-              {language === "PT" ? "LINHA DO TEMPO HISTÓRICA" : "HISTORICAL TIMELINE"}
-            </span>
             <h2 className="text-3xl font-black text-white mt-3">
               {language === "PT" ? "A Nossa História, O Nosso Legado" : "Our Journey, Our Proud Legacy"}
             </h2>
@@ -1161,8 +1199,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           {/* Timeline Bar Indicator */}
           <div className="relative flex justify-between items-center max-w-4xl mx-auto mb-12">
             <div className="absolute top-1/2 left-0 right-0 h-1 bg-neutral-800 -translate-y-1/2 z-0" />
-            <div 
-              className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-[#B5121B] to-[#D4AF37] -translate-y-1/2 z-0 transition-all duration-500" 
+            <div
+              className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-[#B5121B] to-[#D4AF37] -translate-y-1/2 z-0 transition-all duration-500"
               style={{
                 width: `${(timelineData.findIndex(d => d.year === activeYear) / (timelineData.length - 1)) * 100}%`
               }}
@@ -1172,8 +1210,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 key={d.year}
                 onClick={() => setActiveYear(d.year)}
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs z-10 transition-all cursor-pointer ${
-                  activeYear === d.year 
-                    ? "bg-[#B5121B] text-white border-2 border-[#D4AF37] scale-110 shadow-lg" 
+                  activeYear === d.year
+                    ? "bg-[#B5121B] text-white border-2 border-[#D4AF37] scale-110 shadow-lg"
                     : "bg-neutral-900 text-slate-400 hover:text-white"
                 }`}
               >
@@ -1217,9 +1255,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
             <div>
-              <span className="text-[10px] font-mono font-black uppercase text-[#B5121B] bg-red-50 border border-red-100 px-3 py-1 rounded-full">
-                {language === "PT" ? "CORPO DE DIREÇÃO EXECUTIVA" : "EXECUTIVE LEADERSHIP BODY"}
-              </span>
               <h2 className="text-3xl font-black text-slate-900 tracking-tight mt-3">
                 {language === "PT" ? "Liderança Unificada no Terreno" : "Unified Leadership on the Ground"}
               </h2>
@@ -1240,8 +1275,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   key={btn.key}
                   onClick={() => setLeadershipFilter(btn.key)}
                   className={`px-3.5 py-1.5 text-xs font-bold rounded-xl border transition cursor-pointer ${
-                    leadershipFilter === btn.key 
-                      ? "bg-[#B5121B] text-white border-[#B5121B]" 
+                    leadershipFilter === btn.key
+                      ? "bg-[#B5121B] text-white border-[#B5121B]"
                       : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100"
                   }`}
                 >
@@ -1254,7 +1289,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           {/* Leaders Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {leaders.filter(l => leadershipFilter === "all" || l.committee === leadershipFilter).map((leader, idx) => (
-              <div 
+              <div
                 key={idx}
                 className="group bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden hover:border-[#B5121B]/30 hover:shadow-xl transition duration-300 flex flex-col justify-between"
               >
@@ -1272,12 +1307,15 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
                 <div className="p-5 flex-1 flex flex-col justify-between items-start gap-4 text-left">
                   <div>
+                    <span className="inline-block text-[9px] font-mono font-black text-[#B5121B] uppercase bg-red-50 border border-red-100 px-2 py-0.5 rounded mb-2">
+                      {language === "PT" ? "COMITÉ NATIONAL" : "NATIONAL COMMITTEE"}
+                    </span>
                     <h4 className="font-extrabold text-slate-900 text-sm">{leader.name}</h4>
                     <p className="text-[10px] font-mono text-[#B5121B] font-bold uppercase tracking-wider mt-0.5">
                       {language === "PT" ? leader.role_pt : leader.role_en}
                     </p>
                   </div>
-                  <button 
+                  <button
                     onClick={() => setSelectedLeader(leader)}
                     className="text-xs font-bold text-[#B5121B] group-hover:underline flex items-center gap-1 cursor-pointer"
                   >
@@ -1295,13 +1333,13 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <AnimatePresence>
         {selectedLeader && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xs">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               className="bg-white rounded-3xl border border-slate-200 max-w-2xl w-full overflow-hidden shadow-2xl relative text-left"
             >
-              <button 
+              <button
                 onClick={() => setSelectedLeader(null)}
                 className="absolute top-4 right-4 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition z-10"
               >
@@ -1313,13 +1351,13 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 </div>
                 <div className="sm:col-span-7 p-6 space-y-4">
                   <span className="text-[10px] font-mono font-bold text-[#B5121B] uppercase bg-red-50 border border-red-100 px-3 py-1 rounded">
-                    {selectedLeader.committee.toUpperCase()} DELEGATION
+                    {language === "PT" ? "COMITÉ NATIONAL" : "NATIONAL COMMITTEE"}
                   </span>
                   <h3 className="text-xl font-black text-slate-900">{selectedLeader.name}</h3>
                   <p className="text-xs font-semibold text-slate-500 mt-1">
                     {language === "PT" ? selectedLeader.role_pt : selectedLeader.role_en}
                   </p>
-                  
+
                   <div className="border-t border-b border-slate-100 py-3 mt-4 space-y-2">
                     <p className="text-xs text-slate-600 leading-relaxed">
                       {language === "PT" ? selectedLeader.bio_pt : selectedLeader.bio_en}
@@ -1330,7 +1368,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   </div>
 
                   <div className="flex justify-end gap-2 pt-2">
-                    <button 
+                    <button
                       onClick={() => alert(`Enviando email a ${selectedLeader.name}`)}
                       className="px-4 py-2 bg-[#B5121B] hover:bg-red-700 text-white font-bold text-xs rounded-xl transition"
                     >
@@ -1349,9 +1387,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#B5121B]/5 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-[10px] font-mono font-black uppercase text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-              {language === "PT" ? "DASHBOARD DE IMPACTO SOCIAL" : "SOCIAL IMPACT DASHBOARD"}
-            </span>
             <h2 className="text-3xl font-black text-white mt-3">
               {language === "PT" ? "Transparência, Dados e Alcance" : "Transparency, Data and Footprint"}
             </h2>
@@ -1368,10 +1403,10 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   {language === "PT" ? "MAPA INTERATIVO DE ATIVIDADES" : "INTERACTIVE ACTIVITIES MAP"}
                 </p>
                 <h4 className="text-lg font-extrabold text-white">
-                  {language === "PT" ? "Células da SADC por Província" : "SADC Cells by Diáspora Province"}
+                  {language === "PT" ? "Células no Cape" : "Cape Cells"}
                 </h4>
                 <p className="text-slate-400 text-xs mt-1.5 leading-relaxed">
-                  Clique ou selecione uma província para ver as estatísticas locais.
+                  Clique ou selecione uma província do Cape para ver as estatísticas locais.
                 </p>
 
                 {/* Map Grid */}
@@ -1381,12 +1416,12 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                       key={prov}
                       onClick={() => setHoveredProvince(prov)}
                       className={`p-3 rounded-xl border text-center font-bold text-xs transition cursor-pointer uppercase ${
-                        hoveredProvince === prov 
-                          ? "bg-[#B5121B] border-[#D4AF37] text-white shadow-lg" 
+                        hoveredProvince === prov
+                          ? "bg-[#B5121B] border-[#D4AF37] text-white shadow-lg"
                           : "bg-slate-900 border-white/10 text-slate-400 hover:bg-slate-850"
                       }`}
                     >
-                      {prov}
+                      {provinceDetails[prov].name}
                     </button>
                   ))}
                 </div>
@@ -1491,7 +1526,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               transition={{ repeat: Infinity, duration: 24, ease: "linear" }}
               className="whitespace-nowrap inline-block"
             >
-              {language === "PT" 
+              {language === "PT"
                 ? "• Comité de Sandton conclui registo recorde de 500 novos militantes esta semana • Aulas gratuitas de Língua Portuguesa expandem para Western Cape • Gabinete de Apoio Consular inicia atendimento digital automatizado no próximo sábado • OMA planeia novos fóruns sociais"
                 : "• Sandton Committee registers record 500 new members this week • Free Portuguese classes expanding to Western Cape next Monday • Consular Support Office begins automated digital ticketing service • OMA schedules social integration forum"}
             </motion.div>
@@ -1503,9 +1538,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           {/* COLUMN 1: THE LEAD EDITORIAL (6 Columns) */}
           <div className="lg:col-span-6 bg-white border border-slate-200 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between relative group">
             <div className="relative h-80 overflow-hidden bg-slate-100 shrink-0">
-              <img 
-                src={images.mplaSupportersBackground} 
-                alt="MPLA digital registration campaign" 
+              <img
+                src={images.mplaSupportersBackground}
+                alt="MPLA digital registration campaign"
                 className="w-full h-full object-cover group-hover:scale-[1.02] transition duration-700 filter brightness-95"
                 referrerPolicy="no-referrer"
               />
@@ -1521,7 +1556,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   <span className="w-1.5 h-1.5 bg-slate-300 rounded-full" />
                   <span className="text-slate-400 font-normal">15 JUL 2026</span>
                 </div>
-                <h3 
+                <h3
                   onClick={() => setSelectedArticle({
                     title_pt: "Abertura Oficial do Recadastramento Digital e Atualização de Militantes na SADC",
                     title_en: "Official Launch of the Digital Membership Update and Registry Campaign across SADC",
@@ -1537,7 +1572,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   })}
                   className="text-2xl font-serif font-black text-slate-900 hover:text-[#B5121B] transition cursor-pointer leading-tight tracking-tight"
                 >
-                  {language === "PT" 
+                  {language === "PT"
                     ? "Abertura Oficial do Recadastramento Digital e Atualização de Militantes na SADC"
                     : "Official Launch of the Digital Membership Update and Registry Campaign across SADC"}
                 </h3>
@@ -1548,7 +1583,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 </p>
               </div>
               <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-xs">
-                <button 
+                <button
                   onClick={() => setSelectedArticle({
                     title_pt: "Abertura Oficial do Recadastramento Digital e Atualização de Militantes na SADC",
                     title_en: "Official Launch of the Digital Membership Update and Registry Campaign across SADC",
@@ -1569,7 +1604,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 </button>
                 <div className="flex items-center gap-2">
                   <span className="text-slate-400 font-mono text-[10px]">4 min read</span>
-                  <button 
+                  <button
                     onClick={() => {
                       navigator.clipboard.writeText(window.location.href);
                       alert("Link da notícia copiado!");
@@ -1613,8 +1648,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 content_en: "The delegation of the Organization of Angolan Women (OMA) carried out a significant humanitarian and civic action in the Soweto community, benefiting dozens of Angolan families facing extreme vulnerability. The initiative included distributing comprehensive food parcels, blankets for winter, and basic hygiene kits.\n\nAlongside material support, OMA provided a volunteer legal advisory team to clarify procedures regarding immigration regularization, temporary visa renewals, and enrolling children in the Diásporan education system."
               }
             ].map((newsItem, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="group flex flex-col justify-between h-[48%] border-b border-slate-100 pb-5 last:border-0 last:pb-0 text-left"
               >
                 <div className="space-y-2">
@@ -1625,7 +1660,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     </span>
                     <span className="text-slate-400 font-normal">{newsItem.date}</span>
                   </div>
-                  <h4 
+                  <h4
                     onClick={() => setSelectedArticle(newsItem)}
                     className="font-serif font-black text-slate-900 text-sm leading-snug hover:text-[#B5121B] cursor-pointer transition line-clamp-3"
                   >
@@ -1635,7 +1670,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     {language === "PT" ? newsItem.desc_pt : newsItem.desc_en}
                   </p>
                 </div>
-                <button 
+                <button
                   onClick={() => setSelectedArticle(newsItem)}
                   className="mt-3 text-[10px] font-black text-[#B5121B] hover:text-red-700 flex items-center gap-1 cursor-pointer uppercase tracking-wider"
                 >
@@ -1693,15 +1728,15 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                       content_en: "Digitization of consular workflows is set to slash passport processing timelines by up to 60% for citizens across Gauteng."
                     }
                   ].map((trend, i) => (
-                    <div 
-                      key={trend.id} 
+                    <div
+                      key={trend.id}
                       className="group flex gap-3 text-left border-b border-slate-100 last:border-0 pb-3 last:pb-0"
                     >
                       <span className="text-xl font-serif font-black text-amber-500/80 tracking-tighter shrink-0">
                         {trend.rank}
                       </span>
                       <div className="space-y-1">
-                        <h5 
+                        <h5
                           onClick={() => setSelectedArticle({
                             title_pt: trend.title_pt,
                             title_en: trend.title_en,
@@ -1737,9 +1772,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
             <div>
-              <span className="text-[10px] font-mono font-black uppercase text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full border border-amber-400/20">
-                {language === "PT" ? "PRÓXIMAS ATIVIDADES REGIONAIS" : "UPCOMING REGIONAL EVENTS"}
-              </span>
               <h2 className="text-3xl font-black text-white mt-3">
                 {language === "PT" ? "Fóruns, Comícios e Workshops" : "Forums, Rallies and Workshops"}
               </h2>
@@ -1747,7 +1779,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 Acompanhe o cronograma de eventos em tempo real. Participe na sua província.
               </p>
             </div>
-            <button 
+            <button
               onClick={() => alert("Calendário oficial de eventos completo em desenvolvimento")}
               className="px-4 py-2 border border-white/10 text-white hover:border-[#D4AF37] hover:bg-white/5 rounded-xl text-xs font-bold transition cursor-pointer"
             >
@@ -1758,14 +1790,14 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           {/* Events horizontal scroll track */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {eventList.map((evt, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 className="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden hover:border-[#D4AF37]/40 hover:shadow-2xl transition duration-300 flex flex-col justify-between"
               >
                 <div className="h-44 bg-neutral-850 overflow-hidden relative shrink-0">
                   <img src={evt.image} alt={evt.title_pt} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent" />
-                  
+
                   {/* Live countdown timer overlay */}
                   <div className="absolute top-3 left-3 bg-red-600/90 text-white text-[9px] font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-lg flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-white rounded-full animate-ping" />
@@ -1794,7 +1826,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     </div>
                   </div>
 
-                  <button 
+                  <button
                     onClick={() => onNavigateToAuth("signin")}
                     className="w-full py-2.5 bg-neutral-800 hover:bg-[#B5121B] text-white font-bold text-[11px] rounded-xl transition cursor-pointer uppercase tracking-wider"
                   >
@@ -1811,9 +1843,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <section className="max-w-7xl mx-auto px-6 py-20 text-left" id="gallery">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
           <div>
-            <span className="text-[10px] font-mono font-black uppercase text-[#B5121B] bg-red-50 border border-red-100 px-3 py-1 rounded-full">
-              {language === "PT" ? "GALERIA DE ACTIVIDADES DA DIÁSPORA" : "DIASPORA ACTIVITIES GALLERY"}
-            </span>
             <h2 className="text-3xl font-black text-slate-900 tracking-tight mt-3">
               {language === "PT" ? "O Nosso Trabalho em Imagens" : "Our Commitment in Images"}
             </h2>
@@ -1836,8 +1865,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 key={btn.key}
                 onClick={() => setGalleryCategory(btn.key)}
                 className={`px-3 py-1.5 text-[10px] font-bold rounded-xl uppercase tracking-wider border transition cursor-pointer ${
-                  galleryCategory === btn.key 
-                    ? "bg-[#B5121B] text-white border-[#B5121B]" 
+                  galleryCategory === btn.key
+                    ? "bg-[#B5121B] text-white border-[#B5121B]"
                     : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100"
                 }`}
               >
@@ -1850,7 +1879,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
         {/* Masonry Pinterest Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredGallery.map((img, idx) => (
-            <div 
+            <div
               key={idx}
               onClick={() => setLightboxIndex(idx)}
               className="group bg-slate-150 rounded-2xl overflow-hidden relative cursor-pointer border border-slate-200 shadow-sm hover:shadow-xl transition duration-300 h-64"
@@ -1866,7 +1895,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <AnimatePresence>
         {lightboxIndex !== null && (
           <div className="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center p-4">
-            <button 
+            <button
               onClick={() => setLightboxIndex(null)}
               className="absolute top-6 right-6 p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition"
               title="Close View"
@@ -1875,9 +1904,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             </button>
             <div className="relative max-w-4xl w-full flex flex-col items-center gap-4">
               <div className="h-[60vh] max-h-[500px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                <img 
-                  src={filteredGallery[lightboxIndex].url} 
-                  alt="Membro do MPLA na África do Sul" 
+                <img
+                  src={filteredGallery[lightboxIndex].url}
+                  alt="Membro do MPLA na África do Sul"
                   className="w-full h-full object-contain"
                 />
               </div>
@@ -1914,28 +1943,25 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       {/* VIDEO BANNER / SPEECHES FEATURE */}
       <section className="relative w-full py-28 text-center text-white overflow-hidden bg-slate-950" id="video-section">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1920&q=80" 
-            alt="Militantes em conferência regional" 
+          <img
+            src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1920&q=80"
+            alt="Militantes em conferência regional"
             className="w-full h-full object-cover opacity-20 filter blur-xs"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950" />
         </div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-6">
-          <span className="text-[10px] font-mono font-black uppercase text-[#D4AF37] bg-amber-400/10 px-3.5 py-1 rounded-full border border-amber-400/20">
-            {language === "PT" ? "MULTIMÉDIA E DISCURSOS DA PATRIA" : "MULTIMEDIA & HOMELAND KEY SPEECHES"}
-          </span>
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
             {language === "PT" ? "Assista nossos eventos Oficiais" : "Watch our Official Events"}
           </h2>
           <p className="text-slate-400 font-light text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-            {language === "PT" 
+            {language === "PT"
               ? "Confira os discursos oficiais e o resumo audiovisual dos projectos de acolhimento de famílias angolanas realizados em Joanesburgo e Pretória."
               : "Watch official speeches and the video summary detailing our support for Angolan families living in Johannesburg and Pretoria."}
           </p>
 
-          <button 
+          <button
             onClick={() => setShowVideoModal(true)}
             className="w-16 h-16 bg-[#B5121B] hover:bg-red-700 text-white rounded-full flex items-center justify-center m-auto shadow-2xl cursor-pointer transition transform hover:scale-110 active:scale-95"
             title="Launch Player"
@@ -1949,20 +1975,20 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <AnimatePresence>
         {showVideoModal && (
           <div className="fixed inset-0 z-50 bg-slate-950/95 flex items-center justify-center p-4">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 30 }}
               className="bg-[#111] rounded-3xl border border-neutral-800 max-w-3xl w-full overflow-hidden shadow-2xl relative text-left"
             >
-              <button 
+              <button
                 onClick={() => setShowVideoModal(false)}
                 className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 transition z-10"
                 title="Close Player"
               >
                 <X className="w-4 h-4" />
               </button>
-              
+
               <div className="relative aspect-video bg-black">
                 <iframe
                   className="absolute inset-0 w-full h-full"
@@ -1981,7 +2007,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <AnimatePresence>
         {showDonationModal && (
           <div className="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -2000,7 +2026,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     {language === "PT" ? "Fundo de Apoio e Solidariedade" : "Support & Solidarity Fund"}
                   </h3>
                 </div>
-                <button 
+                <button
                   onClick={() => setShowDonationModal(false)}
                   className="p-1.5 rounded-full bg-black/20 text-white hover:bg-black/40 transition cursor-pointer"
                   aria-label="Close"
@@ -2012,7 +2038,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               {/* Modal Content */}
               <div className="p-6 space-y-6">
                 <p className="text-xs text-slate-500 leading-relaxed font-light">
-                  {language === "PT" 
+                  {language === "PT"
                     ? "As suas contribuições voluntárias e quotas apoiam diretamente os nossos programas sociais gratuitos, incluindo o Gabinete de Apoio Consular, as Aulas de Português, e a assistência a famílias em vulnerabilidade na África do Sul."
                     : "Your voluntary contributions and membership fees directly support our free social programs, including the Consular Support Office, Portuguese Classes, and assistance to vulnerable families in Diáspora."}
                 </p>
@@ -2042,7 +2068,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                           MPLA COORDENACAO NACIONAL DELEGACAO
                         </span>
                       </div>
-                      <button 
+                      <button
                         onClick={() => handleCopy("MPLA COORDENACAO NACIONAL DELEGACAO", "holder")}
                         className="p-1.5 rounded-lg hover:bg-white/10 transition text-slate-400 hover:text-amber-400 cursor-pointer shrink-0"
                         title="Copy Account Holder"
@@ -2061,7 +2087,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                           62908472910
                         </span>
                       </div>
-                      <button 
+                      <button
                         onClick={() => handleCopy("62908472910", "acc")}
                         className="p-1.5 rounded-lg hover:bg-white/10 transition text-slate-400 hover:text-amber-400 cursor-pointer shrink-0"
                         title="Copy Account Number"
@@ -2081,7 +2107,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                             Sandton City (254605)
                           </span>
                         </div>
-                        <button 
+                        <button
                           onClick={() => handleCopy("254605", "branch")}
                           className="p-1 hover:bg-white/5 rounded text-slate-500 hover:text-amber-400 cursor-pointer shrink-0"
                           title="Copy Branch Code"
@@ -2100,7 +2126,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                             FIRNZAJJ
                           </span>
                         </div>
-                        <button 
+                        <button
                           onClick={() => handleCopy("FIRNZAJJ", "swift")}
                           className="p-1 hover:bg-white/5 rounded text-slate-500 hover:text-amber-400 cursor-pointer shrink-0"
                           title="Copy SWIFT"
@@ -2128,7 +2154,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
               {/* Footer action */}
               <div className="p-6 pt-0 flex gap-3 border-t border-slate-100 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-900">
-                <button 
+                <button
                   onClick={() => setShowDonationModal(false)}
                   className="w-full mt-4 py-2.5 bg-[#B5121B] hover:bg-red-700 text-white font-bold text-xs rounded-xl tracking-wider uppercase transition cursor-pointer text-center"
                 >
@@ -2144,7 +2170,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <AnimatePresence>
         {selectedArticle && (
           <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
@@ -2158,7 +2184,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   <Globe className="w-3.5 h-3.5 text-amber-400 animate-spin-slow" />
                   AL JAZEERA STYLE MPLA COURIER
                 </span>
-                <button 
+                <button
                   onClick={() => setSelectedArticle(null)}
                   className="p-1 rounded-full bg-black/10 hover:bg-black/25 text-white transition cursor-pointer"
                   aria-label="Close"
@@ -2190,9 +2216,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
                 {selectedArticle.image && (
                   <div className="rounded-2xl overflow-hidden h-64 border border-slate-100 dark:border-neutral-800 shadow-sm shrink-0">
-                    <img 
-                      src={selectedArticle.image} 
-                      alt="News Illustration" 
+                    <img
+                      src={selectedArticle.image}
+                      alt="News Illustration"
                       className="w-full h-full object-cover filter brightness-95"
                       referrerPolicy="no-referrer"
                     />
@@ -2207,7 +2233,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               {/* Share and Bottom Action Bar */}
               <div className="p-6 pt-4 border-t border-slate-100 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-900 flex justify-between items-center shrink-0">
                 <div className="flex gap-2">
-                  <button 
+                  <button
                     onClick={() => {
                       navigator.clipboard.writeText(language === "PT" ? selectedArticle.title_pt : selectedArticle.title_en);
                       alert("Título do artigo copiado!");
@@ -2217,7 +2243,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     <Share2 className="w-3.5 h-3.5 text-[#B5121B]" />
                     {language === "PT" ? "Partilhar" : "Share"}
                   </button>
-                  <button 
+                  <button
                     onClick={() => {
                       alert(language === "PT" ? "Iniciando download do comunicado em PDF..." : "Initiating statement PDF download...");
                     }}
@@ -2227,7 +2253,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     PDF
                   </button>
                 </div>
-                <button 
+                <button
                   onClick={() => setSelectedArticle(null)}
                   className="px-4 py-1.5 bg-[#B5121B] hover:bg-red-700 text-white text-[10px] font-bold uppercase tracking-wider rounded-lg transition cursor-pointer"
                 >
@@ -2243,11 +2269,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <section className="max-w-7xl mx-auto px-6 py-20 text-left" id="testimonials">
         <div className="bg-slate-50 p-8 sm:p-14 rounded-3xl border border-slate-200 shadow-xs relative overflow-hidden">
           <div className="absolute top-0 right-0 w-36 h-36 bg-[#D4AF37]/5 rounded-full blur-2xl" />
-          
+
           <div className="mb-10 text-center sm:text-left">
-            <span className="text-[10px] font-mono font-black uppercase text-[#B5121B] bg-red-50 border border-red-100 px-3 py-1 rounded-full">
-              {language === "PT" ? "TESTEMUNHOS REAIS DE MILITANTES" : "REAL FEEDBACK FROM MEMBERS"}
-            </span>
             <h2 className="text-3xl font-black text-slate-900 tracking-tight mt-3">
               {language === "PT" ? "A Voz da Nossa Comunidade" : "The Voice of Our Community"}
             </h2>
@@ -2297,18 +2320,15 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       {/* PROMOTIONAL MEMBERSHIP SECTION */}
       <section className="bg-slate-900 text-white py-20 text-center relative overflow-hidden border-t border-b border-white/5" id="membership">
         <div className="absolute inset-0 z-0">
-          <img 
-            src={images.mplaSupportersBackground} 
-            alt="Militantes do MPLA África do Sul" 
+          <img
+            src={images.mplaSupportersBackground}
+            alt="Militantes do MPLA África do Sul"
             className="w-full h-full object-cover opacity-15 filter brightness-50"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-[#B5121B]/40" />
         </div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 space-y-6">
-          <span className="text-[10px] font-mono font-black uppercase text-amber-400 bg-amber-400/10 px-3.5 py-1 rounded-full border border-amber-400/20">
-            {language === "PT" ? "CADASTRO UNIFICADO DA DIÁSPORA" : "UNIFIED DIASPORA MEMBERSHIP"}
-          </span>
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
             {language === "PT" ? "Faça Parte da Nossa Força de Progresso" : "Be Part of Our Force for Progress"}
           </h2>
@@ -2338,13 +2358,13 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           </div>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <button 
+            <button
               onClick={() => onNavigateToAuth("signup")}
               className="px-6 py-3 bg-[#B5121B] hover:bg-red-700 text-white font-bold text-xs rounded-xl transition tracking-wider uppercase shadow-xl"
             >
               {language === "PT" ? "Registrar-me Hoje" : "Register Now"}
             </button>
-            <button 
+            <button
               onClick={() => onNavigateToAuth("signin")}
               className="px-6 py-3 bg-white text-slate-900 hover:bg-slate-100 font-bold text-xs rounded-xl transition tracking-wider uppercase"
             >
@@ -2361,13 +2381,13 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           <div className="absolute top-0 right-0 w-24 h-24 bg-[#B5121B]/10 rounded-full blur-2xl pointer-events-none" />
           <div className="space-y-6">
             <span className="text-[10px] font-mono font-black text-amber-400 tracking-wider uppercase block">
-              {language === "PT" ? "DELEGAÇÃO SEDE EM SANDTON" : "SED CENTRAL IN SANDTON"}
+              {language === "PT" ? "DELEGAÇÃO SEDE NA CIDADE DO CABO" : "CAPE TOWN HEADQUARTERS"}
             </span>
             <h3 className="text-2xl font-black">
-              {language === "PT" ? "Nossa Sede em Joanesburgo" : "Our Johannesburg Office"}
+              {language === "PT" ? "Nossa Sede na Cidade do Cabo" : "Our Cape Town Office"}
             </h3>
             <p className="text-slate-400 text-xs leading-relaxed">
-              {language === "PT" 
+              {language === "PT"
                 ? "Visite o nosso gabinete principal de coordenação consular e atendimento às famílias na África do Sul."
                 : "Visit our primary coordination office and family helpdesk in the Diáspora."}
             </p>
@@ -2375,7 +2395,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             <div className="space-y-4 pt-4 border-t border-white/5 text-xs text-slate-300">
               <p className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                <span>104 Main Street, Sandton, Johannesburg, 2196</span>
+                <span>Goodwood, Cidade do Cabo, África do Sul</span>
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#D4AF37] shrink-0" />
@@ -2383,7 +2403,11 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                <span>suporte@mpla-sa.org</span>
+                <span>suporte@mplacapetown.co.za</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                <span>comitemplacapetown@gmail.com</span>
               </p>
               <p className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-[#D4AF37] shrink-0" />
@@ -2404,9 +2428,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
         {/* Right column: Form */}
         <div className="lg:col-span-7 bg-white border border-slate-200 p-8 rounded-3xl shadow-xs">
-          <span className="text-[10px] font-mono font-black uppercase text-[#B5121B] bg-red-50 border border-red-100 px-3 py-1 rounded-full">
-            {language === "PT" ? "FORMULÁRIO DE CONTACTO OFICIAL" : "OFFICIAL CONTACT FORM"}
-          </span>
           <h3 className="text-2xl font-black text-slate-900 mt-4 mb-2">
             {language === "PT" ? "Fale Conosco" : "Get In Touch"}
           </h3>
@@ -2419,8 +2440,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               <CheckCircle2 className="w-10 h-10 text-emerald-600 m-auto" />
               <h4 className="font-bold text-sm">✓ {language === "PT" ? "Mensagem Enviada!" : "Message Sent!"}</h4>
               <p className="text-xs">
-                {language === "PT" 
-                  ? "A sua mensagem foi registada e encaminhada ao Secretário das Relações Exteriores e Cooperação." 
+                {language === "PT"
+                  ? "A sua mensagem foi registada e encaminhada ao Secretário das Relações Exteriores e Cooperação."
                   : "Your message was successfully logged and forwarded to the Secretary of Foreign Affairs."}
               </p>
             </div>
@@ -2458,8 +2479,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 <textarea rows={4} required placeholder={language === "PT" ? "Escreva pormenorizadamente a sua solicitação..." : "Write your detailed inquiry here..."} className="w-full p-2.5 border border-slate-200 rounded-xl text-xs focus:ring-1 focus:ring-[#B5121B] focus:border-[#B5121B]" />
               </div>
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="w-full py-3 bg-[#B5121B] hover:bg-red-700 text-white font-bold text-xs rounded-xl tracking-wider uppercase transition cursor-pointer"
               >
                 {language === "PT" ? "Enviar Mensagem Oficial" : "Send Official Inquiry"}
@@ -2472,23 +2493,23 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       {/* LUXURIOUS INSTITUTIONAL FOOTER */}
       <footer className="bg-slate-950 text-white pt-16 pb-8 border-t border-neutral-800" id="main-footer">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
-          
+
           {/* Col 1: Brand details */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-0.5 border border-[#D4AF37]">
-                <img 
-                  src={images.mplaLogo} 
-                  alt="MPLA Logo" 
+                <img
+                  src={images.mplaLogo}
+                  alt="MPLA Logo"
                   className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <h4 className="font-extrabold text-sm text-white tracking-wide">MPLA CAPE</h4>
+              <h4 className="font-extrabold text-sm text-white tracking-wide">MPLA Cape Town</h4>
             </div>
             <p className="text-xs text-slate-400 leading-normal max-w-xs">
-              {language === "PT" 
-                ? "Portal cívico e de serviços unificado dos angolanos organizados na diáspora sul-africana. Apoio consular, integração social e cooperação económica." 
+              {language === "PT"
+                ? "Portal cívico e de serviços unificado dos angolanos organizados na diáspora sul-africana. Apoio consular, integração social e cooperação económica."
                 : "Unified civic and service portal for Angolans organized in the Diásporan diaspora. Consular assistance, social integration, and trade."}
             </p>
             <p className="text-[10px] font-mono text-[#D4AF37] font-bold">
@@ -2532,20 +2553,20 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             {newsletterSuccess ? (
               <p className="text-xs text-emerald-400 font-bold">✓ {language === "PT" ? "Subscrito com sucesso!" : "Subscribed successfully!"}</p>
             ) : (
-              <form 
-                onSubmit={(e) => { e.preventDefault(); setNewsletterSuccess(true); }} 
+              <form
+                onSubmit={(e) => { e.preventDefault(); setNewsletterSuccess(true); }}
                 className="flex gap-2"
               >
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   required
-                  placeholder="seu@email.com" 
+                  placeholder="seu@email.com"
                   className="p-2 bg-slate-800 border border-slate-700 rounded-lg text-xs font-semibold text-white focus:outline-hidden focus:ring-1 focus:ring-[#B5121B] flex-1"
                 />
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="px-3 bg-[#B5121B] hover:bg-red-700 text-white rounded-lg text-xs font-bold transition"
                 >
                   OK
