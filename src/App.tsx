@@ -1,8 +1,8 @@
 import { images } from "./assets/images";
 import React, { useState, useEffect } from "react";
-import { 
-  Member, Announcement, PartyEvent, LearningCourse, 
-  SupportTicket, ChatChannel, SystemAuditLog, InventoryStats 
+import {
+  Member, Announcement, PartyEvent, LearningCourse,
+  SupportTicket, ChatChannel, SystemAuditLog, InventoryStats
 } from "./types";
 
 // Import custom components
@@ -21,10 +21,10 @@ import AuthPortal from "./components/AuthPortal";
 import MemberPortalViews from "./components/MemberPortalViews";
 import PublicWebsite from "./components/PublicWebsite";
 
-import { 
-  Award, ShieldCheck, User, Sparkles, LogOut, CheckCircle2, 
+import {
+  Award, ShieldCheck, User, Sparkles, LogOut, CheckCircle2,
   ChevronRight, Calendar, Compass, Layers, Bot, MessageSquare,
-  BarChart3, Network, Settings, CreditCard, FileText, DollarSign, 
+  BarChart3, Network, Settings, CreditCard, FileText, DollarSign,
   Newspaper, Users, MapPin, HelpCircle, Phone, LifeBuoy
 } from "lucide-react";
 
@@ -87,6 +87,7 @@ export default function App() {
   const [auditLogs, setAuditLogs] = useState<SystemAuditLog[]>([]);
   const [inventory, setInventory] = useState<InventoryStats>({
     blankCards: 4820,
+    printersStatus: "Online",
     inkPercent: 78,
     ribbonPercent: 62,
     packagingEnvelopes: 12050,
@@ -330,15 +331,15 @@ export default function App() {
   if (!isAuthenticated) {
     if (activeView === "auth") {
       return (
-        <AuthPortal 
-          onLoginSuccess={handleLoginSuccess} 
+        <AuthPortal
+          onLoginSuccess={handleLoginSuccess}
           onBackToWeb={() => setActiveView("website")}
           initialMode={authInitialMode}
         />
       );
     }
     return (
-      <PublicWebsite 
+      <PublicWebsite
         onNavigateToAuth={(mode) => {
           setAuthInitialMode(mode);
           setActiveView("auth");
@@ -361,9 +362,9 @@ export default function App() {
 
         {/* Apoioers image watermark */}
         <div className="absolute -right-12 bottom-12 w-[350px] h-[350px] md:w-[550px] md:h-[550px] rounded-full overflow-hidden opacity-[0.11] blur-[0.5px]">
-          <img 
-            src={images.mplaSupportersBackground} 
-            alt="Militantes MPLA" 
+          <img
+            src={images.mplaSupportersBackground}
+            alt="Militantes MPLA"
             className="w-full h-full object-cover grayscale contrast-110 brightness-110"
             referrerPolicy="no-referrer"
           />
@@ -375,13 +376,13 @@ export default function App() {
       {/* GLOBAL SYSTEM BAR / BRAND HEADER */}
       <header className="bg-white border-b border-slate-200 px-6 py-4 sticky top-0 z-40 shadow-sm">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          
+
           {/* Logo Title */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-white border-2 border-[#FFCC00] rounded-xl flex items-center justify-center shadow-sm p-1 text-white">
-              <img 
-                src={images.mplaLogo} 
-                alt="MPLA Logo" 
+              <img
+                src={images.mplaLogo}
+                alt="MPLA Logo"
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
               />
@@ -394,7 +395,7 @@ export default function App() {
                 </span>
               </h1>
               <p className="text-[10px] text-slate-400 font-mono">
-                {userRole === "admin" ? "Centro de Controlo Super Administrador" : "MPLA CAPE - Auto-Serviço"}
+                {userRole === "admin" ? "Centro de Controlo Super Administrador" : "MPLA Cape Town - Auto-Serviço"}
               </p>
             </div>
           </div>
@@ -403,15 +404,15 @@ export default function App() {
           <div className="flex items-center gap-4">
             {/* Sector indicator badge */}
             <span className={`text-[11px] font-bold px-3 py-1.5 rounded-xl border ${
-              userRole === "admin" 
-                ? "bg-red-50 text-[#D3122A] border-red-200" 
+              userRole === "admin"
+                ? "bg-red-50 text-[#D3122A] border-red-200"
                 : "bg-green-50 text-green-700 border-green-200"
             }`}>
               {userRole === "admin" ? "🛡️ Comando Central HQ" : "👤 Acesso Membro Oficial"}
             </span>
 
             {userRole === "admin" && (
-              <button 
+              <button
                 onClick={() => {
                   setCurrentPortal(currentPortal === "admin" ? "member" : "admin");
                   setMemberTab("dashboard");
@@ -424,10 +425,10 @@ export default function App() {
 
             {/* Profile badge */}
             <div className="hidden md:flex items-center gap-2 border-l border-slate-200 pl-4">
-              <img 
-                src={userRole === "admin" ? "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=150&h=150&fit=crop" : member.photo} 
-                alt={userRole === "admin" ? "Administração Nacional" : member.fullName} 
-                className="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs" 
+              <img
+                src={userRole === "admin" ? "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=150&h=150&fit=crop" : member.photo}
+                alt={userRole === "admin" ? "Administração Nacional" : member.fullName}
+                className="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs"
                 referrerPolicy="no-referrer"
               />
               <div className="text-left leading-none">
@@ -453,7 +454,7 @@ export default function App() {
 
       {/* CORE WRAPPER LAYOUT */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 lg:p-8 flex flex-col md:flex-row gap-8">
-        
+
         {/* SIDEBAR SUB-NAVIGATION */}
         <aside className="w-full md:w-[280px] shrink-0 space-y-6">
           {currentPortal === "member" ? (
@@ -501,21 +502,21 @@ export default function App() {
               <div className="pt-4 border-t border-slate-800 space-y-3">
                 <p className="text-[9px] uppercase font-mono tracking-widest text-slate-500 font-bold px-3">Precisa de Ajuda?</p>
                 <div className="space-y-1 px-3">
-                  <button 
+                  <button
                     onClick={() => setMemberTab("messages")}
                     className="w-full text-left text-[11px] text-slate-400 hover:text-[#FFCC00] flex items-center gap-2 transition cursor-pointer"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
                     Chat Apoio
                   </button>
-                  <button 
+                  <button
                     onClick={() => setMemberTab("learning")}
                     className="w-full text-left text-[11px] text-slate-400 hover:text-[#FFCC00] flex items-center gap-2 transition cursor-pointer"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                     Base de Conhecimento
                   </button>
-                  <button 
+                  <button
                     onClick={() => setMemberTab("support")}
                     className="w-full text-left text-[11px] text-slate-400 hover:text-[#C8102E] flex items-center gap-2 transition cursor-pointer"
                   >
@@ -529,7 +530,7 @@ export default function App() {
             /* SUPER ADMIN PORTAL NAVIGATION */
             <div className="bg-[#0F172A] p-4 rounded-xl border border-slate-800 shadow-lg space-y-2">
               <p className="text-[9px] uppercase font-mono tracking-widest text-slate-500 font-bold px-3 mb-2">Administração Nacional</p>
-              
+
               {[
                 { key: "dashboard", label: "Registo Nacional", icon: Layers },
                 { key: "executive", label: "Comando Executivo", icon: BarChart3 },
@@ -567,10 +568,10 @@ export default function App() {
           {/* Mini Info banner in sidebar */}
           <div className="bg-slate-800/80 text-white p-5 rounded-xl border border-slate-700/50 space-y-3.5 relative overflow-hidden shadow-sm">
             <div className="absolute right-0 bottom-0 opacity-15 flex items-center justify-center">
-              <img 
-                src={images.mplaLogo} 
-                className="w-24 h-24 object-contain transform translate-x-4 translate-y-4" 
-                alt="MPLA" 
+              <img
+                src={images.mplaLogo}
+                className="w-24 h-24 object-contain transform translate-x-4 translate-y-4"
+                alt="MPLA"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -608,22 +609,22 @@ export default function App() {
             <>
               {adminTab === "dashboard" && (
                 <div className="animate-fade-in">
-                  <AdminDashboard 
-                    members={members} 
-                    auditLogs={auditLogs} 
-                    onUpdateMember={handleUpdateMember} 
-                    onDeleteMember={handleDeleteMember} 
+                  <AdminDashboard
+                    members={members}
+                    auditLogs={auditLogs}
+                    onUpdateMember={handleUpdateMember}
+                    onDeleteMember={handleDeleteMember}
                   />
                 </div>
               )}
 
               {adminTab === "cards" && (
                 <div className="animate-fade-in">
-                  <AdminCardCentre 
-                    members={members} 
-                    inventory={inventory} 
-                    onUpdateMember={handleUpdateMember} 
-                    onUpdateInventory={handleUpdateInventory} 
+                  <AdminCardCentre
+                    members={members}
+                    inventory={inventory}
+                    onUpdateMember={handleUpdateMember}
+                    onUpdateInventory={handleUpdateInventory}
                   />
                 </div>
               )}
@@ -659,7 +660,7 @@ export default function App() {
       {/* SECURE SYSTEM FOOTER */}
       <footer className="bg-white border-t border-slate-100 py-6 px-6 mt-12 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>© 2026 MPLA CAPE. Todos os direitos reservados. Em conformidade com a Carta Constitucional.</p>
+          <p>© 2026 MPLA Cape Town. Todos os direitos reservados. Em conformidade com a Carta Constitucional.</p>
           <p className="font-mono text-[10px]">Portal ID de Segurança: {member.id.toUpperCase()}-SSL-2026</p>
           <a href="http://www.ai.neurogrowthlabs.co.za" target="_blank" rel="noreferrer" className="font-bold text-[#B5121B] hover:underline">Developed by NeuroGrowth Labs www.ai.neurogrowthlabs.co.za</a>
         </div>

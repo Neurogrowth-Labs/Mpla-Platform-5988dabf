@@ -1,32 +1,25 @@
+import { images } from "../assets/images";
 import React, { useState, useEffect, useRef } from "react";
-import { 
-  User, Mail, Phone, Lock, Eye, EyeOff, CheckCircle2, AlertCircle, 
-  Loader2, ArrowLeft, Camera, Upload, Check, ShieldCheck, Award, Sparkles 
+import {
+  User, Mail, Phone, Lock, Eye, EyeOff, CheckCircle2, AlertCircle,
+  Loader2, ArrowLeft, Camera, Upload, Check, ShieldCheck, Award, Sparkles
 } from "lucide-react";
 
 // South African provincial mapping for adaptive dropdowns
-const PROVINCE_MAPPING: { 
-  [key: string]: { municipalities: string[]; committees: string[] } 
+const PROVINCE_MAPPING: {
+  [key: string]: { municipalities: string[]; committees: string[] }
 } = {
-  "Gauteng": {
-    municipalities: ["City of Johannesburg", "City of Tshwane", "Ekurhuleni"],
-    committees: ["Ward 117 Local Committee", "Ward 100 Civic Union", "Ward 90 General Branch"]
-  },
   "Western Cape": {
-    municipalities: ["City of Cape Town", "Stellenbosch", "Drakenstein"],
-    committees: ["Ward 57 Committee", "Ward 12 Stellenbosch Alliance", "Ward 24 Coastline"]
-  },
-  "KwaZulu-Natal": {
-    municipalities: ["eThekwini", "Msunduzi", "uMhlathuze"],
-    committees: ["Ward 10 eThekwini South", "Ward 3 Msunduzi East", "Ward 15 Port Committee"]
+    municipalities: ["City of Cape Town", "Goodwood", "Stellenbosch", "Drakenstein"],
+    committees: ["Comité MPLA Cape Town", "Núcleo Goodwood", "Núcleo Stellenbosch", "Núcleo Drakenstein"]
   },
   "Eastern Cape": {
     municipalities: ["Nelson Mandela Bay", "Buffalo City", "King Sabata Dalindyebo"],
-    committees: ["Ward 2 NMB Metro", "Ward 4 East London Core", "Ward 8 Mthatha Branch"]
+    committees: ["Núcleo Eastern Cape", "Núcleo Gqeberha", "Núcleo East London"]
   },
-  "Free State": {
-    municipalities: ["Mangaung", "Metsimaholo", "Dihlabeng"],
-    committees: ["Ward 1 Mangaung Central", "Ward 6 Metsimaholo North", "Ward 12 Dihlabeng East"]
+  "Northern Cape": {
+    municipalities: ["Sol Plaatje", "Dawid Kruiper", "Nama Khoi"],
+    committees: ["Núcleo Northern Cape", "Núcleo Kimberley", "Núcleo Upington"]
   }
 };
 
@@ -52,7 +45,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
     }
   }, [initialMode]);
   const [role, setRole] = useState<"member" | "admin">("member");
-  
+
   // Sign in fields
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
@@ -78,9 +71,9 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
     email: "",
     password: "",
     confirmPassword: "",
-    province: "Gauteng",
-    municipality: "City of Johannesburg",
-    committee: "Ward 117 Local Committee",
+    province: "Western Cape",
+    municipality: "City of Cape Town",
+    committee: "Comité MPLA Cape Town",
     affiliation: "Apenas Militante",
     documentType: "BI",
     photo: ""
@@ -92,7 +85,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
 
   // Load persistent draft sign-up data
   useEffect(() => {
-    const savedDraft = localStorage.getItem("nda_signup_draft");
+    const savedDraft = localStorage.getItem("mpla_cape_town_signup_draft");
     if (savedDraft) {
       try {
         const parsed = JSON.parse(savedDraft);
@@ -109,14 +102,14 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
   // Save draft on change
   const saveSignUpDraft = (updatedData: typeof signUpData, step: number) => {
     localStorage.setItem(
-      "nda_signup_draft", 
+      "mpla_cape_town_signup_draft",
       JSON.stringify({ data: updatedData, step, timestamp: Date.now() })
     );
   };
 
   // Clear draft
   const clearSignUpDraft = () => {
-    localStorage.removeItem("nda_signup_draft");
+    localStorage.removeItem("mpla_cape_town_signup_draft");
   };
 
   // Live Password Strength calculations
@@ -124,7 +117,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
     if (!pwd) return { label: "Weak", score: 0, color: "bg-red-500", requirements: {
       length: false, upper: false, lower: false, num: false, sym: false
     }};
-    
+
     const requirements = {
       length: pwd.length >= 8,
       upper: /[A-Z]/.test(pwd),
@@ -217,8 +210,8 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
 
     try {
       // Simulate sending OTP to identifier
-      const maskPhone = identifier.includes("@") 
-        ? identifier 
+      const maskPhone = identifier.includes("@")
+        ? identifier
         : identifier.replace(/.(?=.{4})/g, "X");
 
       const response = await fetch("/api/auth/send-otp", {
@@ -418,12 +411,12 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
 
   return (
     <div id="auth_portal_root" className="min-h-screen bg-[#0F172A] flex flex-col justify-between font-sans relative overflow-hidden">
-      
+
       {/* Full-screen Background Image of MPLA members/supporters */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <img 
-          src="/src/assets/images/mpla_supporters_background_1784328681804.jpg" 
-          alt="Militantes do MPLA" 
+        <img
+          src={images.mplaSupportersBackground}
+          alt="Militantes do MPLA"
           className="w-full h-full object-cover opacity-30 scale-105"
           referrerPolicy="no-referrer"
         />
@@ -441,7 +434,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
             {language === "PT" ? "Voltar ao Website" : "Back to Website"}
           </button>
         ) : <div />}
-        <select 
+        <select
           id="auth_lang_select"
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
@@ -456,16 +449,16 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
 
       {/* Main Grid Wrapper */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-10 min-h-screen relative z-10">
-        
+
         {/* Left Panel: 45% (Cols 1-4) - Branding & Features (No separating line, transparent background) */}
         <div className="hidden lg:flex lg:col-span-4 bg-transparent flex-col justify-between p-12 relative overflow-hidden">
-          
+
           {/* Logo Title */}
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-md p-1 border-2 border-[#FFCC00] text-white">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
-                alt="MPLA Logo" 
+              <img
+                src={images.mplaLogo}
+                alt="MPLA Logo"
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
               />
@@ -495,7 +488,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
             {/* Semi-transparent Glassmorphism Illustration Block */}
             <div className="bg-slate-900/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-lg max-w-sm relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-red-900/20 rounded-full blur-3xl opacity-60" />
-              
+
               <div className="space-y-4 relative z-10">
                 {/* Simulated Digital Card UI */}
                 <div className="border border-[#FFCC00] rounded-xl p-4 bg-gradient-to-br from-[#D3122A] via-[#D3122A] to-slate-950 text-white space-y-3 shadow-md">
@@ -505,9 +498,9 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                   </div>
                   <div className="flex gap-3 items-center">
                     <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                      <img 
-                        src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
-                        alt="MPLA" 
+                      <img
+                        src={images.mplaLogo}
+                        alt="MPLA"
                         className="w-5 h-5 object-contain"
                         referrerPolicy="no-referrer"
                       />
@@ -557,20 +550,20 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
 
         {/* Right Panel: 55% (Cols 5-10) - Authenticating Forms (Semi-transparent background for seamless integration) */}
         <div className="col-span-1 lg:col-span-6 flex flex-col justify-center items-center p-6 sm:p-12 md:p-16 bg-white/95 backdrop-blur-md">
-          
+
           {/* Logo on mobile only */}
           <div className="flex lg:hidden items-center gap-2.5 mb-8 self-start">
             <div className="w-10 h-10 bg-white border-2 border-[#FFCC00] p-1 rounded-lg flex items-center justify-center text-white">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
-                alt="MPLA Logo" 
+              <img
+                src={images.mplaLogo}
+                alt="MPLA Logo"
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
               />
             </div>
             <div>
               <h2 className="font-sans font-bold text-sm text-[#111827]">
-                MPLA Sede África do Sul
+                MPLA Cape Town
               </h2>
             </div>
           </div>
@@ -743,7 +736,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
 
                 {/* Security Trust Note */}
                 <p className="text-[10px] text-[#6B7280] text-center font-medium bg-[#F8FAFC] p-2.5 rounded-lg border border-[#E5E7EB]">
-                  🔒 As suas informações estão criptografadas e protegidas sob os regulamentos internos do MPLA Sede África do Sul.
+                  🔒 As suas informações estão criptografadas e protegidas sob os regulamentos internos do MPLA Cape Town.
                 </p>
               </div>
             )}
@@ -788,17 +781,17 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                   <div className="flex items-center gap-1 justify-between py-1">
                     {[1, 2, 3, 4, 5].map((s) => (
                       <React.Fragment key={s}>
-                        <div 
+                        <div
                           className={`w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold text-[9px] shrink-0 ${
-                            s <= signUpStep 
-                              ? "bg-[#C8102E] text-white shadow-xs" 
+                            s <= signUpStep
+                              ? "bg-[#C8102E] text-white shadow-xs"
                               : "bg-[#E5E7EB] text-[#6B7280]"
                           }`}
                         >
                           {s < signUpStep ? "✓" : s}
                         </div>
                         {s < 5 && (
-                          <div 
+                          <div
                             className={`h-0.5 w-full rounded-full ${
                               s < signUpStep ? "bg-[#C8102E]" : "bg-[#E5E7EB]"
                             }`}
@@ -957,8 +950,8 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                         {/* Progress Bar of Strength */}
                         <div className="h-1.5 w-full bg-[#E5E7EB] rounded-full overflow-hidden flex gap-0.5">
                           {[1, 2, 3, 4, 5].map((idx) => (
-                            <div 
-                              key={idx} 
+                            <div
+                              key={idx}
                               className={`h-full w-1/5 transition ${
                                 idx <= strength.score ? strength.color : "bg-transparent"
                               }`}
@@ -1009,8 +1002,8 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                         onChange={(e) => {
                           const prov = e.target.value;
                           const mapped = PROVINCE_MAPPING[prov];
-                          const updated = { 
-                            ...signUpData, 
+                          const updated = {
+                            ...signUpData,
                             province: prov,
                             municipality: mapped?.municipalities[0] || "",
                             committee: mapped?.committees[0] || ""
@@ -1082,9 +1075,9 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                         </div>
                       ) : signUpData.photo ? (
                         <div className="relative">
-                          <img 
-                            src={signUpData.photo} 
-                            alt="Accreditation avatar preview" 
+                          <img
+                            src={signUpData.photo}
+                            alt="Accreditation avatar preview"
                             className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
                             referrerPolicy="no-referrer"
                           />
@@ -1140,11 +1133,11 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                       <p className="text-[10px] font-mono font-bold text-[#6B7280] uppercase tracking-wider border-b border-[#E5E7EB] pb-1">
                         Accreditation Review File
                       </p>
-                      
+
                       <div className="flex gap-4 items-center">
-                        <img 
-                          src={signUpData.photo || PHOTO_SAMPLES[0]} 
-                          alt="Review avatar" 
+                        <img
+                          src={signUpData.photo || PHOTO_SAMPLES[0]}
+                          alt="Review avatar"
                           className="w-14 h-14 rounded-full object-cover border border-[#E5E7EB]"
                           referrerPolicy="no-referrer"
                         />
@@ -1269,7 +1262,7 @@ export default function AuthPortal({ onLoginSuccess, onBackToWeb, initialMode }:
                       "Didn't receive code?"
                     )}
                   </span>
-                  
+
                   <button
                     type="button"
                     disabled={countdown > 0}
