@@ -9,6 +9,7 @@ import {
   Share, Video, Vote, Shield, Smartphone, Key, Bell, Phone, Mail, Sparkles, 
   LogOut, ChevronDown, RefreshCw, Volume2, Lock, EyeOff, Check, X, Camera, Map, Image as ImageIcon
 } from "lucide-react";
+import { formatCurrencyPT, formatDatePT, traduzirEstadoMembro } from "../utils/portugal";
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
 // Interfaces
@@ -155,7 +156,7 @@ function HomeDashboardView({ member, events, announcements, onChangeTab, onRegis
                         referrerPolicy="no-referrer"
                       />
                     </div>
-                    <span className="text-[9px] font-mono font-black tracking-wider text-[#FFCC00]">MPLA SEDE SA</span>
+                    <span className="text-[9px] font-mono font-black tracking-wider text-[#FFCC00]">MPLA DIÁSPORA</span>
                   </div>
                   <span className="px-2 py-0.5 bg-[#16A34A] text-white text-[8px] font-bold rounded-full font-mono uppercase">ATIVO</span>
                 </div>
@@ -185,11 +186,11 @@ function HomeDashboardView({ member, events, announcements, onChangeTab, onRegis
                   <div className="text-[8px] text-slate-300 space-y-1 font-mono">
                     <p>EMERGÊNCIA: {member.emergencyContact.phone}</p>
                     <p>BI: {member.nationalId}</p>
-                    <p>VALIDAÇÃO: portal.party.org</p>
+                    <p>VALIDAÇÃO: portal.mpla-diaspora.org</p>
                   </div>
                   <div className="bg-white p-1 rounded">
                     <img 
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=https://portal.party.org/verify/${member.membershipNo}`} 
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=https://portal.mpla-diaspora.org/verificar/${member.membershipNo}`} 
                       alt="QR" 
                       className="w-10 h-10"
                     />
@@ -208,17 +209,40 @@ function HomeDashboardView({ member, events, announcements, onChangeTab, onRegis
                 className="flex-1 py-2 bg-white text-slate-900 border border-slate-200 rounded-lg text-xs font-bold hover:bg-slate-50 transition shadow-sm flex items-center justify-center gap-1 cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5 text-slate-500" />
-                Download PDF
+                Descarregar PDF
               </button>
               <button 
-                onClick={() => alert("Cartão digital adicionado ao seu Apple Wallet com sucesso!")}
+                onClick={() => alert("Cartão digital adicionado ao seu Carteira Apple com sucesso!")}
                 className="flex-1 py-2 bg-[#FFCC00] text-slate-950 rounded-lg text-xs font-black hover:bg-yellow-500 transition shadow-sm flex items-center justify-center gap-1 cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                Apple Wallet
+                Carteira Apple
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {[
+          { title: "Estado da Militância", value: traduzirEstadoMembro(member.status), detail: "Quotas • Formação • Eventos • Participação • Comité" },
+          { title: "Próximo Pagamento", value: formatCurrencyPT(member.outstandingBalance), detail: "Cartão bancário, EFT, Mobile Money, PayPal, Stripe, Ozow, Apple Pay e Google Pay" },
+          { title: "Próxima Renovação", value: formatDatePT(member.physicalCardEstDate), detail: "Cartão offline com QR, NFC, verificação dinâmica e carteiras digitais" }
+        ].map((item) => (
+          <div key={item.title} className="bg-white/90 backdrop-blur p-5 rounded-2xl border border-slate-200 shadow-xs">
+            <p className="text-[10px] uppercase tracking-widest font-black text-[#C8102E]">{item.title}</p>
+            <p className="text-lg font-display font-black text-slate-900 mt-1">{item.value}</p>
+            <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">{item.detail}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5">
+        <h3 className="font-display font-black text-slate-900 text-sm mb-4">Módulos Premium da Diáspora MPLA</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+          {["Notícias", "Calendário Nacional", "Voluntariado", "Formações", "Biblioteca Digital", "Galeria Multimédia", "Reconhecimentos", "Sugestões e Reclamações", "Diretório de Membros", "Benefícios", "Campanhas", "Votações", "Missões e Tarefas", "Relatórios Pessoais"].map((label) => (
+            <button key={label} className="text-left p-3 rounded-xl border border-slate-200 hover:border-[#C8102E] hover:bg-red-50/40 font-bold text-slate-700 transition">{label}</button>
+          ))}
         </div>
       </div>
 
@@ -641,12 +665,12 @@ function DigitalCardFullScreenView({ member }: { member: Member }) {
                 />
               </div>
               <div className="text-left leading-none">
-                <span className="text-[10px] font-mono font-black tracking-widest text-[#FFCC00]">MPLA SEDE SA</span>
+                <span className="text-[10px] font-mono font-black tracking-widest text-[#FFCC00]">MPLA DIÁSPORA</span>
                 <p className="text-[9px] text-slate-200 mt-1 uppercase font-bold">Membro Oficial Recenseado</p>
               </div>
             </div>
             <span className="px-3 py-1 bg-white/10 text-white text-[10px] font-bold rounded-lg border border-white/20 font-mono">
-              ACTIVO
+              ATIVO
             </span>
           </div>
 
@@ -687,14 +711,14 @@ function DigitalCardFullScreenView({ member }: { member: Member }) {
               </div>
               <div>
                 <p className="text-[8px] text-slate-400 uppercase font-mono tracking-wider">Verificação Digital</p>
-                <p className="text-[10px] font-mono text-slate-400 truncate">https://portal.party.org/verify</p>
+                <p className="text-[10px] font-mono text-slate-400 truncate">https://portal.mpla-diaspora.org/verificar</p>
               </div>
             </div>
 
             <div className="flex flex-col items-center gap-1">
               <div className="bg-white p-1.5 rounded-lg">
                 <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://portal.party.org/verify/${member.membershipNo}`} 
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://portal.mpla-diaspora.org/verificar/${member.membershipNo}`} 
                   alt="QR" 
                   className="w-20 h-20"
                 />
@@ -729,7 +753,7 @@ function DigitalCardFullScreenView({ member }: { member: Member }) {
         <button onClick={() => alert("Link de verificação copiado!")} className="p-3 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl text-xs flex flex-col items-center gap-1.5 hover:bg-slate-50 transition cursor-pointer shadow-sm">
           <Share2 className="w-4.5 h-4.5 text-slate-500" /> Partilhar Credencial
         </button>
-        <button onClick={() => alert("Adicionado ao Apple Wallet com sucesso.")} className="p-3 bg-[#FFCC00] text-slate-950 font-black rounded-xl text-xs flex flex-col items-center gap-1.5 hover:bg-yellow-500 transition cursor-pointer shadow-sm">
+        <button onClick={() => alert("Adicionado ao Carteira Apple com sucesso.")} className="p-3 bg-[#FFCC00] text-slate-950 font-black rounded-xl text-xs flex flex-col items-center gap-1.5 hover:bg-yellow-500 transition cursor-pointer shadow-sm">
           <Sparkles className="w-4.5 h-4.5" /> Adicionar Carteira
         </button>
       </div>

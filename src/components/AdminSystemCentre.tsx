@@ -134,7 +134,7 @@ export default function AdminSystemCentre() {
           ) : (
             <Save className="w-4 h-4" />
           )}
-          Commit System Settings
+          Guardar Definições do Sistema
         </button>
       </div>
 
@@ -220,7 +220,7 @@ export default function AdminSystemCentre() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">Secondary Palette HEX</label>
+                <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">Paleta Secundária HEX</label>
                 <div className="flex gap-2">
                   <input
                     type="color"
@@ -243,26 +243,25 @@ export default function AdminSystemCentre() {
           <div className="bg-white rounded-xl border border-slate-200 p-6 space-y-4 shadow-xs">
             <h3 className="font-display font-bold text-slate-800 text-sm flex items-center gap-2 border-b border-slate-100 pb-3">
               <Globe className="w-4.5 h-4.5 text-[#D3122A]" />
-              Regionalization, Time Zones & Interface Theme
+              Regionalização, Fusos Horários e Tema da Interface
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">Default System Language</label>
+                <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">Idioma Predefinido do Sistema</label>
                 <select
                   value={settings.defaultLanguage}
                   onChange={(e) => handleChangeField(["defaultLanguage"], e.target.value)}
                   className="w-full text-xs font-semibold px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none"
                 >
-                  <option>English (South Africa)</option>
-                  <option>isiZulu (South Africa)</option>
-                  <option>Afrikaans (South Africa)</option>
-                  <option>Sotho (South Africa)</option>
+                  <option>Português (Portugal)</option>
+                  <option>Português (Angola)</option>
+                  <option>Português da Diáspora MPLA</option>
                 </select>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">Operational Time Zone</label>
+                <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">Fuso Horário Operacional</label>
                 <select
                   value={settings.timezone}
                   onChange={(e) => handleChangeField(["timezone"], e.target.value)}
@@ -276,7 +275,7 @@ export default function AdminSystemCentre() {
 
               {/* Theme Settings requested by prompt */}
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">Portal Theme Engine</label>
+                <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-bold">Motor de Tema do Portal</label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => setThemeMode("light")}
@@ -427,7 +426,7 @@ export default function AdminSystemCentre() {
                   <h4 className="text-xs font-bold text-rose-700 flex items-center gap-1.5">
                     <ShieldAlert className="w-3.5 h-3.5" /> Maintenance Mode Lock
                   </h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-normal">Forces standard users to maintenance page. Restricts login to Super Admins.</p>
+                  <p className="text-[10px] text-slate-400 mt-0.5 leading-normal">Encaminha utilizadores padrão para a página de manutenção e limita o acesso a super administradores.</p>
                 </div>
 
                 <button
@@ -524,7 +523,7 @@ export default function AdminSystemCentre() {
               </div>
 
               <div className="p-3 bg-emerald-50 rounded-lg border border-emerald-100 text-[10px] text-emerald-800 leading-normal font-mono text-center">
-                <strong>Plan Class:</strong> Gold Elite Enterprise Multi-Tenant Instance (Verified Active SLA)
+                <strong>Classe do Plano:</strong> Instância Empresarial Multi-Inquilino Ouro Elite (SLA ativo verificado)
               </div>
             </div>
           </div>

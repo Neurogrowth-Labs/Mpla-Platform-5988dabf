@@ -45,11 +45,11 @@ export default function App() {
   // Mock Global State representing our in-memory database
   const [member, setMember] = useState<Member>({
     id: "m_908",
-    membershipNo: "MPLA-4019-GP",
-    fullName: "Naledi Mandela",
-    nationalId: "9507175123089",
-    mobile: "+27 82 555 1234",
-    email: "naledi@mpla-sa.org",
+    membershipNo: "",
+    fullName: "",
+    nationalId: "",
+    mobile: "",
+    email: "",
     dob: "1995-07-17",
     gender: "Female",
     maritalStatus: "Single",
@@ -57,22 +57,19 @@ export default function App() {
       name: "Nelson Mandela Jr",
       phone: "+27 83 444 9876"
     },
-    occupation: "Public Health Officer",
-    employer: "City of Johannesburg",
-    education: "Master of Public Health",
-    province: "Gauteng",
-    municipality: "City of Johannesburg",
-    committee: "Ward 117 Local Committee",
+    occupation: "",
+    employer: "",
+    education: "",
+    province: "",
+    municipality: "",
+    committee: "",
     category: "General",
-    leadershipRoles: ["Ward Representative", "Campaign Captain"],
+    leadershipRoles: [],
     registrationDate: "2021-04-12",
-    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
+    photo: "https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png",
     status: "Active",
     outstandingBalance: 120,
-    paymentHistory: [
-      { id: "tx_1", date: "2026-01-05", amount: 120, purpose: "Annual Membership Subscription 2026", status: "Paid" },
-      { id: "tx_2", date: "2025-01-10", amount: 100, purpose: "Annual Membership Subscription 2025", status: "Paid" }
-    ],
+    paymentHistory: [],
     votedPollIds: ["poll_2"],
     completedCourses: ["c_1"],
     physicalCardStatus: "Approved",
@@ -81,7 +78,7 @@ export default function App() {
 
   const [members, setMembers] = useState<Member[]>([]);
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
-  const [events, setEvents] = useState<PartyEvent[]>([]);
+  const [events, setEventos] = useState<PartyEvent[]>([]);
   const [courses, setCourses] = useState<LearningCourse[]>([]);
   const [polls, setPolls] = useState<any[]>([]);
   const [tickets, setTickets] = useState<SupportTicket[]>([]);
@@ -124,7 +121,7 @@ export default function App() {
 
       setMembers(dataM);
       setAnnouncements(dataA);
-      setEvents(dataE);
+      setEventos(dataE);
       setCourses(dataC);
       setPolls(dataP);
       setTickets(dataT);
@@ -361,7 +358,7 @@ export default function App() {
           </svg>
         </div>
 
-        {/* Supporters image watermark */}
+        {/* Apoioers image watermark */}
         <div className="absolute -right-12 bottom-12 w-[350px] h-[350px] md:w-[550px] md:h-[550px] rounded-full overflow-hidden opacity-[0.11] blur-[0.5px]">
           <img 
             src="/src/assets/images/mpla_supporters_background_1784328681804.jpg" 
@@ -392,11 +389,11 @@ export default function App() {
               <h1 className="font-display font-extrabold text-slate-900 tracking-tight text-base sm:text-lg flex items-center gap-1.5">
                 MPLA Portal Unificado
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider bg-red-50 text-[#D3122A] px-2 py-0.5 rounded border border-red-100">
-                  {userRole === "admin" ? "HQ ADMIN" : "SECURE"}
+                  {userRole === "admin" ? "ADMIN" : "SEGURO"}
                 </span>
               </h1>
               <p className="text-[10px] text-slate-400 font-mono">
-                {userRole === "admin" ? "Super Admin Command Centre" : "Sede África do Sul - Auto-Serviço"}
+                {userRole === "admin" ? "Centro de Controlo Super Administrador" : "MPLA Diaspora - Auto-Serviço"}
               </p>
             </div>
           </div>
@@ -420,7 +417,7 @@ export default function App() {
                 }}
                 className="text-xs font-bold bg-[#D3122A] hover:bg-red-700 text-white px-3.5 py-2 rounded-xl transition shadow-md shadow-red-100 cursor-pointer"
               >
-                {currentPortal === "admin" ? "Visualizar Como Membro" : "Voltar ao Super Admin"}
+                {currentPortal === "admin" ? "Visualizar Como Membro" : "Voltar ao Super Administrador"}
               </button>
             )}
 
@@ -428,26 +425,26 @@ export default function App() {
             <div className="hidden md:flex items-center gap-2 border-l border-slate-200 pl-4">
               <img 
                 src={userRole === "admin" ? "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=150&h=150&fit=crop" : member.photo} 
-                alt={userRole === "admin" ? "HQ Admin" : member.fullName} 
+                alt={userRole === "admin" ? "Administração Nacional" : member.fullName} 
                 className="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-xs" 
                 referrerPolicy="no-referrer"
               />
               <div className="text-left leading-none">
-                <p className="text-xs font-bold text-slate-900 mb-0.5">{userRole === "admin" ? "Central Admin" : member.fullName}</p>
+                <p className="text-xs font-bold text-slate-900 mb-0.5">{userRole === "admin" ? "Administração Central" : member.fullName}</p>
                 <p className="text-[10px] text-green-600 font-bold flex items-center gap-1">
                   <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                  AUTHENTICATED
+                  AUTENTICADO
                 </p>
               </div>
             </div>
 
-            {/* Red Sign Out Button */}
+            {/* Red Terminar Sessão Button */}
             <button
               onClick={handleSignOut}
               className="flex items-center gap-2 text-xs font-bold border border-slate-200 text-slate-700 hover:text-red-600 hover:bg-red-50 hover:border-red-200 px-4 py-2 rounded-xl transition cursor-pointer"
             >
               <LogOut className="w-3.5 h-3.5" />
-              Sign Out
+              Terminar Sessão
             </button>
           </div>
         </div>
@@ -465,20 +462,20 @@ export default function App() {
                 <p className="text-[9px] uppercase font-mono tracking-widest text-slate-500 font-bold px-3 mb-2">Painel de Auto-Serviço</p>
                 <div className="space-y-1 max-h-[380px] overflow-y-auto pr-1">
                   {[
-                    { key: "dashboard", label: "Home (Dashboard)", icon: Compass },
-                    { key: "profile", label: "My Profile", icon: User },
-                    { key: "card", label: "Digital Membership Card", icon: CreditCard },
-                    { key: "status", label: "Membership Status", icon: ShieldCheck },
-                    { key: "documents", label: "Documents", icon: FileText },
-                    { key: "payments", label: "Payments", icon: DollarSign },
-                    { key: "events", label: "Events", icon: Calendar },
-                    { key: "learning", label: "Learning Centre", icon: Award },
-                    { key: "news", label: "News", icon: Newspaper },
-                    { key: "messages", label: "Messages", icon: MessageSquare },
-                    { key: "community", label: "Community", icon: Users },
-                    { key: "committee", label: "Committee", icon: MapPin },
-                    { key: "support", label: "Support", icon: HelpCircle },
-                    { key: "settings", label: "Settings", icon: Settings }
+                    { key: "dashboard", label: "Painel Principal", icon: Compass },
+                    { key: "profile", label: "Meu Perfil", icon: User },
+                    { key: "card", label: "Cartão de Militante Digital", icon: CreditCard },
+                    { key: "status", label: "Estado de Membro", icon: ShieldCheck },
+                    { key: "documents", label: "Documentos", icon: FileText },
+                    { key: "payments", label: "Pagamentos", icon: DollarSign },
+                    { key: "events", label: "Eventos", icon: Calendar },
+                    { key: "learning", label: "Centro de Formação", icon: Award },
+                    { key: "news", label: "Notícias", icon: Newspaper },
+                    { key: "messages", label: "Mensagens", icon: MessageSquare },
+                    { key: "community", label: "Comunidade", icon: Users },
+                    { key: "committee", label: "Comité", icon: MapPin },
+                    { key: "support", label: "Apoio", icon: HelpCircle },
+                    { key: "settings", label: "Definições", icon: Settings }
                   ].map((tab) => (
                     <button
                       key={tab.key}
@@ -499,30 +496,30 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Need Help? Bottom of left sidebar */}
+              {/* Precisa de Ajuda? Bottom of left sidebar */}
               <div className="pt-4 border-t border-slate-800 space-y-3">
-                <p className="text-[9px] uppercase font-mono tracking-widest text-slate-500 font-bold px-3">Need Help?</p>
+                <p className="text-[9px] uppercase font-mono tracking-widest text-slate-500 font-bold px-3">Precisa de Ajuda?</p>
                 <div className="space-y-1 px-3">
                   <button 
                     onClick={() => setMemberTab("messages")}
                     className="w-full text-left text-[11px] text-slate-400 hover:text-[#FFCC00] flex items-center gap-2 transition cursor-pointer"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                    Chat Support
+                    Chat Apoio
                   </button>
                   <button 
                     onClick={() => setMemberTab("learning")}
                     className="w-full text-left text-[11px] text-slate-400 hover:text-[#FFCC00] flex items-center gap-2 transition cursor-pointer"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                    Knowledge Base
+                    Base de Conhecimento
                   </button>
                   <button 
                     onClick={() => setMemberTab("support")}
                     className="w-full text-left text-[11px] text-slate-400 hover:text-[#C8102E] flex items-center gap-2 transition cursor-pointer"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                    Emergency Contact
+                    Contacto de Emergência
                   </button>
                 </div>
               </div>
@@ -530,15 +527,15 @@ export default function App() {
           ) : (
             /* SUPER ADMIN PORTAL NAVIGATION */
             <div className="bg-[#0F172A] p-4 rounded-xl border border-slate-800 shadow-lg space-y-2">
-              <p className="text-[9px] uppercase font-mono tracking-widest text-slate-500 font-bold px-3 mb-2">National HQ Admin</p>
+              <p className="text-[9px] uppercase font-mono tracking-widest text-slate-500 font-bold px-3 mb-2">Administração Nacional</p>
               
               {[
-                { key: "dashboard", label: "National Registry", icon: Layers },
-                { key: "executive", label: "Executive Command", icon: BarChart3 },
-                { key: "integrations", label: "Integration Centre", icon: Network },
-                { key: "system", label: "System Administration", icon: Settings },
-                { key: "cards", label: "Card Printing Queue", icon: Calendar },
-                { key: "ai", label: "AI Command Centre", icon: Bot }
+                { key: "dashboard", label: "Registo Nacional", icon: Layers },
+                { key: "executive", label: "Comando Executivo", icon: BarChart3 },
+                { key: "integrations", label: "Centro de Integrações", icon: Network },
+                { key: "system", label: "Administração do Sistema", icon: Settings },
+                { key: "cards", label: "Fila de Emissão de Cartões", icon: Calendar },
+                { key: "ai", label: "Centro de Comando IA", icon: Bot }
               ].map((tab) => (
                 <button
                   key={tab.key}
@@ -560,7 +557,7 @@ export default function App() {
               <div className="pt-4 border-t border-slate-800 text-center">
                 <div className="inline-flex items-center gap-1 text-[10px] text-slate-500 font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-                  HQ Officer Auth
+                  Oficial Autenticado
                 </div>
               </div>
             </div>

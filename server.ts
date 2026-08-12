@@ -45,413 +45,23 @@ function getGeminiClient(): GoogleGenAI | null {
 }
 
 // Global In-Memory Store
-let members: Member[] = [
-  {
-    id: "m-1",
-    membershipNo: "MP-2026-1024",
-    nationalId: "9603125089081",
-    fullName: "Simao Lusimadio",
-    email: "simao.lusimadio@gmail.com",
-    mobile: "+27 82 123 4567",
-    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
-    status: "Active",
-    membershipLevel: "Standard",
-    category: "General",
-    province: "Gauteng",
-    municipality: "City of Johannesburg",
-    committee: "Ward 117 Local Committee",
-    registrationDate: "2026-01-10",
-    physicalCardStatus: "Printing",
-    physicalCardEstDate: "2026-07-28",
-    outstandingBalance: 150,
-    gender: "Male",
-    dob: "1996-03-12",
-    maritalStatus: "Single",
-    emergencyContact: { name: "Maria Lusimadio", phone: "+27 82 987 6543" },
-    occupation: "Software Engineer",
-    employer: "Tech Corp",
-    education: "BSc Computer Science",
-    leadershipRoles: ["Branch Youth Delegate"],
-    registeredEvents: ["e-2"],
-    completedCourses: ["c-1"],
-    votedPolls: { "p-1": "Strongly Agree" }
-  },
-  {
-    id: "m-2",
-    membershipNo: "MP-2026-5942",
-    nationalId: "8507204908123",
-    fullName: "Naledi Mandela",
-    email: "naledi.mandela@party.org",
-    mobile: "+27 71 456 7890",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
-    status: "Active",
-    membershipLevel: "Committee",
-    category: "General",
-    province: "Western Cape",
-    municipality: "City of Cape Town",
-    committee: "Ward 57 Committee",
-    registrationDate: "2024-05-12",
-    physicalCardStatus: "Collected",
-    physicalCardEstDate: "2024-06-01",
-    outstandingBalance: 0,
-    gender: "Female",
-    dob: "1985-07-20",
-    maritalStatus: "Married",
-    emergencyContact: { name: "Teboho Mandela", phone: "+27 71 111 2222" },
-    occupation: "Public Relations Officer",
-    employer: "Provincial Dept",
-    education: "BA Communications",
-    leadershipRoles: ["Western Cape Provincial Publicist"],
-    registeredEvents: ["e-1", "e-2"],
-    completedCourses: ["c-1", "c-2"],
-    votedPolls: { "p-1": "Agree" }
-  },
-  {
-    id: "m-3",
-    membershipNo: "MP-2026-0812",
-    nationalId: "9901015091234",
-    fullName: "Thabo Mbeki Jr",
-    email: "thabo.mbeki@gmail.com",
-    mobile: "+27 63 987 6543",
-    photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
-    status: "Pending Verification",
-    membershipLevel: "Standard",
-    category: "Youth",
-    province: "Gauteng",
-    municipality: "Tshwane",
-    committee: "Ward 2 Local Committee",
-    registrationDate: "2026-07-15",
-    physicalCardStatus: "Submitted",
-    physicalCardEstDate: "2026-08-15",
-    outstandingBalance: 200,
-    gender: "Male",
-    dob: "1999-01-01",
-    maritalStatus: "Single",
-    emergencyContact: { name: "Thabo Mbeki Sr", phone: "+27 11 444 5555" },
-    occupation: "Student",
-    employer: "University of Pretoria",
-    education: "Undergraduate",
-    leadershipRoles: [],
-    registeredEvents: [],
-    completedCourses: [],
-    votedPolls: {}
-  },
-  {
-    id: "m-4",
-    membershipNo: "MP-2026-0813",
-    nationalId: "9901015091234", // Intentional duplicate ID for AI duplicates checker
-    fullName: "T. Mbeki Jr",
-    email: "thabo.duplicate@gmail.com",
-    mobile: "+27 63 987 6543",
-    photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
-    status: "Pending Verification",
-    membershipLevel: "Standard",
-    category: "Youth",
-    province: "Gauteng",
-    municipality: "Tshwane",
-    committee: "Ward 2 Local Committee",
-    registrationDate: "2026-07-16",
-    physicalCardStatus: "Submitted",
-    physicalCardEstDate: "2026-08-15",
-    outstandingBalance: 200,
-    gender: "Male",
-    dob: "1999-01-01",
-    maritalStatus: "Single",
-    emergencyContact: { name: "Thabo Mbeki Sr", phone: "+27 11 444 5555" },
-    occupation: "Student",
-    employer: "University of Pretoria",
-    education: "Undergraduate",
-    leadershipRoles: [],
-    registeredEvents: [],
-    completedCourses: [],
-    votedPolls: {}
-  },
-  {
-    id: "m-5",
-    membershipNo: "MP-2026-3029",
-    nationalId: "7209115082194",
-    fullName: "Johan de Wet",
-    email: "johan.dewet@telkomsa.net",
-    mobile: "+27 83 234 5678",
-    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
-    status: "Suspended",
-    membershipLevel: "Standard",
-    category: "Senior",
-    province: "Free State",
-    municipality: "Mangaung",
-    committee: "Ward 4 Committee",
-    registrationDate: "2021-03-24",
-    physicalCardStatus: "Quality Check",
-    physicalCardEstDate: "2026-07-20",
-    outstandingBalance: 0,
-    gender: "Male",
-    dob: "1972-09-11",
-    maritalStatus: "Married",
-    emergencyContact: { name: "Annelize de Wet", phone: "+27 83 999 8888" },
-    occupation: "Farmer",
-    employer: "Self-employed",
-    education: "Diploma Agriculture",
-    leadershipRoles: [],
-    registeredEvents: [],
-    completedCourses: ["c-1"],
-    votedPolls: { "p-1": "Disagree" }
-  }
-];
+let members: Member[]= [];
 
-let announcements: Announcement[] = [
-  {
-    id: "a-1",
-    title: "National Campaign: Forward Together 2026",
-    content: "We are officially launching the National Campaign 'Forward Together 2026' on July 25th. This landmark campaign will shape municipal advocacy across all nine provinces. Get involved in your local branch assemblies and mobilizations. Materials and flyers are available for download in the Documents center.",
-    source: "National",
-    date: "2026-07-16",
-    author: "National Communications Directorate",
-    category: "Campaign"
-  },
-  {
-    id: "a-2",
-    title: "Regional Coordinator Appointed for Cape Metro",
-    content: "The National Executive Committee (NEC) has approved the appointment of Dr. Sibongile Khumalo as the new Regional Coordinator for the Cape Town Metro. Dr. Khumalo brings 15 years of community development and grass-roots organization experience.",
-    source: "Regional",
-    date: "2026-07-14",
-    author: "Western Cape Provincial Office",
-    category: "News"
-  },
-  {
-    id: "a-3",
-    title: "Emergency Announcement: Ward 117 Local Venue Change",
-    content: "Please note that the local branch meeting scheduled for Saturday afternoon has been relocated to the Community Hall in Rosebank due to maintenance at the primary library office.",
-    source: "Local",
-    date: "2026-07-17",
-    author: "Ward 117 Secretary",
-    category: "Emergency"
-  },
-  {
-    id: "a-4",
-    title: "Launch of Virtual Political Academy & Training Certificates",
-    content: "The National Education Committee is proud to release three accredited digital masterclasses designed to build campaign leadership, policy analysis, and community organizer skills. Explore the new Learning Center today!",
-    source: "National",
-    date: "2026-07-10",
-    author: "National Training Center",
-    category: "Notice"
-  }
-];
+let announcements: Announcement[]= [];
 
-let events: PartyEvent[] = [
-  {
-    id: "e-1",
-    title: "National Policy Summit 2026",
-    description: "Annual summit gathering members and coordinators nationwide to consult on social security reform, sustainable local economies, and infrastructure guidelines.",
-    date: "2026-08-10T09:00:00",
-    location: "Gallagher Convention Centre, Midrand",
-    organizer: "National",
-    status: "Upcoming",
-    registeredCount: 412,
-    capacity: 1000,
-    registeredMemberIds: ["m-2"]
-  },
-  {
-    id: "e-2",
-    title: "Local Assembly & Ward Feedback Seminar",
-    description: "Your chance to meet Ward 117 coordinators, discuss local community policing initiatives, utility maintenance reports, and municipal budgets.",
-    date: "2026-07-25T14:00:00",
-    location: "Rosebank Community Hall, Johannesburg",
-    organizer: "Local",
-    status: "Upcoming",
-    registeredCount: 48,
-    capacity: 100,
-    registeredMemberIds: ["m-1", "m-2"]
-  },
-  {
-    id: "e-3",
-    title: "Western Cape Leadership Workshop",
-    description: "Intensive training for branch secretaries on event coordination, digital registration metrics, and local conflict resolution.",
-    date: "2026-07-15T10:00:00",
-    location: "Woodstock Assembly Hall, Cape Town",
-    organizer: "Provincial",
-    status: "Completed",
-    registeredCount: 30,
-    capacity: 30,
-    registeredMemberIds: ["m-2"]
-  }
-];
+let events: PartyEvent[]= [];
 
-let chatChannels: ChatChannel[] = [
-  {
-    id: "c-1",
-    memberId: "m-1",
-    type: "Local Committee",
-    messages: [
-      { sender: "member", senderName: "Simao Lusimadio", text: "Hello Ward 117 leadership. I wanted to ask how I can assist with flyers distribution for the Rosebank meeting next week?", timestamp: "2026-07-16T10:30:00Z" },
-      { sender: "admin", senderName: "Ward Leader (Naledi)", text: "Hi Simao! Thank you so much for volunteering. We have packages printed and ready. You can pick them up from the municipal ward office tomorrow anytime between 9 AM and 4 PM.", timestamp: "2026-07-16T11:15:00Z" },
-      { sender: "member", senderName: "Simao Lusimadio", text: "Brilliant, will collect them during lunch tomorrow!", timestamp: "2026-07-16T11:20:00Z" }
-    ]
-  },
-  {
-    id: "c-2",
-    memberId: "m-1",
-    type: "National Helpdesk",
-    messages: [
-      { sender: "member", senderName: "Simao Lusimadio", text: "Good day, I paid my outstanding balance via EFT yesterday but my dashboard still shows R150 outstanding. Could you please reconcile this?", timestamp: "2026-07-17T08:00:00Z" },
-      { sender: "admin", senderName: "National Finance Desk", text: "Greetings Simao, standard EFT settlements can take up to 48 hours. I will tag our banking reconciliation officer to prioritize yours. Please ensure your reference was MP-2026-1024.", timestamp: "2026-07-17T09:45:00Z" }
-    ]
-  }
-];
+let chatChannels: ChatChannel[]= [];
 
-let supportTickets: SupportTicket[] = [
-  {
-    id: "TKT-1082",
-    memberId: "m-1",
-    type: "Card Replacement",
-    description: "Requested a replacement card since I moved to Gauteng and need Ward 117 labeled as my voting committee on the physical badge.",
-    status: "In Progress",
-    assignedOfficer: "Kabelo Mokoena (Printing Officer)",
-    estResolutionTime: "4 days",
-    createdAt: "2026-07-14T11:00:00Z",
-    replies: [
-      { sender: "member", senderName: "Simao Lusimadio", text: "I have uploaded my new proof of residence. Can you double check if it is sufficient?", timestamp: "2026-07-14T11:05:00Z" },
-      { sender: "officer", senderName: "Kabelo Mokoena", text: "Hi Simao, the document is approved. Your physical card status is updated to 'Printing' and will be printed in our next batch tomorrow.", timestamp: "2026-07-15T09:30:00Z" }
-    ]
-  },
-  {
-    id: "TKT-1083",
-    memberId: "m-1",
-    type: "Profile Correction",
-    description: "My date of birth is listed as 12 March 1996, but my national ID is 9603125089081 which translates to March 12, 1996. Wait, actually that is correct, my middle name is misspelled as 'Lusimadio' instead of 'Luzimadio'. Could we correct this?",
-    status: "Open",
-    assignedOfficer: "Zola Ndlovu (Registration Officer)",
-    estResolutionTime: "24 hours",
-    createdAt: "2026-07-17T10:15:00Z",
-    replies: []
-  }
-];
+let supportTickets: SupportTicket[]= [];
 
-let surveyPolls: SurveyPoll[] = [
-  {
-    id: "p-1",
-    title: "Draft Infrastructure & Municipal Investment Proposal",
-    description: "Should local committees receive direct allocations of 15% of provincial infrastructure funds to spend directly on local road repairs?",
-    options: ["Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"],
-    votes: { "Strongly Agree": 142, "Agree": 89, "Neutral": 12, "Disagree": 8, "Strongly Disagree": 3 },
-    votedMemberIds: ["m-1", "m-2", "m-5"],
-    isAnonymous: true
-  },
-  {
-    id: "p-2",
-    title: "Preferred Virtual Educational Forum Slots",
-    description: "What time slot works best for the bi-weekly live policy discussions?",
-    options: ["Weekday Evenings (6 PM - 8 PM)", "Saturday Mornings (9 AM - 11 AM)", "Saturday Afternoons (2 PM - 4 PM)", "Sunday Afternoons (3 PM - 5 PM)"],
-    votes: { "Weekday Evenings (6 PM - 8 PM)": 45, "Saturday Mornings (9 AM - 11 AM)": 78, "Saturday Afternoons (2 PM - 4 PM)": 32, "Sunday Afternoons (3 PM - 5 PM)": 12 },
-    votedMemberIds: ["m-2"],
-    isAnonymous: false
-  }
-];
+let surveyPolls: SurveyPoll[]= [];
 
-let paymentLogs: PaymentLog[] = [
-  {
-    id: "p-101",
-    memberId: "m-1",
-    amount: 100,
-    date: "2026-01-10",
-    method: "Credit Card",
-    status: "Successful",
-    purpose: "Annual Membership Renewal"
-  },
-  {
-    id: "p-102",
-    memberId: "m-1",
-    amount: 50,
-    date: "2026-04-12",
-    method: "Mobile Money",
-    status: "Successful",
-    purpose: "Monthly Dues"
-  },
-  {
-    id: "p-103",
-    memberId: "m-2",
-    amount: 250,
-    date: "2025-12-01",
-    method: "Credit Card",
-    status: "Successful",
-    purpose: "Donation"
-  }
-];
+let paymentLogs: PaymentLog[]= [];
 
-let learningCourses: LearningCourse[] = [
-  {
-    id: "c-1",
-    title: "Fundamentals of Municipal Governance & Advocacy",
-    description: "Understand the structural branches of local government, municipal budgets, and how local branches advocate effectively for community needs.",
-    category: "Civics & Governance",
-    duration: "45 mins",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-    contentMarkdown: "# Fundamentals of Municipal Governance\n\nIn this course, we explore how local councils are constituted and funded, and the active role of branch ward committees.\n\n## Core Pillars:\n1. **Integrated Development Plans (IDP)**: The primary mechanism of public participation.\n2. **Ward Committees**: Represent community interests in municipal council.\n3. **Public Hearings**: Participating in budget allocations.",
-    quiz: [
-      {
-        question: "What is the primary document guiding a municipality's 5-year developmental plan?",
-        options: ["National Growth Guide", "Integrated Development Plan (IDP)", "Municipal Tax Register", "Local Safety Pact"],
-        correctIndex: 1
-      },
-      {
-        question: "How many members typically compose a Ward Committee?",
-        options: ["Up to 10 members", "Up to 5 members", "Exactly 20 members", "It varies by province entirely"],
-        correctIndex: 0
-      }
-    ]
-  },
-  {
-    id: "c-2",
-    title: "Campaign Leadership & Grass-roots Mobilization",
-    description: "An advanced masterclass in community organizing, setting up campaign assemblies, volunteer logistics, and messaging strategy.",
-    category: "Campaign Management",
-    duration: "1 hour 15 mins",
-    videoUrl: "https://www.w3schools.com/html/movie.mp4",
-    contentMarkdown: "# Campaign Leadership and Mobilization\n\nThis guide explains how to recruit, retain, and inspire volunteers on the ground.\n\n## Topics covered:\n- Relational organizing and active listening.\n- Knocking doors and tracking digital contacts.\n- Public speaking and branch coordination.",
-    quiz: [
-      {
-        question: "Which organizing concept prioritizes leveraging personal relationships for mobilization?",
-        options: ["Direct Mail Marketing", "Relational Organizing", "Billboard Blitzing", "Cold Calling"],
-        correctIndex: 1
-      }
-    ]
-  }
-];
+let learningCourses: LearningCourse[]= [];
 
-let auditLogs: SystemAuditLog[] = [
-  {
-    id: "a-101",
-    timestamp: "2026-07-17T11:20:00Z",
-    user: "Simao Lusimadio",
-    role: "Member",
-    action: "Login",
-    device: "Chrome / macOS",
-    location: "Johannesburg, ZA",
-    ip: "105.4.120.89",
-    details: "Logged in successfully to Member Platform via OTP"
-  },
-  {
-    id: "a-102",
-    timestamp: "2026-07-17T11:25:00Z",
-    user: "Kabelo Mokoena",
-    role: "Printing Officer",
-    action: "Card Printing Status Change",
-    device: "Firefox / Ubuntu",
-    location: "Pretoria, ZA",
-    ip: "196.22.45.10",
-    details: "Changed Simao Lusimadio physical card status to 'Printing'"
-  },
-  {
-    id: "a-103",
-    timestamp: "2026-07-16T15:30:00Z",
-    user: "Naledi Mandela",
-    role: "Committee Leader",
-    action: "Publish Announcement",
-    device: "Safari / iPhone",
-    location: "Cape Town, ZA",
-    ip: "41.13.90.124",
-    details: "Published local announcement: 'Emergency Announcement: Ward 117 Local Venue Change'"
-  }
-];
+let auditLogs: SystemAuditLog[]= [];
 
 let inventoryStats: InventoryStats = {
   blankCards: 4850,
@@ -471,7 +81,7 @@ function logAction(user: string, role: string, action: string, details: string) 
     role,
     action,
     device: "Chrome / Linux (Server)",
-    location: "National HQ, ZA",
+    location: "Sede Nacional, ZA",
     ip: "127.0.0.1",
     details
   };
@@ -493,20 +103,20 @@ app.post("/api/auth/login", (req, res) => {
     if (
       (cleanId === "admin@democraticalliance.org.za" || 
        cleanId === "admin@nda.org.za" || 
-       cleanId === "admin@mpla-sa.org" || 
+       cleanId === "admin@mpla-diaspora.org" || 
        cleanId === "admin@mpla.org" || 
        cleanId === "admin") && 
       password === "admin123"
     ) {
-      logAction("Super Admin", "Authentication", "Admin Login Success", "Super Admin authenticated successfully via secure tunnel");
+      logAction("Super Administrador", "Authentication", "Admin Login Success", "Super Administrador authenticated successfully via secure tunnel");
       return res.json({
         success: true,
         role: "admin",
         user: {
           id: "admin-hq",
           membershipNo: "MPLA-ADMIN-HQ-99",
-          fullName: "National HQ Super Admin",
-          email: "admin@mpla-sa.org",
+          fullName: "Super Administrador Nacional",
+          email: "admin@mpla-diaspora.org",
           photo: "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=150&h=150&fit=crop",
           status: "Active"
         }
@@ -534,46 +144,6 @@ app.post("/api/auth/login", (req, res) => {
       user: found
     });
   } else {
-    // Auto-generate testing profile if query has "@"
-    if (query.includes("@")) {
-      const newMember: Member = {
-        id: `m-${Date.now()}`,
-        membershipNo: `MP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
-        nationalId: `900101509${Math.floor(1000 + Math.random() * 9000)}`,
-        fullName: query.split("@")[0].split(/[._-]+/).map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(" "),
-        email: query,
-        mobile: "+27 82 000 0000",
-        photo: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop",
-        status: "Active",
-        membershipLevel: "Standard",
-        category: "General",
-        province: "Gauteng",
-        municipality: "City of Johannesburg",
-        committee: "Ward 117 Local Committee",
-        registrationDate: new Date().toISOString().split("T")[0],
-        physicalCardStatus: "Submitted",
-        physicalCardEstDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
-        outstandingBalance: 150,
-        gender: "Male",
-        dob: "1990-01-01",
-        maritalStatus: "Single",
-        emergencyContact: { name: "Next of Kin", phone: "+27 82 111 1111" },
-        occupation: "Representative",
-        employer: "Organization",
-        education: "Graduate Degree",
-        leadershipRoles: [],
-        registeredEvents: [],
-        completedCourses: [],
-        votedPolls: {}
-      };
-      members.push(newMember);
-      logAction(newMember.fullName, "Authentication", "Auto-Registration", `Auto-registered new email: ${query}`);
-      return res.json({
-        success: true,
-        role: "member",
-        user: newMember
-      });
-    }
     logAction("Anonymous", "Authentication", "Member Login Failure", `No active registration matches identifier: ${identifier}`);
     return res.status(401).json({ error: "Membership credentials not found. Enter an email address to auto-generate a testing profile." });
   }
@@ -596,7 +166,7 @@ app.post("/api/members", (req, res) => {
     votedPolls: {}
   };
   members.push(newMember);
-  logAction("Super Admin", "National Admin", "Create Member", `Created member profile for ${newMember.fullName}`);
+  logAction("Super Administrador", "National Admin", "Create Member", `Created member profile for ${newMember.fullName}`);
   res.status(210).json(newMember);
 });
 
@@ -617,7 +187,7 @@ app.delete("/api/members/:id", (req, res) => {
   if (index === -1) return res.status(404).json({ error: "Member not found" });
 
   const deleted = members.splice(index, 1)[0];
-  logAction("Super Admin", "National Admin", "Delete Member", `Permanently deleted member record: ${deleted.fullName}`);
+  logAction("Super Administrador", "National Admin", "Delete Member", `Permanently deleted member record: ${deleted.fullName}`);
   res.json({ success: true, id });
 });
 
@@ -650,7 +220,7 @@ app.post("/api/events", (req, res) => {
     registeredMemberIds: []
   };
   events.push(newEvent);
-  logAction("Super Admin", "Event Coordinator", "Create Event", `Scheduled new event: ${newEvent.title}`);
+  logAction("Super Administrador", "Event Coordinator", "Create Event", `Scheduled new event: ${newEvent.title}`);
   res.status(201).json(newEvent);
 });
 
@@ -739,7 +309,7 @@ app.put("/api/tickets/:id/status", (req, res) => {
   if (status) ticket.status = status;
   if (assignedOfficer) ticket.assignedOfficer = assignedOfficer;
 
-  logAction("Super Admin", "Support Administrator", "Ticket Status Update", `Modified ticket ${id} to ${status}`);
+  logAction("Super Administrador", "Support Administrator", "Ticket Status Update", `Modified ticket ${id} to ${status}`);
   res.json(ticket);
 });
 
@@ -880,41 +450,55 @@ app.get("/api/inventory", (req, res) => {
 
 app.put("/api/inventory", (req, res) => {
   inventoryStats = { ...inventoryStats, ...req.body };
-  logAction("Super Admin", "National HQ", "Inventory Updated", "Updated blank card batch allocations and printer toner thresholds");
+  logAction("Super Administrador", "Sede Nacional", "Inventory Updated", "Updated blank card batch allocations and printer toner thresholds");
   res.json(inventoryStats);
 });
 
 // SYSTEM SETTINGS AND INTEGRATIONS STATE
+function limparDadosNaoPersistidosNoArranque() {
+  members = members.filter(m => m.id && m.membershipNo && m.fullName && m.registrationDate);
+  announcements = announcements.filter(a => a.id && a.title && a.date);
+  events = events.filter(e => e.id && e.title && e.date);
+  chatChannels = chatChannels.filter(c => c.id && c.memberId);
+  supportTickets = supportTickets.filter(t => t.id && t.memberId);
+  surveyPolls = surveyPolls.filter(p => p.id && p.title);
+  paymentLogs = paymentLogs.filter(p => p.id && p.memberId);
+  learningCourses = learningCourses.filter(c => c.id && c.title);
+  auditLogs = auditLogs.filter(l => l.id && l.timestamp);
+}
+
+limparDadosNaoPersistidosNoArranque();
+
 let systemSettings = {
-  partyName: "Democratic Alliance (NDA)",
+  partyName: "MPLA Diaspora",
   logoUrl: "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=120&h=120&fit=crop",
-  primaryColor: "#2563EB", 
-  secondaryColor: "#1E3A8A", 
-  defaultLanguage: "English (South Africa)",
+  primaryColor: "#C8102E", 
+  secondaryColor: "#FFCC00", 
+  defaultLanguage: "Português (Portugal)",
   timezone: "Africa/Johannesburg (GMT+2)",
-  dateFormat: "YYYY-MM-DD",
+  dateFormat: "DD/MM/YYYY",
   maintenanceModeActive: false,
   emailTemplates: {
-    verification: "<h3>Welcome to NDA</h3><p>Your OTP code is {{otp}}. This is valid for 10 minutes.</p>",
-    cardDispatched: "<p>Greetings {{name}}, your National NDA Membership card has been produced and released to dispatch logistics. Track inside your portal.</p>"
+    verification: "<h3>Bem-vindo(a) ao MPLA Diaspora</h3><p>O seu código OTP é {{otp}}. É válido durante 10 minutos.</p>",
+    cardDispatched: "<p>Camarada {{name}}, o seu Cartão de Militante do MPLA Diaspora foi emitido e encaminhado para entrega. Acompanhe no portal.</p>"
   },
   smsTemplates: {
-    otp: "NDA Secure Portal OTP: {{otp}}. Do not disclose this code to anyone.",
-    cardDispatched: "NDA Card: Hello {{name}}, your physical card has been dispatched. Estimated delivery date: {{estDate}}."
+    otp: "Portal Seguro MPLA Diaspora OTP: {{otp}}. Não divulgue este código a ninguém.",
+    cardDispatched: "Cartão MPLA: Camarada {{name}}, o seu cartão físico foi expedido. Data estimada: {{estDate}}."
   },
   featureFlags: {
     aiAssistedScans: true,
     instantSelfServiceRegistration: true,
     realtimeCardDispatches: false
   },
-  licenseKey: "NDA-SUPERADMIN-GOLD-2026-X94J-LK32",
+  licenseKey: "MPLA-DIASPORA-SUPERADMIN-2026",
   licenseExpires: "2030-12-31"
 };
 
 let integrations = {
   nationalIdVerification: {
     enabled: true,
-    provider: "Department of Home Affairs (HA-API)",
+    provider: "Verificação de Identidade da Diáspora MPLA",
     apiKey: "ha_sec_9081239841",
     endpoint: "https://api.homeaffairs.gov.za/v2/verify"
   },
@@ -923,7 +507,7 @@ let integrations = {
     provider: "Twilio API Gateway",
     apiKey: "AC810238410294812",
     apiSecret: "tw_sec_lkj19023812",
-    senderId: "NDA-Verify"
+    senderId: "MPLA-Verify"
   },
   emailService: {
     enabled: true,
@@ -935,20 +519,20 @@ let integrations = {
   },
   paymentGateway: {
     enabled: true,
-    provider: "PayFast Secure Checkout",
+    provider: "Stripe / PayPal / Ozow / EFT / Mobile Money",
     merchantId: "1002495",
     secretKey: "pf_sec_9081230",
     testMode: true
   },
   qrVerification: {
     enabled: true,
-    provider: "NDA Internal Scan Engine",
-    validationEndpoint: "https://portal.nda.org.za/api/qr/verify"
+    provider: "Motor Interno de Verificação MPLA",
+    validationEndpoint: "https://portal.mpla-diaspora.org/api/qr/verificar"
   },
   cloudStorage: {
     enabled: true,
     provider: "AWS S3 Private Buckets",
-    bucketName: "nda-encrypted-member-vault",
+    bucketName: "mpla-diaspora-cofre-militantes",
     region: "af-south-1"
   },
   gisMapping: {
@@ -980,7 +564,7 @@ app.get("/api/system/settings", (req, res) => {
 
 app.put("/api/system/settings", (req, res) => {
   systemSettings = { ...systemSettings, ...req.body };
-  logAction("Super Admin", "System Administration", "Update Settings", "Modified platform-wide parameters, branding details, and feature flags");
+  logAction("Super Administrador", "System Administration", "Update Settings", "Modified platform-wide parameters, branding details, and feature flags");
   res.json(systemSettings);
 });
 
@@ -990,14 +574,14 @@ app.get("/api/system/integrations", (req, res) => {
 
 app.put("/api/system/integrations", (req, res) => {
   integrations = { ...integrations, ...req.body };
-  logAction("Super Admin", "Integration Centre", "Update Integrations", "Modified external API credentials, gateways, and connection switches");
+  logAction("Super Administrador", "Integration Centre", "Update Integrations", "Modified external API credentials, gateways, and connection switches");
   res.json(integrations);
 });
 
 app.post("/api/system/backup", (req, res) => {
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
   const backupFile = `NDA-BACKUP-${timestamp}-SECURE.zip`;
-  logAction("Super Admin", "System Administration", "Manual Backup", `Triggered encrypted system state snapshot: ${backupFile}`);
+  logAction("Super Administrador", "System Administration", "Manual Backup", `Triggered encrypted system state snapshot: ${backupFile}`);
   res.json({
     success: true,
     backupFile,
@@ -1012,7 +596,7 @@ app.post("/api/system/test-integration", (req, res) => {
   const { key, provider } = req.body;
   const isEnabled = (integrations as any)[key]?.enabled;
   const latency = Math.floor(10 + Math.random() * 45);
-  logAction("Super Admin", "Integration Centre", "Test Connection", `Tested connection gateway for ${provider}`);
+  logAction("Super Administrador", "Integration Centre", "Test Connection", `Tested connection gateway for ${provider}`);
   res.json({
     success: true,
     message: `Secure TLS ping completed. Connection to ${provider} is ACTIVE. Latency: ${latency}ms. Node status: Operational (100% SLA).`
@@ -1101,7 +685,7 @@ app.post("/api/ai/ask", async (req, res) => {
   }
 
   try {
-    const sysInstruction = `You are the Command AI Assistant for the National Party Member Platform and Super Admin Command Center.
+    const sysInstruction = `You are the Command AI Assistant for the National Party Member Platform and Super Administrador Command Center.
 You have access to the following live database snapshot:
 - Members: ${JSON.stringify(members.map(m => ({ name: m.fullName, level: m.membershipLevel, status: m.status, province: m.province, card: m.physicalCardStatus })))}
 - Tickets: ${JSON.stringify(supportTickets.map(t => ({ id: t.id, type: t.type, status: t.status })))}

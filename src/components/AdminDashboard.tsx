@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Member, SystemAuditLog } from "../types";
+import { formatCurrencyPT, traduzirEstadoMembro } from "../utils/portugal";
 import { 
   Users, CheckCircle, ShieldAlert, Clock, Search, MapPin, 
   Trash2, ShieldOff, CheckSquare, XCircle, ChevronRight, 
@@ -71,11 +72,11 @@ export default function AdminDashboard({
       {/* Super Admin KPI Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {[
-          { label: "Total Members", count: totalMembers, desc: "Nationwide registered", icon: Users, color: "text-[#D3122A] bg-red-50" },
-          { label: "Active Status", count: activeCount, desc: "Verified credentials", icon: CheckCircle, color: "text-emerald-600 bg-emerald-50" },
-          { label: "Pending Verification", count: pendingCount, desc: "Approval pipeline queue", icon: Clock, color: "text-amber-600 bg-amber-50" },
-          { label: "Suspended Records", count: suspendedCount, desc: "Flagged or archived", icon: ShieldAlert, color: "text-rose-600 bg-rose-50" },
-          { label: "Outstanding Dues", count: `R${totalOutstanding}`, desc: "Arrears membership balances", icon: AlertTriangle, color: "text-[#D3122A] bg-red-50" }
+          { label: "Total de Militantes", count: totalMembers, desc: "Registados na diáspora", icon: Users, color: "text-[#D3122A] bg-red-50" },
+          { label: "Militantes Ativos", count: activeCount, desc: "Credenciais verificadas", icon: CheckCircle, color: "text-emerald-600 bg-emerald-50" },
+          { label: "Em Regularização", count: pendingCount, desc: "Fila de aprovações", icon: Clock, color: "text-amber-600 bg-amber-50" },
+          { label: "Registos Suspensos", count: suspendedCount, desc: "Sinalizados ou arquivados", icon: ShieldAlert, color: "text-rose-600 bg-rose-50" },
+          { label: "Quotas em Dívida", count: formatCurrencyPT(totalOutstanding), desc: "Saldos de quotas em atraso", icon: AlertTriangle, color: "text-[#D3122A] bg-red-50" }
         ].map((kpi, idx) => (
           <div key={idx} className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between">
             <div className="flex justify-between items-start gap-2">
@@ -95,10 +96,10 @@ export default function AdminDashboard({
       {/* Admin Operations Sub-Tab Navigation */}
       <div className="border-b border-slate-200 flex flex-wrap gap-2 pt-2 text-xs font-semibold">
         {[
-          { key: "members", label: "Member Registry Management", icon: Users },
-          { key: "registration", label: "Registration Approvals Queue", badge: pendingRegistrations.length, icon: CheckSquare },
-          { key: "hierarchy", label: "Geographic Hierarchy Explorer", icon: Compass },
-          { key: "audit", label: "Immutable Audit Center Logs", icon: Clock }
+          { key: "members", label: "Gestão do Registo de Militantes", icon: Users },
+          { key: "registration", label: "Fila de Aprovações de Registo", badge: pendingRegistrations.length, icon: CheckSquare },
+          { key: "hierarchy", label: "Explorador da Hierarquia da Diáspora", icon: Compass },
+          { key: "audit", label: "Registos de Auditoria Imutáveis", icon: Clock }
         ].map((subTab) => (
           <button
             key={subTab.key}
@@ -131,7 +132,7 @@ export default function AdminDashboard({
               </span>
               <input
                 type="text"
-                placeholder="Search member name, ID card reference, or National ID..."
+                placeholder="Pesquisar nome, número de militante, B.I. ou passaporte..."
                 value={memberSearch}
                 onChange={(e) => setMemberSearch(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:ring-1 focus:ring-[#D3122A] outline-none"
@@ -141,13 +142,13 @@ export default function AdminDashboard({
             <div className="flex flex-wrap gap-3 text-xs">
               {/* Province Selector */}
               <div className="flex items-center gap-1.5">
-                <span className="text-slate-400 font-medium">Province:</span>
+                <span className="text-slate-400 font-medium">Província:</span>
                 <select
                   value={provinceFilter}
                   onChange={(e) => setProvinceFilter(e.target.value)}
                   className="p-2 bg-slate-50 border border-slate-200 rounded-xl outline-none"
                 >
-                  <option value="All">All Provinces</option>
+                  <option value="All">Todas as províncias</option>
                   <option value="Gauteng">Gauteng</option>
                   <option value="Western Cape">Western Cape</option>
                   <option value="Free State">Free State</option>
@@ -157,16 +158,16 @@ export default function AdminDashboard({
 
               {/* Status Selector */}
               <div className="flex items-center gap-1.5">
-                <span className="text-slate-400 font-medium">Status:</span>
+                <span className="text-slate-400 font-medium">Estado:</span>
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
                   className="p-2 bg-slate-50 border border-slate-200 rounded-xl outline-none"
                 >
-                  <option value="All">All Statuses</option>
+                  <option value="All">Todos os estados</option>
                   <option value="Active">Active</option>
-                  <option value="Pending Verification">Pending Verification</option>
-                  <option value="Suspended">Suspended</option>
+                  <option value="Pending Verification">Em Regularização</option>
+                  <option value="Suspended">Suspenso</option>
                   <option value="Inactive">Inactive</option>
                 </select>
               </div>
@@ -178,12 +179,12 @@ export default function AdminDashboard({
             <table className="w-full text-left border-collapse text-xs">
               <thead>
                 <tr className="bg-slate-50 text-slate-400 uppercase font-mono font-bold border-b border-slate-200">
-                  <th className="p-4">Member Info</th>
-                  <th className="p-4">Placement / Address</th>
-                  <th className="p-4">Level & Type</th>
-                  <th className="p-4">Card Dispatch Status</th>
-                  <th className="p-4 text-center">Status Action</th>
-                  <th className="p-4 text-right">Delete</th>
+                  <th className="p-4">Dados do Militante</th>
+                  <th className="p-4">Comité / Morada</th>
+                  <th className="p-4">Nível e Categoria</th>
+                  <th className="p-4">Estado do Cartão</th>
+                  <th className="p-4 text-center">Ações de Estado</th>
+                  <th className="p-4 text-right">Eliminar</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200">
@@ -224,14 +225,14 @@ export default function AdminDashboard({
                             onClick={() => onUpdateMember(m.id, { status: "Active" })}
                             className="px-2.5 py-1 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition rounded-lg font-bold text-[10px]"
                           >
-                            Reinstate
+                            Reativar
                           </button>
                         ) : (
                           <button
                             onClick={() => onUpdateMember(m.id, { status: "Suspended" })}
                             className="px-2.5 py-1 bg-amber-50 text-amber-700 hover:bg-amber-100 transition rounded-lg font-bold text-[10px]"
                           >
-                            Suspend
+                            Suspender
                           </button>
                         )}
 
@@ -250,7 +251,7 @@ export default function AdminDashboard({
                     <td className="p-4 text-right">
                       <button
                         onClick={() => {
-                          if (confirm(`Are you sure you want to permanently delete member record for ${m.fullName}?`)) {
+                          if (confirm(`Tem a certeza de que pretende eliminar definitivamente a ficha de ${m.fullName}?`)) {
                             onDeleteMember(m.id);
                           }
                         }}
@@ -271,7 +272,7 @@ export default function AdminDashboard({
         /* REGISTRATION APPROVALS QUEUE */
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-4">
           <div>
-            <h3 className="font-display font-semibold text-slate-800 text-sm">Applications Pending Verification</h3>
+            <h3 className="font-display font-semibold text-slate-800 text-sm">Applications Em Regularização</h3>
             <p className="text-xs text-slate-500 mt-1">Review newly registered citizens, verify biographical credentials, and authorize print queues.</p>
           </div>
 
@@ -380,7 +381,7 @@ export default function AdminDashboard({
 
             {/* Step 3: Local Ward Branches */}
             <div className="border border-slate-200 rounded-xl p-4 bg-slate-50/50">
-              <h4 className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold mb-3 border-b border-slate-200 pb-2">Ward Branches & Committees ({selectedMuni})</h4>
+              <h4 className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold mb-3 border-b border-slate-200 pb-2">Células e Comités ({selectedMuni})</h4>
               <div className="space-y-1.5">
                 {(geoHierarchy[selectedProvince]?.[selectedMuni] || []).map((branch, idx) => {
                   const mCount = members.filter(m => m.committee === branch).length;
@@ -391,7 +392,7 @@ export default function AdminDashboard({
                     >
                       <span className="font-semibold">{branch}</span>
                       <span className="px-2 py-0.5 bg-slate-100 rounded font-mono font-bold text-[9px] text-slate-500">
-                        {mCount} Active Members
+                        {mCount} Militantes Ativos
                       </span>
                     </div>
                   );
