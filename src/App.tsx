@@ -1,3 +1,4 @@
+import { images } from "./assets/images";
 import React, { useState, useEffect } from "react";
 import { 
   Member, Announcement, PartyEvent, LearningCourse, 
@@ -361,7 +362,7 @@ export default function App() {
         {/* Apoioers image watermark */}
         <div className="absolute -right-12 bottom-12 w-[350px] h-[350px] md:w-[550px] md:h-[550px] rounded-full overflow-hidden opacity-[0.11] blur-[0.5px]">
           <img 
-            src="/src/assets/images/mpla_supporters_background_1784328681804.jpg" 
+            src={images.mplaSupportersBackground} 
             alt="Militantes MPLA" 
             className="w-full h-full object-cover grayscale contrast-110 brightness-110"
             referrerPolicy="no-referrer"
@@ -379,7 +380,7 @@ export default function App() {
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-white border-2 border-[#FFCC00] rounded-xl flex items-center justify-center shadow-sm p-1 text-white">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
+                src={images.mplaLogo} 
                 alt="MPLA Logo" 
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
@@ -393,7 +394,7 @@ export default function App() {
                 </span>
               </h1>
               <p className="text-[10px] text-slate-400 font-mono">
-                {userRole === "admin" ? "Centro de Controlo Super Administrador" : "MPLA Diaspora - Auto-Serviço"}
+                {userRole === "admin" ? "Centro de Controlo Super Administrador" : "MPLA CAPE - Auto-Serviço"}
               </p>
             </div>
           </div>
@@ -567,7 +568,7 @@ export default function App() {
           <div className="bg-slate-800/80 text-white p-5 rounded-xl border border-slate-700/50 space-y-3.5 relative overflow-hidden shadow-sm">
             <div className="absolute right-0 bottom-0 opacity-15 flex items-center justify-center">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
+                src={images.mplaLogo} 
                 className="w-24 h-24 object-contain transform translate-x-4 translate-y-4" 
                 alt="MPLA" 
                 referrerPolicy="no-referrer"
@@ -658,8 +659,9 @@ export default function App() {
       {/* SECURE SYSTEM FOOTER */}
       <footer className="bg-white border-t border-slate-100 py-6 px-6 mt-12 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>© 2026 MPLA Sede África do Sul. Todos os direitos reservados. Em conformidade com a Carta Constitucional.</p>
+          <p>© 2026 MPLA CAPE. Todos os direitos reservados. Em conformidade com a Carta Constitucional.</p>
           <p className="font-mono text-[10px]">Portal ID de Segurança: {member.id.toUpperCase()}-SSL-2026</p>
+          <a href="http://www.ai.neurogrowthlabs.co.za" target="_blank" rel="noreferrer" className="font-bold text-[#B5121B] hover:underline">Developed by NeuroGrowth Labs www.ai.neurogrowthlabs.co.za</a>
         </div>
       </footer>
     </div>

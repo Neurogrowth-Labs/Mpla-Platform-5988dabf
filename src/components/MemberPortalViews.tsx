@@ -9,6 +9,7 @@ import {
   Share, Video, Vote, Shield, Smartphone, Key, Bell, Phone, Mail, Sparkles, 
   LogOut, ChevronDown, RefreshCw, Volume2, Lock, EyeOff, Check, X, Camera, Map, Image as ImageIcon
 } from "lucide-react";
+import { images } from "../assets/images";
 import { formatCurrencyPT, formatDatePT, traduzirEstadoMembro } from "../utils/portugal";
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
@@ -765,13 +766,19 @@ function DigitalCardFullScreenView({ member }: { member: Member }) {
 // 4. DETAILED LOGISTICS / MEMBERSHIP STATUS
 // ==========================================
 function MembershipStatusView({ member }: { member: Member }) {
+  const registeredAt = new Date(member.registrationDate || new Date().toISOString());
+  const addDays = (days: number) => new Date(registeredAt.getTime() + days * 24 * 3600 * 1000).toLocaleDateString("pt-ZA");
+  const deliveryDate = member.physicalCardEstDate || new Date(registeredAt.getTime() + 14 * 24 * 3600 * 1000).toISOString().split("T")[0];
+  const trackingCode = `MPLA-CPT-${member.membershipNo.replace(/[^A-Z0-9]/gi, "").slice(-8)}-${member.id.replace(/[^A-Z0-9]/gi, "").toUpperCase()}`;
+  const statusOrder = ["Submitted", "Verification", "Approved", "Printing", "In Transit", "Available for Collection", "Collected"];
+  const currentIndex = Math.max(0, statusOrder.indexOf(member.physicalCardStatus));
   const steps = [
-    { key: "Submitted", title: "Pedido Submetido", date: "01 Jul 2026", desc: "A sua solicitação de cartão físico foi registada automaticamente na Sede Consular.", done: true },
-    { key: "Verification", title: "Verificação de Ficha", date: "03 Jul 2026", desc: "Os secretários regionais auditaram a sua ficha e confirmaram a regularidade de quotas.", done: true },
-    { key: "Approved", title: "Aprovação Central", date: "05 Jul 2026", desc: "A delegação provincial de Luanda emitiu o número de matrícula criptográfico oficial.", done: true },
-    { key: "Printing", title: "Impressão e Holograma", date: "08 Jul 2026", desc: "O cartão físico foi cunhado no centro nacional de segurança com holograma holográfico 3D.", done: member.physicalCardStatus !== "Submitted" && member.physicalCardStatus !== "Verification" },
-    { key: "In Transit", title: "Trânsito Logístico", date: "Estimado: 20 Jul", desc: "O lote diplomático de cartões encontra-se em trânsito internacional express para a Sede Consular em Joanesburgo.", done: ["In Transit", "Available for Collection", "Collected"].includes(member.physicalCardStatus) },
-    { key: "Available for Collection", title: "Pronto para Levantamento", date: "Estimado: 25 Jul", desc: "O cartão físico estará disponível para recolha presencial mediante apresentação do B.I. físico.", done: ["Available for Collection", "Collected"].includes(member.physicalCardStatus) }
+    { key: "Submitted", title: "Pedido Submetido", date: addDays(0), desc: "Pedido registado em tempo real no portal do Comité MPLA Cape Town.", done: currentIndex >= 0 },
+    { key: "Verification", title: "Verificação de Ficha", date: addDays(2), desc: "Dados do BI/Passaporte e ficha partidária em validação segura.", done: currentIndex >= 1 },
+    { key: "Approved", title: "Aprovação Central", date: addDays(4), desc: "Número de militante confirmado e reservado para emissão.", done: currentIndex >= 2 },
+    { key: "Printing", title: "Impressão e Holograma", date: addDays(7), desc: "Cartão em preparação para impressão segura local.", done: currentIndex >= 3 },
+    { key: "In Transit", title: "Trânsito Logístico", date: addDays(10), desc: "Processo logístico da emissão local para o gabinete emissor em Cape Town.", done: currentIndex >= 4 },
+    { key: "Available for Collection", title: "Pronto para Levantamento", date: new Date(deliveryDate).toLocaleDateString("pt-ZA"), desc: "Previsão automática de duas semanas a partir do registo inicial.", done: currentIndex >= 5 }
   ];
 
   return (
@@ -786,15 +793,15 @@ function MembershipStatusView({ member }: { member: Member }) {
         <div className="flex flex-wrap justify-between items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 text-xs">
           <div>
             <p className="text-slate-400 font-mono uppercase text-[9px] font-bold">Código de Rastreio</p>
-            <p className="font-bold text-slate-800 font-mono text-[#C8102E]">MPLA-SA-4019-GPX</p>
+            <p className="font-bold text-slate-800 font-mono text-[#C8102E]">{trackingCode}</p>
           </div>
           <div>
             <p className="text-slate-400 font-mono uppercase text-[9px] font-bold">Gabinete Emissor</p>
-            <p className="font-bold text-slate-800">Centro Logístico Luanda</p>
+            <p className="font-bold text-slate-800">Cape Town</p>
           </div>
           <div>
             <p className="text-slate-400 font-mono uppercase text-[9px] font-bold">Previsão de Entrega</p>
-            <p className="font-bold text-slate-800 font-mono">25 Jul 2026</p>
+            <p className="font-bold text-slate-800 font-mono">{new Date(deliveryDate).toLocaleDateString("pt-ZA")}</p>
           </div>
         </div>
 
@@ -885,7 +892,7 @@ function DocumentsEmptyState({ onSeed }: { onSeed: () => void }) {
         className="px-5 py-2.5 bg-[#C8102E] hover:bg-red-700 text-white font-bold rounded-xl text-xs transition shadow-md hover:shadow-red-500/20 flex items-center gap-2 cursor-pointer mx-auto"
       >
         <Sparkles className="w-4 h-4 text-[#FFCC00]" />
-        Gerar Documentos de Demonstração
+        Solicitar documento ao Super Administrador
       </button>
     </div>
   );
@@ -902,8 +909,7 @@ function DocumentsManagerView({ member }: { member: Member }) {
     { name: "Cartao_Digital_Segunda_Via_Crypto.pdf", folder: "Membership", size: "820 KB", date: "05 Jul 2026" },
     { name: "Diploma_Curso_Valores_MPLA.pdf", folder: "Certificates", size: "2.1 MB", date: "15 Jul 2026" },
     { name: "Certificado_Academia_Militancia.pdf", folder: "Certificates", size: "1.9 MB", date: "12 Jul 2026" },
-    { name: "Recibo_Inscricao_Quotas_2026.pdf", folder: "Receipts", size: "340 KB", date: "05 Jan 2026" },
-    { name: "Comprovativo_Taxa_Consular_SA.pdf", folder: "Receipts", size: "510 KB", date: "10 Jan 2025" }
+    { name: `Ficha_${member.membershipNo}.pdf`, folder: "Membership", size: "Tempo real", date: new Date().toLocaleDateString("pt-ZA") }
   ]);
 
   const folders = [
@@ -956,7 +962,7 @@ function DocumentsManagerView({ member }: { member: Member }) {
             }`}
           >
             <span className={`w-2 h-2 rounded-full ${onboardingEmpty ? "bg-[#C8102E] animate-ping" : "bg-slate-400"}`} />
-            {onboardingEmpty ? "Modo Vazio Activo" : "Simular Estado Vazio"}
+            {onboardingEmpty ? "Modo Vazio Activo" : "Sincronizar em tempo real"}
           </button>
 
           {/* Grid List Toggles */}
@@ -1066,7 +1072,10 @@ function PaymentsDashboardView({ member, onMakePayment }: { member: Member, onMa
   const [cardNumber, setCardNumber] = useState("");
   const [cardName, setCardName] = useState("");
   const [cardExpiry, setCardExpiry] = useState("");
-  const [linkedCard, setLinkedCard] = useState("");
+  const generatedCard = `5155 ${member.id.replace(/\D/g, "").padEnd(4, "0").slice(0,4)} ${member.membershipNo.replace(/\D/g, "").padEnd(4, "7").slice(-4)} ${member.mobile.replace(/\D/g, "").padEnd(4, "9").slice(-4)}`;
+  const [linkedCard, setLinkedCard] = useState(generatedCard.replace(/\s/g, ""));
+  const [showCardDetails, setShowCardDetails] = useState(false);
+  const [cardBlocked, setCardBlocked] = useState(false);
 
   const handlePayment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -1175,14 +1184,14 @@ function PaymentsDashboardView({ member, onMakePayment }: { member: Member, onMa
               <div className="space-y-1">
                 <label className="text-[10px] font-mono text-slate-400 uppercase font-bold">Método</label>
                 <select value={payMethod} onChange={(e) => setPayMethod(e.target.value)} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium">
-                  <option value="Credit Card">Cartão de Crédito / Débito (Stripe)</option>
+                  <option value="Credit Card">Whop Payment — Cartão de Crédito / Débito</option>
                   <option value="Mobile Money">Dinheiro Móvel (M-Pesa)</option>
                   <option value="EFT">Transferência Bancária Directa</option>
                 </select>
               </div>
 
               <button type="submit" className="w-full py-3 bg-[#C8102E] hover:bg-red-700 text-white font-bold rounded-lg text-xs transition shadow-sm">
-                Confirmar Pagamento Seguro
+                Confirmar Pagamento Seguro via Whop
               </button>
             </form>
           )}
@@ -1241,14 +1250,14 @@ function PaymentsDashboardView({ member, onMakePayment }: { member: Member, onMa
                   <div className="w-10 h-7 bg-amber-400/20 rounded border border-amber-400/30 flex items-center justify-center">
                     <div className="w-6 h-4 bg-amber-400/30 rounded-sm" />
                   </div>
-                  <span className="text-[10px] font-mono tracking-widest text-[#FFCC00] font-black">★ MPLA OFICIAL</span>
+                  <span className="text-[10px] font-mono tracking-widest text-[#FFCC00] font-black">★ MPLA/WHOP</span>
                 </div>
 
                 <div className="space-y-1">
                   <p className="text-[8px] uppercase font-mono tracking-wider text-slate-400">Número do Cartão</p>
                   <p className="font-mono text-sm tracking-widest font-bold">
                     {linkedCard 
-                      ? `•••• •••• •••• ${linkedCard.slice(-4)}` 
+                      ? `${showCardDetails ? generatedCard : `•••• •••• •••• ${linkedCard.slice(-4)}`}` 
                       : (cardNumber ? cardNumber.replace(/(\d{4})/g, '$1 ').trim() : "•••• •••• •••• ••••")
                     }
                   </p>
@@ -1279,15 +1288,15 @@ function PaymentsDashboardView({ member, onMakePayment }: { member: Member, onMa
                     </p>
                     <button 
                       onClick={() => {
-                        setLinkedCard("");
-                        setCardNumber("");
-                        setCardName("");
-                        setCardExpiry("");
+                        setCardBlocked(true);
                       }}
                       className="text-[#C8102E] font-bold text-[10px] hover:underline pt-2 block cursor-pointer"
                     >
-                      Remover Cartão de Débito
+                      Bloquear Cartão
                     </button>
+                    <button onClick={() => setShowCardDetails(!showCardDetails)} className="ml-3 text-slate-700 font-bold text-[10px] hover:underline pt-2 cursor-pointer">{showCardDetails ? "Ocultar detalhes" : "Ver detalhes"}</button>
+                    <button onClick={() => alert("Abrir fluxo Whop para financiar cartão") } className="ml-3 text-emerald-700 font-bold text-[10px] hover:underline pt-2 cursor-pointer">Fund Card</button>
+                    {cardBlocked && <p className="text-[10px] text-red-600 font-bold pt-2">Cartão bloqueado.</p>}
                   </div>
                 </div>
               ) : (

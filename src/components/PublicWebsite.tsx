@@ -1,3 +1,4 @@
+import { images } from "../assets/images";
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
@@ -463,7 +464,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           <a href="#portal-root" className="flex items-center gap-3.5 group">
             <div className="w-11 h-11 bg-white rounded-xl flex items-center justify-center border-2 border-[#D4AF37] p-1 shadow-md transform group-hover:scale-105 transition duration-300">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
+                src={images.mplaLogo} 
                 alt="MPLA Logo" 
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
@@ -572,7 +573,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             >
               <img 
                 src={heroSlides[currentSlide].image} 
-                alt="MPLA Diaspora background" 
+                alt="MPLA CAPE background" 
                 className="w-full h-full object-cover opacity-35"
                 referrerPolicy="no-referrer"
               />
@@ -1223,7 +1224,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 {language === "PT" ? "Liderança Unificada no Terreno" : "Unified Leadership on the Ground"}
               </h2>
               <p className="text-xs text-slate-500 mt-1">
-                Conheça o corpo diretivo responsável pelas comissões de Gauteng, Western Cape e KwaZulu-Natal.
+                Conheça o corpo diretivo responsável do Comité de MPLA Cape Town.
               </p>
             </div>
 
@@ -1503,7 +1504,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           <div className="lg:col-span-6 bg-white border border-slate-200 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between relative group">
             <div className="relative h-80 overflow-hidden bg-slate-100 shrink-0">
               <img 
-                src="/src/assets/images/mpla_supporters_background_1784328681804.jpg" 
+                src={images.mplaSupportersBackground} 
                 alt="MPLA digital registration campaign" 
                 className="w-full h-full object-cover group-hover:scale-[1.02] transition duration-700 filter brightness-95"
                 referrerPolicy="no-referrer"
@@ -1855,10 +1856,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               className="group bg-slate-150 rounded-2xl overflow-hidden relative cursor-pointer border border-slate-200 shadow-sm hover:shadow-xl transition duration-300 h-64"
             >
               <img src={img.url} alt={img.title_pt} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-left">
-                <span className="text-[9px] font-mono text-amber-400 font-bold uppercase mb-1">{img.category}</span>
-                <h4 className="text-sm font-bold text-white">{language === "PT" ? img.title_pt : img.title_en}</h4>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300" />
             </div>
           ))}
         </div>
@@ -1883,12 +1881,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="text-center text-white space-y-1">
-                <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest">{filteredGallery[lightboxIndex].category}</span>
-                <h4 className="text-base font-bold">
-                  {language === "PT" ? filteredGallery[lightboxIndex].title_pt : filteredGallery[lightboxIndex].title_en}
-                </h4>
-              </div>
+
 
               {/* Navigation arrows */}
               <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex justify-between px-2 pointer-events-none">
@@ -1934,7 +1927,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             {language === "PT" ? "MULTIMÉDIA E DISCURSOS DA PATRIA" : "MULTIMEDIA & HOMELAND KEY SPEECHES"}
           </span>
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
-            {language === "PT" ? "Assista ao Documentário Comunitário Oficial" : "Watch the Official Community Documentary"}
+            {language === "PT" ? "Assista nossos eventos Oficiais" : "Watch our Official Events"}
           </h2>
           <p className="text-slate-400 font-light text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
             {language === "PT" 
@@ -1970,25 +1963,14 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 <X className="w-4 h-4" />
               </button>
               
-              <div className="relative aspect-video bg-black flex items-center justify-center">
-                {/* Embedded mock video screen with high fidelity visual style */}
-                <div className="text-center p-6 space-y-4">
-                  <span className="w-3 h-3 bg-red-600 rounded-full animate-ping m-auto block" />
-                  <h4 className="text-sm font-bold text-white tracking-widest uppercase">
-                    {language === "PT" ? "STREAM DO COMITÊ EM DIRETO" : "COMMITTEE LIVE STREAM PORTAL"}
-                  </h4>
-                  <p className="text-xs text-slate-500 max-w-md mx-auto leading-normal">
-                    O canal institucional do MPLA África do Sul transmite debates de cidadania, informações de renovação de vistos, e fóruns económicos semanais.
-                  </p>
-                  <div className="inline-flex gap-4 pt-2">
-                    <button onClick={() => alert("Simulando reprodução de alta definição...")} className="px-5 py-2.5 bg-[#B5121B] text-white text-xs font-bold rounded-xl">
-                      PLAY STREAM
-                    </button>
-                    <button onClick={() => setShowVideoModal(false)} className="px-5 py-2.5 bg-neutral-800 text-white text-xs font-bold rounded-xl">
-                      DISMISS
-                    </button>
-                  </div>
-                </div>
+              <div className="relative aspect-video bg-black">
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/live_stream?channel=UCZHPr3QVs-CUMlxdTXmurgA"
+                  title="MPLA Cape Town YouTube Live"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
               </div>
             </motion.div>
           </div>
@@ -2316,7 +2298,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       <section className="bg-slate-900 text-white py-20 text-center relative overflow-hidden border-t border-b border-white/5" id="membership">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/src/assets/images/mpla_supporters_background_1784328681804.jpg" 
+            src={images.mplaSupportersBackground} 
             alt="Militantes do MPLA África do Sul" 
             className="w-full h-full object-cover opacity-15 filter brightness-50"
           />
@@ -2496,13 +2478,13 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-0.5 border border-[#D4AF37]">
                 <img 
-                  src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
+                  src={images.mplaLogo} 
                   alt="MPLA Logo" 
                   className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <h4 className="font-extrabold text-sm text-white tracking-wide">MPLA Sede África do Sul</h4>
+              <h4 className="font-extrabold text-sm text-white tracking-wide">MPLA CAPE</h4>
             </div>
             <p className="text-xs text-slate-400 leading-normal max-w-xs">
               {language === "PT" 
@@ -2576,11 +2558,10 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
         {/* Legal copyright bar */}
         <div className="max-w-7xl mx-auto px-6 border-t border-slate-800 mt-10 pt-6 text-center text-[10px] text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
           <span>
-            © 2026 MPLA Comitê de Coordenação na República da África do Sul. Todos os direitos reservados.
+            © 2026 MPLA CAPE. Todos os direitos reservados.
           </span>
-          <span className="font-mono uppercase tracking-widest text-[#D4AF37]">
-            SADC PORTAL AUTHORITY v3.0.0
-          </span>
+          <span className="font-mono uppercase tracking-widest text-[#D4AF37]">SADC PORTAL AUTHORITY v3.0.0</span>
+          <a href="http://www.ai.neurogrowthlabs.co.za" target="_blank" rel="noreferrer" className="font-bold text-[#D4AF37] hover:underline">Developed by NeuroGrowth Labs www.ai.neurogrowthlabs.co.za</a>
         </div>
       </footer>
     </div>

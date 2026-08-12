@@ -88,6 +88,38 @@ function logAction(user: string, role: string, action: string, details: string) 
   auditLogs.unshift(newLog);
 }
 
+function generateMembershipNumber(province = "Western Cape") {
+  const provCodes: { [key: string]: string } = {
+    "Gauteng": "GP", "Western Cape": "CPT", "KwaZulu-Natal": "KZN", "Eastern Cape": "EC",
+    "Free State": "FS", "Limpopo": "LP", "Mpumalanga": "MP", "North West": "NW", "Northern Cape": "NC"
+  };
+  const code = provCodes[province] || "CPT";
+  let candidate = "";
+  do {
+    const serial = String(Math.floor(100000 + Math.random() * 900000));
+    candidate = `MPLA-${code}-${new Date().getFullYear()}-${serial}`;
+  } while (members.some(member => member.membershipNo === candidate));
+  return candidate;
+}
+
+function getMembershipLevelFromAffiliation(affiliation?: string): Member["membershipLevel"] {
+  if (affiliation === "JMPLA") return "Silver";
+  if (affiliation === "OMA") return "Gold";
+  return "Standard";
+}
+
+function runBirthdayNotificationSweep() {
+  const today = new Date();
+  const mmdd = `${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  members
+    .filter(member => member.dob?.slice(5) === mmdd)
+    .forEach(member => {
+      logAction("System", "Birthday Service", "Birthday Notification", `Queued congratulatory notification and personalized email for ${member.fullName}`);
+    });
+}
+
+setInterval(runBirthdayNotificationSweep, 24 * 3600 * 1000);
+
 // REST API Endpoints
 
 // Authentication API
@@ -103,10 +135,10 @@ app.post("/api/auth/login", (req, res) => {
     if (
       (cleanId === "admin@democraticalliance.org.za" || 
        cleanId === "admin@nda.org.za" || 
-       cleanId === "admin@mpla-diaspora.org" || 
+       cleanId === "comitemplacapetown@gmail.com" || 
        cleanId === "admin@mpla.org" || 
        cleanId === "admin") && 
-      password === "admin123"
+      password === "Comitempla2@26"
     ) {
       logAction("Super Administrador", "Authentication", "Admin Login Success", "Super Administrador authenticated successfully via secure tunnel");
       return res.json({
@@ -116,7 +148,7 @@ app.post("/api/auth/login", (req, res) => {
           id: "admin-hq",
           membershipNo: "MPLA-ADMIN-HQ-99",
           fullName: "Super Administrador Nacional",
-          email: "admin@mpla-diaspora.org",
+          email: "comitemplacapetown@gmail.com",
           photo: "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=150&h=150&fit=crop",
           status: "Active"
         }
@@ -160,7 +192,7 @@ app.post("/api/members", (req, res) => {
     id: `m-${Date.now()}`,
     membershipNo: `MP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
     registrationDate: new Date().toISOString().split("T")[0],
-    outstandingBalance: 150,
+    outstandingBalance: 0,
     registeredEvents: [],
     completedCourses: [],
     votedPolls: {}
@@ -470,7 +502,7 @@ function limparDadosNaoPersistidosNoArranque() {
 limparDadosNaoPersistidosNoArranque();
 
 let systemSettings = {
-  partyName: "MPLA Diaspora",
+  partyName: "MPLA CAPE",
   logoUrl: "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=120&h=120&fit=crop",
   primaryColor: "#C8102E", 
   secondaryColor: "#FFCC00", 
@@ -479,11 +511,11 @@ let systemSettings = {
   dateFormat: "DD/MM/YYYY",
   maintenanceModeActive: false,
   emailTemplates: {
-    verification: "<h3>Bem-vindo(a) ao MPLA Diaspora</h3><p>O seu código OTP é {{otp}}. É válido durante 10 minutos.</p>",
-    cardDispatched: "<p>Camarada {{name}}, o seu Cartão de Militante do MPLA Diaspora foi emitido e encaminhado para entrega. Acompanhe no portal.</p>"
+    verification: "<h3>Bem-vindo(a) ao MPLA CAPE</h3><p>O seu código OTP é {{otp}}. É válido durante 10 minutos.</p>",
+    cardDispatched: "<p>Camarada {{name}}, o seu Cartão de Militante do MPLA CAPE foi emitido e encaminhado para entrega. Acompanhe no portal.</p>"
   },
   smsTemplates: {
-    otp: "Portal Seguro MPLA Diaspora OTP: {{otp}}. Não divulgue este código a ninguém.",
+    otp: "Portal Seguro MPLA CAPE OTP: {{otp}}. Não divulgue este código a ninguém.",
     cardDispatched: "Cartão MPLA: Camarada {{name}}, o seu cartão físico foi expedido. Data estimada: {{estDate}}."
   },
   featureFlags: {
@@ -627,13 +659,8 @@ app.post("/api/auth/register", (req, res) => {
   }
 
   const newId = `m-${members.length + 1}`;
-  const randomNo = Math.floor(1000 + Math.random() * 9000);
-  const provCodes: { [key: string]: string } = {
-    "Gauteng": "GP", "Western Cape": "WC", "KwaZulu-Natal": "KZN", "Eastern Cape": "EC",
-    "Free State": "FS", "Limpopo": "LP", "Mpumalanga": "MP", "North West": "NW", "Northern Cape": "NC"
-  };
-  const provCode = provCodes[province] || "HQ";
-  const membershipNo = `MP-2026-${randomNo}-${provCode}`;
+  const membershipNo = generateMembershipNumber(province);
+  const affiliation = req.body.affiliation || "Apenas Militante";
 
   const newMember: Member = {
     id: newId,
@@ -644,15 +671,15 @@ app.post("/api/auth/register", (req, res) => {
     mobile,
     photo: photo || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop",
     status: "Active",
-    membershipLevel: "Standard",
+    membershipLevel: getMembershipLevelFromAffiliation(affiliation),
     category: "General",
     province: province || "Gauteng",
     municipality: municipality || "City of Johannesburg",
     committee: committee || "Ward 117 Local Committee",
     registrationDate: new Date().toISOString().split('T')[0],
     physicalCardStatus: "Printing",
-    physicalCardEstDate: new Date(Date.now() + 10 * 24 * 3600 * 1000).toISOString().split('T')[0],
-    outstandingBalance: 150,
+    physicalCardEstDate: new Date(Date.now() + 14 * 24 * 3600 * 1000).toISOString().split('T')[0],
+    outstandingBalance: 0,
     gender: "Other",
     dob: "1990-01-01",
     maritalStatus: "Single",
@@ -660,7 +687,7 @@ app.post("/api/auth/register", (req, res) => {
     occupation: "Independent",
     employer: "Self-Employed",
     education: "Secondary School Certificate",
-    leadershipRoles: ["General Member"],
+    leadershipRoles: [affiliation],
     registeredEvents: [],
     completedCourses: [],
     votedPolls: {}
