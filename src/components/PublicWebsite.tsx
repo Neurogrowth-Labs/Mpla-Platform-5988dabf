@@ -43,7 +43,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       title_pt: "Construindo Unidade. Fortalecendo Comunidades.",
       title_en: "Building Unity. Empowering Communities.",
       sub_pt: "Promovendo a cidadania participativa, solidariedade e progresso dos angolanos na África do Sul.",
-      sub_en: "Promoting participatory citizenship, solidarity and progress for Angolans in South Africa.",
+      sub_en: "Promoting participatory citizenship, solidarity and progress for Angolans in Diáspora.",
       image: "https://cdn.dailymaverick.co.za/dailymaverick/wp-content/uploads/2022/01/000_9D84GG-1.jpg"
     },
     {
@@ -120,7 +120,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       title_pt: "Expansão da Representação na SADC",
       title_en: "SADC Representation Expansion",
       desc_pt: "Criação do Círculo de Coordenação Nacional da África do Sul, formalizando apoio à imensa comunidade diáspora.",
-      desc_en: "Creation of the South Africa National Coordination Circle, formalizing institutional support for the diaspora.",
+      desc_en: "Creation of the Diáspora National Coordination Circle, formalizing institutional support for the diaspora.",
       milestone: "Presença Internacional",
       image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=500&q=80"
     },
@@ -138,7 +138,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       title_pt: "Filiação Digital Unificada",
       title_en: "Unified Digital Membership",
       desc_pt: "Integração total do sistema de cartões criptografados e carteiras virtuais de apoio a todos os angolanos na África do Sul.",
-      desc_en: "Full rollout of encrypted digital cards and community support hubs across all South African provinces.",
+      desc_en: "Full rollout of encrypted digital cards and community support hubs across all Diásporan provinces.",
       milestone: "Futuro e Conectividade",
       image: "/src/assets/images/mpla_supporters_background_1784328681804.jpg"
     }
@@ -155,15 +155,15 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       role_en: "National Coordination Executive Secretary",
       committee: "national",
       bio_pt: "Diplomata e cientista político com mais de 18 anos de coordenação de assuntos comunitários e bilaterais entre Angola e África do Sul. Dedicado a reestruturar os mecanismos de apoio consular.",
-      bio_en: "Diplomat and political scientist with over 18 years of experience coordinating community and bilateral affairs between Angola and South Africa. Dedicated to improving consular helpdesks.",
+      bio_en: "Diplomat and political scientist with over 18 years of experience coordinating community and bilateral affairs between Angola and Diáspora. Dedicated to improving consular helpdesks.",
       speech_pt: "A nossa missão na diáspora sul-africana transcende a política; somos uma família unida pela identidade, trabalhando incansavelmente para o progresso de cada angolano.",
-      speech_en: "Our mission in the South African diaspora transcends politics; we are a family united by identity, working tirelessly for the progress of every Angolan citizen.",
+      speech_en: "Our mission in the Diásporan diaspora transcends politics; we are a family united by identity, working tirelessly for the progress of every Angolan citizen.",
       photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop"
     },
     {
       name: "Camarada Teresa Francisco",
       role_pt: "Coordenadora Regional da OMA - África do Sul",
-      role_en: "OMA Regional Coordinator - South Africa",
+      role_en: "OMA Regional Coordinator - Diáspora",
       committee: "oma",
       bio_pt: "Líder de direitos cívicos femininos, gestora comunitária em Joanesburgo, foca no apoio ao empreendedorismo feminino, capacitação de mulheres e amparo social a agregados familiares vulneráveis.",
       bio_en: "Women's civic rights advocate, community manager in Johannesburg, focusing on women's entrepreneurship, child education, and welfare support for single-parent families.",
@@ -177,9 +177,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       role_en: "JMPLA General Secretary - Gauteng Province",
       committee: "jmpla",
       bio_pt: "Engenheiro de sistemas e mentor académico, lidera projetos de bolsas de estudo e integração de jovens angolanos nas universidades sul-africanas de prestígio.",
-      bio_en: "Systems engineer and academic mentor, leading student bursaries and the smooth integration of young Angolans into premium South African universities.",
+      bio_en: "Systems engineer and academic mentor, leading student bursaries and the smooth integration of young Angolans into premium Diásporan universities.",
       speech_pt: "A juventude é o motor da inovação. Capacitar nossos estudantes na África do Sul com tecnologia e ciência é semear o progresso de Angola no amanhã.",
-      speech_en: "Youth is the engine of innovation. Empowering our students in South Africa with technology and science is sowing the seeds of Angola's progress tomorrow.",
+      speech_en: "Youth is the engine of innovation. Empowering our students in Diáspora with technology and science is sowing the seeds of Angola's progress tomorrow.",
       photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=400&fit=crop"
     },
     {
@@ -190,12 +190,12 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       bio_pt: "Especialista em assistência humanitária, lidera o registo social unificado, auxiliando os imigrantes a regularizarem a sua documentação e inserção laboral digna.",
       bio_en: "Humanitarian assistance specialist, leading the unified social registry, assisting immigrants in regularizing documentation and obtaining dignified employment.",
       speech_pt: "A solidariedade é a nossa maior divisa. Nenhum compatriota nosso deve sentir-se desamparado nas terras da África do Sul.",
-      speech_en: "Solidarity is our greatest currency. No compatriot of ours should ever feel helpless or forgotten while living in South Africa.",
+      speech_en: "Solidarity is our greatest currency. No compatriot of ours should ever feel helpless or forgotten while living in Diáspora.",
       photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=400&fit=crop"
     }
   ];
 
-  // Interactive South Africa Map state
+  // Interactive Diáspora Map state
   const [hoveredProvince, setHoveredProvince] = useState<string | null>("GP");
   const provinceDetails: Record<string, { name: string; members: string; caps: number; projects: string }> = {
     GP: { name: "Gauteng (Johannesburg/Pretoria)", members: "6,420+", caps: 14, projects: "Aulas de Português, Gabinete Jurídico, Distribuição Alimentar" },
@@ -329,7 +329,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
   const testimonials = [
     {
       quote_pt: "O amparo e dedicação do Comitê de Solidariedade do MPLA na África do Sul permitiram-me renovar a minha documentação civil e encontrar um ambiente acolhedor e seguro para as minhas filhas estudarem em Gauteng.",
-      quote_en: "The care and commitment of the MPLA Solidarity Committee in South Africa enabled me to renew my civil documents and find a welcoming and secure environment for my daughters to study in Gauteng.",
+      quote_en: "The care and commitment of the MPLA Solidarity Committee in Diáspora enabled me to renew my civil documents and find a welcoming and secure environment for my daughters to study in Gauteng.",
       author: "Maria de Lurdes Neto",
       role_pt: "Estudante e Mãe, Residente em Germiston",
       role_en: "Student and Mother, Residing in Germiston",
@@ -592,7 +592,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37]"
             >
               <Sparkle className="w-3.5 h-3.5 animate-spin" />
-              {language === "PT" ? "Delegação Oficial África do Sul" : "Official South Africa Delegation"}
+              {language === "PT" ? "Delegação Oficial África do Sul" : "Official Diáspora Delegation"}
             </motion.div>
 
             {/* Giant Bold Typography Animated Reveal */}
@@ -653,7 +653,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               <div className="pt-2 border-t border-white/5">
                 <span className="text-slate-400 text-[10px] uppercase block mb-1">{language === "PT" ? "Anos de Trabalho" : "Years of Support"}</span>
                 <span className="text-2xl font-black text-[#D4AF37] block">25+</span>
-                <span className="text-[9px] text-slate-400 font-mono">Em South Africa</span>
+                <span className="text-[9px] text-slate-400 font-mono">Em Diáspora</span>
               </div>
             </div>
           </div>
@@ -761,7 +761,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             <p className="text-slate-600 leading-relaxed font-light text-sm italic border-l-4 border-[#D4AF37] pl-4">
               "{language === "PT" 
                 ? "Benvindo ao portal cívico unificado dos militantes e amigos do MPLA na África do Sul. A nossa missão é aproximar cada angolano, fornecer representação autêntica, e contribuir diretamente para o desenvolvimento do nosso país." 
-                : "Welcome to the unified civic portal of MPLA members and friends in South Africa. Our goal is to bring every Angolan closer, provide authentic representation, and contribute directly to the development of our country."}"
+                : "Welcome to the unified civic portal of MPLA members and friends in Diáspora. Our goal is to bring every Angolan closer, provide authentic representation, and contribute directly to the development of our country."}"
             </p>
             <p className="text-slate-500 leading-relaxed text-xs">
               {language === "PT"
@@ -818,7 +818,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             <p className="text-slate-600 leading-relaxed text-sm">
               {language === "PT" 
                 ? "Como representação cívica e política unificada, apoiamos os imigrantes angolanos na sua regularização e inserção digna na sociedade sul-africana, ao mesmo tempo que cultivamos os valores patrióticos."
-                : "As a unified civic and political representation body, we support Angolan immigrants in their formal integration into South African society, while preserving patriotic cultural values."}
+                : "As a unified civic and political representation body, we support Angolan immigrants in their formal integration into Diásporan society, while preserving patriotic cultural values."}
             </p>
 
             {/* Tab Controls */}
@@ -845,7 +845,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   <strong>{language === "PT" ? "Missão:" : "Mission:"}</strong>{" "}
                   {language === "PT" 
                     ? "Unir a diáspora angolana na África do Sul sob os princípios de solidariedade, legalidade e participação cívica ativa, atuando como o canal oficial que faz ouvir a voz de nossos militantes na pátria."
-                    : "To unite the Angolan diaspora in South Africa under the principles of solidarity, legality and active citizenship, serving as the official channel to let the voice of our members be heard."}
+                    : "To unite the Angolan diaspora in Diáspora under the principles of solidarity, legality and active citizenship, serving as the official channel to let the voice of our members be heard."}
                 </p>
               )}
               {aboutTab === "vision" && (
@@ -861,7 +861,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                   <strong>{language === "PT" ? "Valores Primordiais:" : "Core Values:"}</strong>{" "}
                   {language === "PT"
                     ? "Solidariedade Social • Patriotismo Construtivo • Transparência Administrativa • Democracia Interna • Respeito Pelas Leis da África do Sul"
-                    : "Social Solidarity • Constructive Patriotism • Administrative Transparency • Participatory Democracy • Absolute Respect for South African Laws"}
+                    : "Social Solidarity • Constructive Patriotism • Administrative Transparency • Participatory Democracy • Absolute Respect for Diásporan Laws"}
                 </p>
               )}
             </div>
@@ -888,7 +888,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-xs sm:text-sm font-light">
                 {language === "PT" 
                   ? "A JMPLA na África do Sul é o motor dinâmico que mobiliza, capacita e integra a juventude angolana na diáspora. Focamo-nos no desenvolvimento de líderes do amanhã, através de programas académicos, mentorias de carreira, eventos culturais e integração tecnológica."
-                  : "JMPLA in South Africa is the dynamic engine mobilizing, empowering, and integrating Angolan youth in the diaspora. We focus on developing the leaders of tomorrow through academic programs, career mentorship, cultural events, and technological integration."}
+                  : "JMPLA in Diáspora is the dynamic engine mobilizing, empowering, and integrating Angolan youth in the diaspora. We focus on developing the leaders of tomorrow through academic programs, career mentorship, cultural events, and technological integration."}
               </p>
 
               {/* Grid of Initiatives */}
@@ -1074,7 +1074,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-xs sm:text-sm font-light">
                 {language === "PT" 
                   ? "A OMA é o pilar de solidariedade, igualdade e apoio social das famílias angolanas na África do Sul. A nossa missão reside em defender os direitos das mulheres, apoiar a inclusão financeira e garantir amparo direto a mães, crianças e compatriotas em situação de vulnerabilidade migratória."
-                  : "OMA is the pillars of solidarity, equality, and social support for Angolan families in South Africa. Our mission lies in defending women's rights, supporting financial inclusion, and providing direct welfare to mothers, children, and compatriots in vulnerable migration states."}
+                  : "OMA is the pillars of solidarity, equality, and social support for Angolan families in Diáspora. Our mission lies in defending women's rights, supporting financial inclusion, and providing direct welfare to mothers, children, and compatriots in vulnerable migration states."}
               </p>
 
               {/* Core Programs Stack */}
@@ -1360,14 +1360,14 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-            {/* Interactive map representing South Africa Provinces */}
+            {/* Interactive map representing Diáspora Provinces */}
             <div className="lg:col-span-4 bg-slate-950/50 p-6 rounded-3xl border border-white/10 flex flex-col justify-between">
               <div>
                 <p className="text-[9px] font-mono font-black uppercase text-amber-400 tracking-wider mb-2">
                   {language === "PT" ? "MAPA INTERATIVO DE ATIVIDADES" : "INTERACTIVE ACTIVITIES MAP"}
                 </p>
                 <h4 className="text-lg font-extrabold text-white">
-                  {language === "PT" ? "Células da SADC por Província" : "SADC Cells by South Africa Province"}
+                  {language === "PT" ? "Células da SADC por Província" : "SADC Cells by Diáspora Province"}
                 </h4>
                 <p className="text-slate-400 text-xs mt-1.5 leading-relaxed">
                   Clique ou selecione uma província para ver as estatísticas locais.
@@ -1416,7 +1416,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               <div className="bg-slate-950/50 p-6 rounded-3xl border border-white/10 flex flex-col justify-between">
                 <div>
                   <p className="text-[10px] font-mono font-black uppercase text-[#B5121B] tracking-wider mb-2">CRESCIMENTO HISTÓRICO</p>
-                  <h4 className="text-sm font-extrabold text-white">Membros Registados em South Africa</h4>
+                  <h4 className="text-sm font-extrabold text-white">Membros Registados em Diáspora</h4>
                 </div>
                 <div className="h-48 mt-4">
                   <ResponsiveContainer width="100%" height="100%">
@@ -1530,9 +1530,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     readTime: "4 min read",
                     image: "/src/assets/images/mpla_supporters_background_1784328681804.jpg",
                     summary_pt: "O Comité de Coordenação Nacional da África do Sul lança uma infraestrutura segura para emissão do novo Cartão Digital de Militante com criptografia avançada de dados de apoio ao cidadão.",
-                    summary_en: "The South Africa National Coordination Committee has launched a secure infrastructure for issuing the new Digital Membership Card with advanced encryption backing.",
+                    summary_en: "The Diáspora National Coordination Committee has launched a secure infrastructure for issuing the new Digital Membership Card with advanced encryption backing.",
                     content_pt: "O Comité de Coordenação Nacional do MPLA na África do Sul deu início oficial à campanha de recadastramento digital e actualização de dados para todos os cidadãos angolanos residentes na região da SADC. Esta iniciativa pioneira visa modernizar a base de dados do partido, optimizando os canais de apoio consular, social e formativo na diáspora.\n\nAtravés de uma infraestrutura web encriptada, os militantes podem agora atualizar os seus dados demográficos, submeter documentação e solicitar a emissão do novo Cartão Digital de Militante. O cartão inclui um código QR único que facilita a verificação em assembleias oficiais, além de garantir o acesso a múltiplos programas sociais integrados de apoio à comunidade angolana.\n\n\"Esta transição para o ecossistema digital representa um passo firme em direcção à transparência organizativa e à proximidade com a nossa comunidade\", sublinhou o Coordenador Nacional durante o acto de lançamento em Sandton. O processo decorre de forma contínua através do portal oficial ou junto das brigadas móveis provinciais.",
-                    content_en: "The MPLA National Coordination Committee in South Africa has officially commenced the digital registry and database update campaign for all Angolan citizens residing in the SADC region. This pioneering initiative aims to modernize the party's database, optimizing consular, social, and educational support channels in the diaspora.\n\nThrough an encrypted web infrastructure, members can now update their demographic information, submit documentation, and request the issuance of the new Digital Member Card. The card features a unique QR code to facilitate verification at official assemblies, while securing access to multiple social programs integrated for the Angolan community.\n\n\"This transition to a digital ecosystem represents a firm step towards organizational transparency and absolute proximity to our community,\" highlighted the National Coordinator during the launch ceremony in Sandton. The process is continuous and accessible through the official portal or provincial mobile brigades."
+                    content_en: "The MPLA National Coordination Committee in Diáspora has officially commenced the digital registry and database update campaign for all Angolan citizens residing in the SADC region. This pioneering initiative aims to modernize the party's database, optimizing consular, social, and educational support channels in the diaspora.\n\nThrough an encrypted web infrastructure, members can now update their demographic information, submit documentation, and request the issuance of the new Digital Member Card. The card features a unique QR code to facilitate verification at official assemblies, while securing access to multiple social programs integrated for the Angolan community.\n\n\"This transition to a digital ecosystem represents a firm step towards organizational transparency and absolute proximity to our community,\" highlighted the National Coordinator during the launch ceremony in Sandton. The process is continuous and accessible through the official portal or provincial mobile brigades."
                   })}
                   className="text-2xl font-serif font-black text-slate-900 hover:text-[#B5121B] transition cursor-pointer leading-tight tracking-tight"
                 >
@@ -1543,7 +1543,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 <p className="text-slate-600 text-xs sm:text-xs leading-relaxed font-light line-clamp-3">
                   {language === "PT"
                     ? "O Comité de Coordenação Nacional da África do Sul lança uma infraestrutura segura para emissão do novo Cartão Digital de Militante com criptografia avançada de dados de apoio ao cidadão angolano."
-                    : "The South Africa National Coordination Committee has launched a secure infrastructure for issuing the new Digital Membership Card with advanced encryption backing."}
+                    : "The Diáspora National Coordination Committee has launched a secure infrastructure for issuing the new Digital Membership Card with advanced encryption backing."}
                 </p>
               </div>
               <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-xs">
@@ -1557,9 +1557,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                     readTime: "4 min read",
                     image: "/src/assets/images/mpla_supporters_background_1784328681804.jpg",
                     summary_pt: "O Comité de Coordenação Nacional da África do Sul lança uma infraestrutura segura para emissão do novo Cartão Digital de Militante com criptografia avançada de dados de apoio ao cidadão.",
-                    summary_en: "The South Africa National Coordination Committee has launched a secure infrastructure for issuing the new Digital Membership Card with advanced encryption backing.",
+                    summary_en: "The Diáspora National Coordination Committee has launched a secure infrastructure for issuing the new Digital Membership Card with advanced encryption backing.",
                     content_pt: "O Comité de Coordenação Nacional do MPLA na África do Sul deu início oficial à campanha de recadastramento digital e actualização de dados para todos os cidadãos angolanos residentes na região da SADC. Esta iniciativa pioneira visa modernizar a base de dados do partido, optimizando os canais de apoio consular, social e formativo na diáspora.\n\nAtravés de uma infraestrutura web encriptada, os militantes podem agora atualizar os seus dados demográficos, submeter documentação e solicitar a emissão do novo Cartão Digital de Militante. O cartão inclui um código QR único que facilita a verificação em assembleias oficiais, além de garantir o acesso a múltiplos programas sociais integrados de apoio à comunidade angolana.\n\n\"Esta transição para o ecossistema digital representa um passo firme em direcção à transparência organizativa e à proximidade com a nossa comunidade\", sublinhou o Coordenador Nacional durante o acto de lançamento em Sandton. O processo decorre de forma contínua através do portal oficial ou junto das brigadas móveis provinciais.",
-                    content_en: "The MPLA National Coordination Committee in South Africa has officially commenced the digital registry and database update campaign for all Angolan citizens residing in the SADC region. This pioneering initiative aims to modernize the party's database, optimizing consular, social, and educational support channels in the diaspora.\n\nThrough an encrypted web infrastructure, members can now update their demographic information, submit documentation, and request the issuance of the new Digital Member Card. The card features a unique QR code to facilitate verification at official assemblies, while securing access to multiple social programs integrated for the Angolan community.\n\n\"This transition to a digital ecosystem represents a firm step towards organizational transparency and absolute proximity to our community,\" highlighted the National Coordinator during the launch ceremony in Sandton. The process is continuous and accessible through the official portal or provincial mobile brigades."
+                    content_en: "The MPLA National Coordination Committee in Diáspora has officially commenced the digital registry and database update campaign for all Angolan citizens residing in the SADC region. This pioneering initiative aims to modernize the party's database, optimizing consular, social, and educational support channels in the diaspora.\n\nThrough an encrypted web infrastructure, members can now update their demographic information, submit documentation, and request the issuance of the new Digital Member Card. The card features a unique QR code to facilitate verification at official assemblies, while securing access to multiple social programs integrated for the Angolan community.\n\n\"This transition to a digital ecosystem represents a firm step towards organizational transparency and absolute proximity to our community,\" highlighted the National Coordinator during the launch ceremony in Sandton. The process is continuous and accessible through the official portal or provincial mobile brigades."
                   })}
                   className="font-black text-[#B5121B] hover:text-red-700 flex items-center gap-1 cursor-pointer uppercase tracking-wider text-[11px]"
                 >
@@ -1596,7 +1596,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=800&q=80",
                 readTime: "3 min read",
                 content_pt: "O fórum realizado no prestigiado centro de convenções de Sandton reuniu mais de 250 líderes empresariais, investidores e jovens empreendedores de origem angolana e sul-africana. Sob o lema \"Investir na Diáspora, Fortalecer a Nação\", os participantes exploraram sinergias comerciais cruciais no âmbito do acordo de livre comércio regional da SADC.\n\nDurante as sessões plenárias, foram discutidos incentivos fiscais para o repatriamento de capital de investimento, mecanismos de facilitação aduaneira e o papel estratégico da classe empresarial angolana na transferência de tecnologias inovadoras para o mercado doméstico.",
-                content_en: "The forum held at the prestigious Sandton Convention Center gathered more than 250 business leaders, investors, and young entrepreneurs of Angolan and South African origin. Under the theme \"Investing in the Diaspora, Strengthening the Nation,\" participants explored crucial commercial synergies within the framework of the SADC regional free trade agreement.\n\nDuring the plenary sessions, fiscal incentives for investment capital repatriation, customs facilitation mechanisms, and the strategic role of the Angolan business class in transferring innovative technologies back home were thoroughly discussed."
+                content_en: "The forum held at the prestigious Sandton Convention Center gathered more than 250 business leaders, investors, and young entrepreneurs of Angolan and Diásporan origin. Under the theme \"Investing in the Diaspora, Strengthening the Nation,\" participants explored crucial commercial synergies within the framework of the SADC regional free trade agreement.\n\nDuring the plenary sessions, fiscal incentives for investment capital repatriation, customs facilitation mechanisms, and the strategic role of the Angolan business class in transferring innovative technologies back home were thoroughly discussed."
               },
               {
                 title_pt: "Delegação OMA Realiza Donativos de Apoio Alimentar em Soweto",
@@ -1609,7 +1609,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80",
                 readTime: "3 min read",
                 content_pt: "A delegação da Organização da Mulher Angolana (OMA) realizou uma importante acção humanitária e cívica na comunidade de Soweto, beneficiando dezenas de famílias angolanas em situação de vulnerabilidade extrema. A iniciativa incluiu a distribuição de cabazes alimentares completos, cobertores para o período de inverno e kits de higiene básica.\n\nAlém do apoio material, a OMA disponibilizou uma equipa de assessoria jurídica voluntária para esclarecer dúvidas sobre os processos de regularização migratória, renovação de vistos temporários e encaminhamento de crianças para o sistema de ensino sul-africano.",
-                content_en: "The delegation of the Organization of Angolan Women (OMA) carried out a significant humanitarian and civic action in the Soweto community, benefiting dozens of Angolan families facing extreme vulnerability. The initiative included distributing comprehensive food parcels, blankets for winter, and basic hygiene kits.\n\nAlongside material support, OMA provided a volunteer legal advisory team to clarify procedures regarding immigration regularization, temporary visa renewals, and enrolling children in the South African education system."
+                content_en: "The delegation of the Organization of Angolan Women (OMA) carried out a significant humanitarian and civic action in the Soweto community, benefiting dozens of Angolan families facing extreme vulnerability. The initiative included distributing comprehensive food parcels, blankets for winter, and basic hygiene kits.\n\nAlongside material support, OMA provided a volunteer legal advisory team to clarify procedures regarding immigration regularization, temporary visa renewals, and enrolling children in the Diásporan education system."
               }
             ].map((newsItem, index) => (
               <div 
@@ -1673,7 +1673,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                       id: "trend-2",
                       rank: "02",
                       title_pt: "A Integração dos Médicos Angolanos no Sistema de Saúde da África do Sul",
-                      title_en: "Integrating Angolan Doctors into the South African Healthcare System",
+                      title_en: "Integrating Angolan Doctors into the Diásporan Healthcare System",
                       author: "Dra. Elisa dos Santos",
                       authorTitle_pt: "Coordenadora de Saúde e Bem-estar",
                       authorTitle_en: "Health & Wellbeing Coordinator",
@@ -1712,7 +1712,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                             summary_pt: trend.content_pt,
                             summary_en: trend.content_en,
                             content_pt: `Artigo de Opinião assinado por ${trend.author} (${trend.authorTitle_pt}):\n\n${trend.content_pt}\n\nA participação ativa da nossa massa intelectual na diáspora sul-africana fortalece o prestígio e a competência organizativa das nossas instituições bilaterais, sedimentando canais inovadores de progresso mútuo e garantindo o retorno construtivo de conhecimentos à pátria mãe.`,
-                            content_en: `Opinion article written by ${trend.author} (${trend.authorTitle_en}):\n\n${trend.content_en}\n\nThe active participation of our intellectual diaspora in South Africa solidifies the prestige and organizational depth of our bilateral institutions, fostering academic exchange and patriotic engagement.`
+                            content_en: `Opinion article written by ${trend.author} (${trend.authorTitle_en}):\n\n${trend.content_en}\n\nThe active participation of our intellectual diaspora in Diáspora solidifies the prestige and organizational depth of our bilateral institutions, fostering academic exchange and patriotic engagement.`
                           })}
                           className="font-serif font-bold text-slate-800 text-xs sm:text-xs leading-snug hover:text-[#B5121B] cursor-pointer transition line-clamp-3"
                         >
@@ -2032,7 +2032,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 <p className="text-xs text-slate-500 leading-relaxed font-light">
                   {language === "PT" 
                     ? "As suas contribuições voluntárias e quotas apoiam diretamente os nossos programas sociais gratuitos, incluindo o Gabinete de Apoio Consular, as Aulas de Português, e a assistência a famílias em vulnerabilidade na África do Sul."
-                    : "Your voluntary contributions and membership fees directly support our free social programs, including the Consular Support Office, Portuguese Classes, and assistance to vulnerable families in South Africa."}
+                    : "Your voluntary contributions and membership fees directly support our free social programs, including the Consular Support Office, Portuguese Classes, and assistance to vulnerable families in Diáspora."}
                 </p>
 
                 {/* Premium FNB Card Layout */}
@@ -2387,7 +2387,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             <p className="text-slate-400 text-xs leading-relaxed">
               {language === "PT" 
                 ? "Visite o nosso gabinete principal de coordenação consular e atendimento às famílias na África do Sul."
-                : "Visit our primary coordination office and family helpdesk in the South Africa."}
+                : "Visit our primary coordination office and family helpdesk in the Diáspora."}
             </p>
 
             <div className="space-y-4 pt-4 border-t border-white/5 text-xs text-slate-300">
@@ -2507,7 +2507,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
             <p className="text-xs text-slate-400 leading-normal max-w-xs">
               {language === "PT" 
                 ? "Portal cívico e de serviços unificado dos angolanos organizados na diáspora sul-africana. Apoio consular, integração social e cooperação económica." 
-                : "Unified civic and service portal for Angolans organized in the South African diaspora. Consular assistance, social integration, and trade."}
+                : "Unified civic and service portal for Angolans organized in the Diásporan diaspora. Consular assistance, social integration, and trade."}
             </p>
             <p className="text-[10px] font-mono text-[#D4AF37] font-bold">
               {language === "PT" ? "UNIDADE, LUTA, PROGRESSO" : "UNITY, STRUGGLE, PROGRESS"}
