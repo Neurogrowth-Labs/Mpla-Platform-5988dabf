@@ -22,7 +22,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-const PORT = 3000;
+const PORT = Number(process.env.PORT || 3000);
 
 // Lazy initialization of Gemini API
 let aiClient: GoogleGenAI | null = null;
@@ -81,7 +81,7 @@ function logAction(user: string, role: string, action: string, details: string) 
     role,
     action,
     device: "Chrome / Linux (Server)",
-    location: "Sede Nacional, ZA",
+    location: "Sede Cape Town, ZA",
     ip: "127.0.0.1",
     details
   };
@@ -122,6 +122,24 @@ setInterval(runBirthdayNotificationSweep, 24 * 3600 * 1000);
 
 // REST API Endpoints
 
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    service: "MPLA Cape Town API",
+    frontendBackendMode: process.env.NODE_ENV === "production" ? "express-static" : "express-vite-middleware",
+    counts: {
+      members: members.length,
+      announcements: announcements.length,
+      events: events.length,
+      tickets: supportTickets.length,
+      courses: learningCourses.length,
+      polls: surveyPolls.length
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
+
 // Authentication API
 app.post("/api/auth/login", (req, res) => {
   const { identifier, password, role } = req.body;
@@ -133,11 +151,8 @@ app.post("/api/auth/login", (req, res) => {
   if (role === "admin") {
     const cleanId = identifier.trim().toLowerCase();
     if (
-      (cleanId === "admin@democraticalliance.org.za" || 
-       cleanId === "admin@nda.org.za" || 
-       cleanId === "comitemplacapetown@gmail.com" || 
-       cleanId === "admin@mpla.org" || 
-       cleanId === "admin") && 
+      (cleanId === "comitemplacapetown@gmail.com" ||
+       cleanId === "admin") &&
       password === "Comitempla2@26"
     ) {
       logAction("Super Administrador", "Authentication", "Admin Login Success", "Super Administrador authenticated successfully via secure tunnel");
@@ -161,10 +176,10 @@ app.post("/api/auth/login", (req, res) => {
 
   // Member checks
   const query = identifier.toLowerCase().trim();
-  const found = members.find(m => 
-    m.email.toLowerCase() === query || 
-    m.membershipNo.toLowerCase() === query || 
-    m.nationalId === query || 
+  const found = members.find(m =>
+    m.email.toLowerCase() === query ||
+    m.membershipNo.toLowerCase() === query ||
+    m.nationalId === query ||
     m.mobile.replace(/\s+/g, '') === query.replace(/\s+/g, '')
   );
 
@@ -190,7 +205,7 @@ app.post("/api/members", (req, res) => {
   const newMember: Member = {
     ...req.body,
     id: `m-${Date.now()}`,
-    membershipNo: `MP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+    membershipNo: generateMembershipNumber(req.body.province),
     registrationDate: new Date().toISOString().split("T")[0],
     outstandingBalance: 0,
     registeredEvents: [],
@@ -199,7 +214,7 @@ app.post("/api/members", (req, res) => {
   };
   members.push(newMember);
   logAction("Super Administrador", "National Admin", "Create Member", `Created member profile for ${newMember.fullName}`);
-  res.status(210).json(newMember);
+  res.status(201).json(newMember);
 });
 
 app.put("/api/members/:id", (req, res) => {
@@ -412,7 +427,7 @@ app.post("/api/polls/:id/vote", (req, res) => {
     poll.votes[option] = 0;
   }
   poll.votes[option]++;
-  
+
   if (!member.votedPolls) {
     member.votedPolls = {};
   }
@@ -446,7 +461,7 @@ app.post("/api/payments", (req, res) => {
   member.outstandingBalance = Math.max(0, member.outstandingBalance - amount);
 
   logAction(member.fullName, "Member", "Membership Payment", `Paid R${amount} for ${purpose} via ${method}`);
-  res.status(210).json({ payment: newPayment, member });
+  res.status(201).json({ payment: newPayment, member });
 });
 
 // Courses
@@ -502,20 +517,20 @@ function limparDadosNaoPersistidosNoArranque() {
 limparDadosNaoPersistidosNoArranque();
 
 let systemSettings = {
-  partyName: "MPLA CAPE",
-  logoUrl: "https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=120&h=120&fit=crop",
-  primaryColor: "#C8102E", 
-  secondaryColor: "#FFCC00", 
+  partyName: "MPLA Cape Town",
+  logoUrl: "/mpla-logo.svg",
+  primaryColor: "#C8102E",
+  secondaryColor: "#FFCC00",
   defaultLanguage: "Português (Portugal)",
   timezone: "Africa/Johannesburg (GMT+2)",
   dateFormat: "DD/MM/YYYY",
   maintenanceModeActive: false,
   emailTemplates: {
-    verification: "<h3>Bem-vindo(a) ao MPLA CAPE</h3><p>O seu código OTP é {{otp}}. É válido durante 10 minutos.</p>",
-    cardDispatched: "<p>Camarada {{name}}, o seu Cartão de Militante do MPLA CAPE foi emitido e encaminhado para entrega. Acompanhe no portal.</p>"
+    verification: "<h3>Bem-vindo(a) ao MPLA Cape Town</h3><p>O seu código OTP é {{otp}}. É válido durante 10 minutos.</p>",
+    cardDispatched: "<p>Camarada {{name}}, o seu Cartão de Militante do MPLA Cape Town foi emitido e encaminhado para entrega. Acompanhe no portal.</p>"
   },
   smsTemplates: {
-    otp: "Portal Seguro MPLA CAPE OTP: {{otp}}. Não divulgue este código a ninguém.",
+    otp: "Portal Seguro MPLA Cape Town OTP: {{otp}}. Não divulgue este código a ninguém.",
     cardDispatched: "Cartão MPLA: Camarada {{name}}, o seu cartão físico foi expedido. Data estimada: {{estDate}}."
   },
   featureFlags: {
@@ -559,18 +574,18 @@ let integrations = {
   qrVerification: {
     enabled: true,
     provider: "Motor Interno de Verificação MPLA",
-    validationEndpoint: "https://portal.mpla-diaspora.org/api/qr/verificar"
+    validationEndpoint: "https://mplacapetown.co.za/api/qr/verificar"
   },
   cloudStorage: {
     enabled: true,
     provider: "AWS S3 Private Buckets",
-    bucketName: "mpla-diaspora-cofre-militantes",
+    bucketName: "mpla-cape-town-cofre-militantes",
     region: "af-south-1"
   },
   gisMapping: {
     enabled: true,
     provider: "Google Maps Platform",
-    mapsApiKey: "AIzaSyD-10293841-NDA-MAPS-PROD"
+    mapsApiKey: "configured-through-env"
   },
   erpSystem: {
     enabled: false,
@@ -612,7 +627,7 @@ app.put("/api/system/integrations", (req, res) => {
 
 app.post("/api/system/backup", (req, res) => {
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-  const backupFile = `NDA-BACKUP-${timestamp}-SECURE.zip`;
+  const backupFile = `MPLA-CAPE-TOWN-BACKUP-${timestamp}-SECURE.zip`;
   logAction("Super Administrador", "System Administration", "Manual Backup", `Triggered encrypted system state snapshot: ${backupFile}`);
   res.json({
     success: true,
@@ -645,8 +660,8 @@ app.post("/api/auth/send-otp", (req, res) => {
 });
 
 app.post("/api/auth/register", (req, res) => {
-  const { 
-    fullName, nationalId, mobile, email, province, municipality, committee, photo 
+  const {
+    fullName, nationalId, mobile, email, province, municipality, committee, photo
   } = req.body;
 
   if (!fullName || !nationalId || !mobile || !email) {
@@ -673,9 +688,9 @@ app.post("/api/auth/register", (req, res) => {
     status: "Active",
     membershipLevel: getMembershipLevelFromAffiliation(affiliation),
     category: "General",
-    province: province || "Gauteng",
-    municipality: municipality || "City of Johannesburg",
-    committee: committee || "Ward 117 Local Committee",
+    province: province || "Western Cape",
+    municipality: municipality || "City of Cape Town",
+    committee: committee || "Comité MPLA Cape Town",
     registrationDate: new Date().toISOString().split('T')[0],
     physicalCardStatus: "Printing",
     physicalCardEstDate: new Date(Date.now() + 14 * 24 * 3600 * 1000).toISOString().split('T')[0],
@@ -707,7 +722,7 @@ app.post("/api/ai/ask", async (req, res) => {
   if (!gemini) {
     // Graceful fallback when API key is missing
     return res.json({
-      text: `### 🤖 National Command AI Assistant\n\n*Note: GEMINI_API_KEY is not configured in this workspace. Showing high-fidelity offline system rules analysis:*\n\nHere is what I found in the system:\n- **Total Members**: ${members.length} registered nationwide.\n- **Card Production**: ${members.filter(m => m.physicalCardStatus === 'Printing').length} currently queuing on industrial thermal card printers.\n- **Open support tickets**: ${supportTickets.filter(t => t.status === 'Open').length} urgent inquiries.\n- **Most Active Province**: Gauteng (${members.filter(m => m.province === 'Gauteng').length} members).`
+      text: `### 🤖 National Command AI Assistant\n\n*Note: GEMINI_API_KEY is not configured in this workspace. Showing high-fidelity offline system rules analysis:*\n\nHere is what I found in the system:\n- **Total Members**: ${members.length} registered nationwide.\n- **Card Production**: ${members.filter(m => m.physicalCardStatus === 'Printing').length} currently queuing on industrial thermal card printers.\n- **Open support tickets**: ${supportTickets.filter(t => t.status === 'Open').length} urgent inquiries.\n- **Most Active Province**: Western Cape (${members.filter(m => m.province === 'Western Cape').length} members).`
     });
   }
 

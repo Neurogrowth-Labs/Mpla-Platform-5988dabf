@@ -2420,7 +2420,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           <div className="mt-6 bg-slate-950 p-4 rounded-2xl border border-white/5 space-y-2">
             <p className="text-[9px] font-mono font-bold text-[#D4AF37] tracking-wider uppercase">MAP COMPLIANCE GEO</p>
             <div className="h-28 bg-slate-900 rounded-lg flex items-center justify-center border border-white/5 relative overflow-hidden">
-              <span className="text-[10px] font-mono text-slate-500">104 Main Street, Sandton Geo-Locator</span>
+              <span className="text-[10px] font-mono text-slate-500">Goodwood, Cape Town Geo-Locator</span>
               <div className="absolute top-1/2 left-1/2 w-4 h-4 bg-[#B5121B] rounded-full -translate-x-1/2 -translate-y-1/2 border-2 border-white animate-pulse" />
             </div>
           </div>
@@ -2579,9 +2579,9 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
         {/* Legal copyright bar */}
         <div className="max-w-7xl mx-auto px-6 border-t border-slate-800 mt-10 pt-6 text-center text-[10px] text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
           <span>
-            © 2026 MPLA CAPE. Todos os direitos reservados.
+            © 2026 MPLA Cape Town. Todos os direitos reservados.
           </span>
-          <span className="font-mono uppercase tracking-widest text-[#D4AF37]">SADC PORTAL AUTHORITY v3.0.0</span>
+          <span className="font-mono uppercase tracking-widest text-[#D4AF37]">MPLA CAPE TOWN PORTAL AUTHORITY v3.0.0</span>
           <a href="http://www.ai.neurogrowthlabs.co.za" target="_blank" rel="noreferrer" className="font-bold text-[#D4AF37] hover:underline">Developed by NeuroGrowth Labs www.ai.neurogrowthlabs.co.za</a>
         </div>
       </footer>
