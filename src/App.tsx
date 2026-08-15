@@ -67,7 +67,7 @@ export default function App() {
     category: "General",
     leadershipRoles: [],
     registrationDate: "2021-04-12",
-    photo: "https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png",
+    photo: images.mplaLogo,
     status: "Active",
     outstandingBalance: 120,
     paymentHistory: [],

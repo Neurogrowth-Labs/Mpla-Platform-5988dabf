@@ -159,7 +159,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       bio_en: "Supreme leader and First Secretary of the MPLA committee executive commission for the Cape Town community, guiding integration, digital membership and consular support.",
       speech_pt: "A nossa prioridade é servir a comunidade angolana da Cidade do Cabo com disciplina, proximidade e unidade patriótica.",
       speech_en: "Our priority is to serve Cape Town's Angolan community with discipline, proximity and patriotic unity.",
-      photo: images.camaradaPintoCauende
     },
     {
       name: "Camarada Manuel Mateus",
@@ -786,7 +785,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           <div className="lg:col-span-5 relative group">
             <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/30 shadow-2xl">
               <img
-                src={images.camaradaPintoCauende}
                 alt="Camarada Pinto N P Cauende"
                 className="w-full h-[380px] object-cover filter brightness-95 group-hover:scale-105 transition duration-500"
                 referrerPolicy="no-referrer"
@@ -1041,7 +1039,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
               <div className="bg-slate-100 dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 rounded-2xl p-4 flex items-center gap-4">
                 <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1 shrink-0">
                   <img
-                    src="https://logowik.com/content/uploads/images/mpla-angola8253.logowik.com.webp"
+                    src={images.mplaLogo}
                     alt="MPLA Brand"
                     className="w-full h-full object-contain"
                     referrerPolicy="no-referrer"
@@ -1293,7 +1291,6 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 key={idx}
                 className="group bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden hover:border-[#B5121B]/30 hover:shadow-xl transition duration-300 flex flex-col justify-between"
               >
-                <div className="p-5 flex-1 flex flex-col justify-between items-center gap-4 text-center">
                   <div>
                     <h4 className="font-extrabold text-slate-900 text-sm">{leader.name}</h4>
                   </div>
