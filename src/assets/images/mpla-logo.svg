@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="MPLA logo">
-  <circle cx="128" cy="128" r="120" fill="#c8102e" stroke="#ffcc00" stroke-width="10"/>
-  <circle cx="128" cy="128" r="88" fill="#111827" stroke="#ffcc00" stroke-width="6"/>
-  <text x="128" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#ffcc00">MPLA</text>
-  <path d="M128 88l12 25 27 4-19 19 4 27-24-13-24 13 4-27-19-19 27-4z" fill="#ffcc00"/>
-  <path d="M70 172h116" stroke="#ffcc00" stroke-width="10" stroke-linecap="round"/>
-  <path d="M83 193h90" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 320" role="img" aria-label="MPLA logo">
+  <rect width="1240" height="320" fill="#000"/>
+  <text x="0" y="190" fill="#d60b24" font-family="Arial Black, Impact, sans-serif" font-size="210" font-weight="900" letter-spacing="-22">MPLA</text>
+  <path fill="#ffd400" d="M710 42l39 78h86l-70 51 27 82-82-51-82 51 27-82-70-51h86z"/>
 </svg>

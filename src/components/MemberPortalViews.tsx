@@ -151,7 +151,7 @@ function HomeDashboardView({ member, events, announcements, onChangeTab, onRegis
                   <div className="flex items-center gap-2">
                     <div className="bg-white p-1 rounded border border-[#FFCC00]">
                       <img 
-                        src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
+                        src={images.mplaLogo} 
                         alt="MPLA" 
                         className="w-4 h-4 object-contain"
                         referrerPolicy="no-referrer"
@@ -659,7 +659,7 @@ function DigitalCardFullScreenView({ member }: { member: Member }) {
             <div className="flex items-center gap-3">
               <div className="bg-white p-1.5 rounded-lg border-2 border-[#FFCC00]">
                 <img 
-                  src="https://upload.wikimedia.org/wikipedia/en/thumb/6/69/MPLA_Party_logo.svg/250px-MPLA_Party_logo.svg.png" 
+                  src={images.mplaLogo} 
                   alt="MPLA" 
                   className="w-6 h-6 object-contain"
                   referrerPolicy="no-referrer"
