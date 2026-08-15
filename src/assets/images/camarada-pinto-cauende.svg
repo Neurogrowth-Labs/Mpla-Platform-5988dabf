@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 658" role="img" aria-labelledby="title desc">
+  <title id="title">Camarada Pinto N P Cauende</title>
+  <desc id="desc">Portrait illustration based on the provided leadership image.</desc>
+  <rect width="850" height="658" fill="#e5e5e5"/>
+  <path d="M70 658 140 330 270 255h310l130 75 80 328Z" fill="#ef0032"/>
+  <path d="m290 260-60 70 70-15 125-30Z" fill="#242424"/>
+  <path d="m560 260 60 70-70-15-125-30Z" fill="#242424"/>
+  <path d="m505 300 70 358h42l-82-368Z" fill="#f2df00"/>
+  <path d="m575 305 55 353h45l-65-358Z" fill="#242424"/>
+  <rect x="210" y="450" width="135" height="35" rx="4" fill="#242424"/>
+  <rect x="365" y="200" width="120" height="115" rx="42" fill="#976052"/>
+  <ellipse cx="425" cy="158" rx="125" ry="130" fill="#a86655"/>
+  <ellipse cx="302" cy="172" rx="18" ry="38" fill="#9b5a4d"/>
+  <ellipse cx="548" cy="172" rx="18" ry="38" fill="#9b5a4d"/>
+  <path d="M310 112c25-70 205-70 230 0-53-30-177-30-230 0Z" fill="#3b302e"/>
+  <rect x="320" y="115" width="90" height="60" rx="16" fill="none" stroke="#12559b" stroke-width="7"/>
+  <rect x="440" y="115" width="90" height="60" rx="16" fill="none" stroke="#12559b" stroke-width="7"/>
+  <path d="M410 145h30" stroke="#12559b" stroke-width="5"/>
+  <circle cx="364" cy="146" r="8" fill="#252525"/>
+  <circle cx="486" cy="146" r="8" fill="#252525"/>
+  <path d="M425 150c-10 35-8 50 13 55" fill="none" stroke="#744239" stroke-width="4" stroke-linecap="round"/>
+  <path d="M385 224c24 15 56 15 82 0" fill="none" stroke="#563434" stroke-width="4" stroke-linecap="round"/>
+</svg>
