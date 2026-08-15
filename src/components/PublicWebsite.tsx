@@ -159,7 +159,7 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
       bio_en: "Supreme leader and First Secretary of the MPLA committee executive commission for the Cape Town community, guiding integration, digital membership and consular support.",
       speech_pt: "A nossa prioridade é servir a comunidade angolana da Cidade do Cabo com disciplina, proximidade e unidade patriótica.",
       speech_en: "Our priority is to serve Cape Town's Angolan community with discipline, proximity and patriotic unity.",
-      photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop"
+      photo: images.camaradaPintoCauende
     },
     {
       name: "Camarada Manuel Mateus",
@@ -786,8 +786,8 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
           <div className="lg:col-span-5 relative group">
             <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/30 shadow-2xl">
               <img
-                src="/src/assets/images/mpla_presidents_collage_1784384603231.jpg"
-                alt={language === "PT" ? "Presidentes Históricos do MPLA" : "Historic MPLA Presidents"}
+                src={images.camaradaPintoCauende}
+                alt="Camarada Pinto N P Cauende"
                 className="w-full h-[380px] object-cover filter brightness-95 group-hover:scale-105 transition duration-500"
                 referrerPolicy="no-referrer"
               />
@@ -822,14 +822,14 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
 
             <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
               <div>
-                <p className="font-bold text-slate-900 text-sm">Camarada Dr. Manuel Diogo</p>
+                <p className="font-bold text-slate-900 text-sm">Camarada Pinto N P Cauende</p>
                 <p className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">
-                  {language === "PT" ? "Presidente do Comité de Coordenação Nacional" : "President of the National Coordination Committee"}
+                  {language === "PT" ? "Primeiro Secretário do Comité de MPLA Cape Town" : "First Secretary of the MPLA Cape Town Committee"}
                 </p>
               </div>
               {/* handwritten simulation signature in gold */}
               <div className="text-[#D4AF37] font-serif italic text-2xl tracking-wider select-none pr-4">
-                Manuel Diogo
+                Pinto Cauende
               </div>
             </div>
           </div>
@@ -1293,35 +1293,10 @@ export default function PublicWebsite({ onNavigateToAuth }: PublicWebsiteProps) 
                 key={idx}
                 className="group bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden hover:border-[#B5121B]/30 hover:shadow-xl transition duration-300 flex flex-col justify-between"
               >
-                <div className="relative h-64 overflow-hidden bg-slate-200 border-b border-slate-200 shrink-0">
-                  <img src={leader.photo} alt={leader.name} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-90 transition duration-300 flex flex-col justify-end p-4">
-                    <p className="text-[10px] text-amber-400 font-mono font-bold leading-relaxed mb-1">
-                      {language === "PT" ? leader.role_pt : leader.role_en}
-                    </p>
-                    <p className="text-slate-300 text-[11px] leading-relaxed line-clamp-3">
-                      {language === "PT" ? leader.bio_pt : leader.bio_en}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-5 flex-1 flex flex-col justify-between items-start gap-4 text-left">
+                <div className="p-5 flex-1 flex flex-col justify-between items-center gap-4 text-center">
                   <div>
-                    <span className="inline-block text-[9px] font-mono font-black text-[#B5121B] uppercase bg-red-50 border border-red-100 px-2 py-0.5 rounded mb-2">
-                      {language === "PT" ? "COMITÉ NATIONAL" : "NATIONAL COMMITTEE"}
-                    </span>
                     <h4 className="font-extrabold text-slate-900 text-sm">{leader.name}</h4>
-                    <p className="text-[10px] font-mono text-[#B5121B] font-bold uppercase tracking-wider mt-0.5">
-                      {language === "PT" ? leader.role_pt : leader.role_en}
-                    </p>
                   </div>
-                  <button
-                    onClick={() => setSelectedLeader(leader)}
-                    className="text-xs font-bold text-[#B5121B] group-hover:underline flex items-center gap-1 cursor-pointer"
-                  >
-                    {language === "PT" ? "Ver Perfil & Discurso" : "View Profile & Quote"}
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
                 </div>
               </div>
             ))}
